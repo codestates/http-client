@@ -2,7 +2,10 @@ import React from "react";
 import axios from "axios";
 import List from "../components/List";
 import "./ToDo.css"
+
 import SignInModal from "../components/SignIn"
+import SignUpModal from "../components/SignUp"
+
 
 // fake data... 서버 API 연동 완료 시 삭제해야 함
 let list = [
@@ -68,7 +71,12 @@ class ToDo extends React.Component {
         const { doWhat, doWhen, err, important, list } = this.state;
         return (
             <>
+
+
                 <SignInModal />
+
+
+
                 <form className="container-input" onSubmit={(e) => e.preventDefault()}>
                     <div className="checkbox">
                         <input type="checkbox" important={important} onChange={this.isImportant} alt="중요해..?" />
