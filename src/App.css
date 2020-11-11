@@ -1,14 +1,14 @@
-.menu {
+/* .menu {
 }
 .screen {
-}
+} */
 
 
 .App {
   text-align: center;
 }
 
-.modal {
+.modal_signIn {
  
   position: fixed;
   top: 0;
@@ -18,7 +18,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
+.modal_signUp {
+ 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* .hidden {
+  display: none;
+} */
 
 .modal_overlay {
   background-color: rgba(0, 0, 0, 0.6);
@@ -37,7 +54,9 @@
   border-radius: 10px;
   width: 40%;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  
 }
+
 
 /* .modal_content h1 {
   margin: 0;
@@ -51,6 +70,7 @@
 .container {
   /* background-color: pink; */
   width: 50%;
+  margin-bottom: 50px;
 
   /* align-items: center; */
   display: inline-table;
@@ -59,8 +79,8 @@
 .container1 {
   background-color: pink;
   max-width: 100%;
-  padding-right:20px;
-  padding-left:20px;
+  padding-right:50px;
+  padding-left:50px;
   padding-top: 10px;
   padding-bottom: 30px;
   /* align-items: center; */
@@ -75,24 +95,37 @@
 }
 
 input[type='email'],
-input[type='password'] {
-  width: 80%;
+input[type='password'],
+input[type='text'] {
+
+  width: 30rem;
   font-size: 1.1rem;
-  padding: 0.4rem;
-  margin: 0.4rem;
+  padding: 1rem ;
+  margin: 0.4rem ;
   
 }
 
-.email_div {
-  padding: 20px;
-}
 
-/* .PW_div {
-  padding-top: 30px;
-} */
 
 .findAccount_span {
   text-align: right;
+  padding-top: 13px;
+  font-size: 1.1rem;
+}
+
+.findAccount_link {
+  text-decoration: none;
+
+}
+
+.signUp_link {
+  text-decoration: none;
+}
+
+.signUp_div {
+  text-align: right;
+  padding-bottom: 10px;
+  font-size: 1.0rem;
 }
 
 
@@ -104,6 +137,17 @@ input[type='password'] {
   
 }
 
+.signUp_btn {
+  margin-top: 30px;
+  width: 100%;
+  font-size: 2rem;
+}
+
+
+.check {
+  text-align: right;
+  font-size: 0.7rem;
+}
 
 
 
