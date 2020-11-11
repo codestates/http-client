@@ -4,7 +4,7 @@ import { HashRouter, Route } from "react-router-dom";
 // Components
 import Nav from "./components/Nav";
 import SignInModal from "./components/SignIn";
-import SignOut from "./components/SignOut";
+import SignUpModal from "./components/SignUp";
 import Footer from "./components/Footer";
 
 // Routes
@@ -12,6 +12,8 @@ import MyPage from "./routes/MyPage";
 import ToDo from "./routes/ToDo";
 import Completed from "./routes/Completed";
 import Important from "./routes/Important";
+
+
 
 // CSS
 import "./App.css";
@@ -34,8 +36,12 @@ class App extends React.Component {
           <Route path={"/mypage"} component={MyPage} />
           <Route path={"/completed"} component={Completed} />
           <Route path={"/Important"} component={Important} />
+          <Route path={"/signup"} component={SignUpModal} />
+
         </div>
         <Footer />
+
+
       </HashRouter>
     );
   }
