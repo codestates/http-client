@@ -1,0 +1,10 @@
+.nav {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.nav-mypage,
+.nav-completed,
+.nav-important {
+  padding: 10px;
+}

@@ -1,0 +1,19 @@
+.list {
+  display: block;
+  border-bottom: 1px solid #ebebeb;
+}
+.list-important {
+  position: relative;
+  float: left;
+  padding-right: 10px;
+}
+.list-contents {
+  float: left;
+  padding-right: 20px;
+}
+.list-startDate {
+  float: left;
+  padding-right: 10px;
+}
+.list-complete {
+}
