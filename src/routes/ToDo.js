@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import List from "../components/List";
 import "./ToDo.css"
+import SignInModal from "../components/SignIn"
 
 // fake data... 서버 API 연동 완료 시 삭제해야 함
 let list = [
@@ -43,10 +44,10 @@ class ToDo extends React.Component {
     // 3. 일정입력
     handleInputValue = (key) => (e) => {
         this.setState({ [key]: e.target.value });
-      };
+    };
     inputToDo = async () => {
         const isImportant = (e) => {
-            this.setState({ important: e.target.important})
+            this.setState({ important: e.target.important })
         }
 
         const { doWhat, doWhen, err, important, list } = this.state;
@@ -67,37 +68,38 @@ class ToDo extends React.Component {
         const { doWhat, doWhen, err, important, list } = this.state;
         return (
             <>
-            <form className="container-input" onSubmit={(e) => e.preventDefault()}>
-                <div className="checkbox">
-                    <input type="checkbox" important={important} onChange={this.isImportant} alt="중요해..?" />
-                </div>
-                <div className="inputbox">
-                    <div className="input-when">
-                        <span className="input-what-description">언제할까?</span>
-                        <input className="input-what-field" type='date' onChange={this.handleInputValue("doWhen")}></input>
+                <SignInModal />
+                <form className="container-input" onSubmit={(e) => e.preventDefault()}>
+                    <div className="checkbox">
+                        <input type="checkbox" important={important} onChange={this.isImportant} alt="중요해..?" />
                     </div>
-                    <div className="input-what">
-                        <span className="input-when-description">뭘할까?</span>
-                        <input className="input-when-field" type="text" onChange={this.handleInputValue("doWhat")}></input>
+                    <div className="inputbox">
+                        <div className="input-when">
+                            <span className="input-what-description">언제할까?</span>
+                            <input className="input-what-field" type='date' onChange={this.handleInputValue("doWhen")}></input>
+                        </div>
+                        <div className="input-what">
+                            <span className="input-when-description">뭘할까?</span>
+                            <input className="input-when-field" type="text" onChange={this.handleInputValue("doWhat")}></input>
+                        </div>
                     </div>
-                </div>
-                <button className="input-button" type='submit' onClick={this.inputToDo}>입력!</button>
-                <div className="alert-box">{err !== "" ? err : null}</div>
-            </form>
-            <section className="container-list">
-                <div className="todo">
-                    {list.map(onedayTodo => (
-                        <List
-                            key={onedayTodo.id}
-                            id={onedayTodo.id}
-                            contents={onedayTodo.contents}
-                            startDate={onedayTodo.startDate}
-                            complete={onedayTodo.complete}
-                            important={onedayTodo.important}
-                        />
-                    ))}
-                </div>
-            </section>
+                    <button className="input-button" type='submit' onClick={this.inputToDo}>입력!</button>
+                    <div className="alert-box">{err !== "" ? err : null}</div>
+                </form>
+                <section className="container-list">
+                    <div className="todo">
+                        {list.map(onedayTodo => (
+                            <List
+                                key={onedayTodo.id}
+                                id={onedayTodo.id}
+                                contents={onedayTodo.contents}
+                                startDate={onedayTodo.startDate}
+                                complete={onedayTodo.complete}
+                                important={onedayTodo.important}
+                            />
+                        ))}
+                    </div>
+                </section>
             </>
         )
     }

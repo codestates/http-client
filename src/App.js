@@ -3,7 +3,7 @@ import { HashRouter, Route } from "react-router-dom";
 
 // Components
 import Nav from "./components/Nav";
-import SignIn from "./components/SignIn";
+import SignInModal from "./components/SignIn";
 import SignOut from "./components/SignOut";
 import Footer from "./components/Footer";
 
@@ -29,7 +29,7 @@ class App extends React.Component {
           <Nav />
         </div>
         <div className="screen">
-          <Route path={"/"} exact={true} component={ isLogin ? ToDo : SignIn} />
+          <Route path={"/"} exact={true} component={isLogin ? ToDo : SignInModal} />
           <Route path={"/todo"} component={ToDo} />
           <Route path={"/mypage"} component={MyPage} />
           <Route path={"/completed"} component={Completed} />
