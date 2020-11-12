@@ -31,8 +31,8 @@ class ToDo extends React.Component {
             important: false,
             list: []
         }
+        // console.log(props)
     }
-
     // 1. 컴포넌트 진입하자마자 전체 목록 가져오기
     getList = async () => {
         // const list = await axiox.get("http://localhost:8000/main"); // 노드서버 구축완료시 활성화 & 테스트
@@ -73,7 +73,7 @@ class ToDo extends React.Component {
             <>
 
 
-                <SignInModal />
+                {/* <SignInModal /> */}
 
 
 
