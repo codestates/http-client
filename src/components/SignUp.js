@@ -7,7 +7,7 @@ class SignUpModal extends React.Component {
   render() {
     return (
 
-      <div className='modal_signUp'>
+      <div className='modal'>
 
         <div className='modal_overlay'></div>
         <div className='modal_content'>
