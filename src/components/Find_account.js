@@ -30,7 +30,7 @@ class FindAccount extends React.Component {
               </div>
 
             </div>
-            <NavLink to='/userinformaion'>
+            <NavLink to='/useremail'>
               <button className='findBtn'>e-mail 찾기</button>
             </NavLink>
             <div className='line'> </div>
@@ -56,7 +56,7 @@ class FindAccount extends React.Component {
 
             </div>
 
-            <NavLink to='/userinformaion'>
+            <NavLink to='/userpw'>
               <button className='findBtn'>PW 찾기</button>
             </NavLink>
 
