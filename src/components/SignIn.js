@@ -1,66 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import SignUpModal from './SignUp'
+
 
 
 
 function SignInModal() {
 
-    // class SignInModal extends React.Component {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         signUp: false // 회원가입 활성화 x
-    //     }
-    //     this.handleClick = this.handleClick.bind(this)
-    //     this.moveSignUp = this.moveSignUp.bind(this)
-    // }
-
-
-    // handleClick() {
-    //     // console.log('잘눌림?')
-    //     this.setState(state => ({
-    //         signUp: !state.signUp  // 기존 state값 반전
-    //     }))
-    //     this.moveSignUp()
-    // }
-
-    // // signIn 모달을 없애고 signUp 모달을 가져온다. 
-    // moveSignUp() {
-
-    //     history.push('/signup')
-
-    // //signIn 모달 엘리먼트 및 하위 엘리먼트들 삭제
-    // let signIn = document.querySelector('.modal_signIn')
-    // signIn.parentNode.removeChild(signIn)
-
-    // //signUp 모달 엘리먼트 가져오기
-
-    // let parent = document.querySelector('.screen')
-    // let parent1 = parent.parentNode
-
-    // let signUp = document.querySelector('.modal_signUp')
-    // let signUp1 = signUp.parentNode
-    // // let insertNode = document.importNode(signUp, true)
-    // //appendChild로 종속시켜버리기
-    // parent1.parentNode.appendChild(signUp1)
-
-
-
-    // return modal.forEach(element => {
-    //     return modal2.forEach(el => {
-    //         return element = el
-    //     })
-    // })
-
-
-    // modal.classList.remove('modal_signIn')
-    // modal.classList.add('modal_signUp')
-    // modal.classList.toggle('')
-    // }
-
-
-    // render() {
     return (
         <div className='modal_signIn hidden'>
 
@@ -97,9 +42,7 @@ function SignInModal() {
 
                     <div className='findAccount_span'>
                         <span>
-                            <NavLink to='' className='findAccount_link'>e-mail</NavLink>
-                            <span> | </span>
-                            <NavLink to='' className='findAccount_link'>PW 찾기</NavLink>
+                            <NavLink to='/findaccount' className='findAccount_link'>e-mail | PW 찾기</NavLink>
                         </span>
                     </div>
 
