@@ -1,11 +1,14 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, Router } from "react-router-dom";
 
 // Components
 import Nav from "./components/Nav";
 import SignInModal from "./components/SignIn";
 import SignUpModal from "./components/SignUp";
+import FindAccount from "./components/Find_account"
+import CompletedFind from "./components/Find_completed"
 import Footer from "./components/Footer";
+
 
 // Routes
 import MyPage from "./routes/MyPage";
@@ -37,6 +40,8 @@ class App extends React.Component {
           <Route path={"/completed"} component={Completed} />
           <Route path={"/Important"} component={Important} />
           <Route path={"/signup"} component={SignUpModal} />
+          <Route path={"/findaccount"} component={FindAccount} />
+          <Route path={"/userinformaion"} component={CompletedFind} />
 
         </div>
         <Footer />
