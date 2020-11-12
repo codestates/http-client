@@ -69,11 +69,12 @@
 
 .container {
   /* background-color: pink; */
-  width: 50%;
+
+  width: 100%;
   margin-bottom: 50px;
 
   /* align-items: center; */
-  display: inline-table;
+  display: block;
 }
 
 .container1 {
@@ -98,7 +99,7 @@ input[type='email'],
 input[type='password'],
 input[type='text'] {
 
-  width: 30rem;
+  width: 25rem;
   font-size: 1.1rem;
   padding: 1rem ;
   margin: 0.4rem ;
@@ -147,6 +148,54 @@ input[type='text'] {
 .check {
   text-align: right;
   font-size: 0.7rem;
+}
+
+/*-----Find_account.css-----*/
+
+.find_e-mail_box {
+
+  display: block;
+  position: relative;
+  background-color: pink;
+  width: 100%;
+  /* padding-right:50px; */
+  /* padding-left:50px; */
+  padding-top: 10px;
+  padding-bottom: 30px;
+  
+}
+
+.line {
+  /* position: absolute; */
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 7%;
+  width: 100%;
+  height: 0px;
+  
+  border: 1px solid #C4C4C4;
+  
+}
+
+.find_pw_box {
+
+  display: block;
+  position: relative;
+  background-color: pink;
+  width: 100%;
+  /* padding-right:50px;
+  padding-left:50px; */
+  padding-top: 10px;
+  padding-bottom: 30px;
+  
+}
+
+.findBtn {
+  
+  margin-top: 10px;
+  font-size: 1rem;
+  width: 50%;
+  height: auto;
 }
 
 
