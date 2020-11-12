@@ -8,9 +8,10 @@
   text-align: center;
 }
 
-.modal_signIn {
+.modal { /*durl*/
  
   position: fixed;
+  margin-top: 1%;
   top: 0;
   left: 0;
   width: 100%;
@@ -20,18 +21,7 @@
   align-items: center;
   z-index: 1;
 }
-.modal_signUp {
- 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-}
+
 
 /* .hidden {
   display: none;
@@ -39,20 +29,20 @@
 
 .modal_overlay {
   background-color: rgba(0, 0, 0, 0.6);
-  width: 100%;
-  height: 100%;
-  position: absolute;
+  width: 1000%;
+  height: 1000%;
+  position: fixed;
   
 }
 
 .modal_content {
   background-color: white;
-  padding: 50px 100px;
+  padding: 30px 100px;
   text-align: center;
   position: relative;
   top: 0px;
   border-radius: 10px;
-  width: 40%;
+  width: 30%;
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   
 }
@@ -89,17 +79,25 @@
 }
 
 /* 사진크기 자동 조절 */
-.container1 img{
+#sign_in_img {
+  
+  display: block;
+  width: inherit;
   max-width: 100%;
   height: auto;
-  display: block;
 }
+/* .container1 img{
+
+  display: block;
+  max-width: 100%;
+  height: auto;
+} */
 
 input[type='email'],
 input[type='password'],
 input[type='text'] {
 
-  width: 25rem;
+  width: 70%;
   font-size: 1.1rem;
   padding: 1rem ;
   margin: 0.4rem ;
