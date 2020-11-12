@@ -5,7 +5,7 @@ class CompletedFindEmail extends React.Component {
 
   render() {
     return (
-      <div className='modal_signUp'>
+      <div className='modal'>
 
         <div className='modal_overlay'></div>
         <div className='modal_content'>
@@ -18,6 +18,10 @@ class CompletedFindEmail extends React.Component {
                 {`귀하의 e-mail은 성유리gmail.com입니다.`}  {/* 재성님께서 멘트 통째로 보내주기로 함. */}
               </div>
             </div>
+
+            <NavLink to='/findaccount'>
+              <button className='findBtn'>PW 찾기</button>
+            </NavLink>
 
             <NavLink to='' className='signUp_link'>
               <button className='signUp_btn'>로그인 페이지로 돌아가기</button>
