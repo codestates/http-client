@@ -36,7 +36,7 @@ class App extends React.Component {
     axios.get('http')
       .then(res => {
         this.setState({
-          isLogin: true,
+          isLogin: false,
           userinfo: res.data.email,
           password: res.data.password,
           username: res.data.username,
@@ -47,10 +47,13 @@ class App extends React.Component {
 
 
   render() {
-    const { isLogin } = this.state;
+    const { isLogin } = this.state;  //! 충돌 우려
+    console.log(isLogin)
 
     return (
+
       <HashRouter>
+
         <div className="menu">
           <Nav />
         </div>
@@ -70,6 +73,7 @@ class App extends React.Component {
 
 
       </HashRouter>
+
     );
   }
 }
