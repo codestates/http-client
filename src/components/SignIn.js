@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
+import axios from 'axios'
 
 
 
@@ -27,19 +27,27 @@ class SignInModal extends React.Component {
                 erroeMessage: 'e-mail과 PW를 입력하세요.'
             })
         }
+        else {
+            axios.post('http', signInfo)
+                .then(res => {
+                    this.props.handleResponseSuccess()  //! 시우님께 어떤 것으로 구현했는지 물어보기
+                })
+                .catch(error => {
+                    this.setState({
+                        erroeMessage: this.state.erroeMessage
+                    })
+                })
+        }
     }
 
     render() {
         return (
-            <div className='modal_signIn hidden'>
+            <div className='modal hidden'>
 
 
                 <div className='modal_overlay'></div>
                 <div className='modal_content'>
                     <h1>너의 시간을 겟~⭐️</h1>
-
-                    {/* <img src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
-
 
                     <div className='container'>
 
@@ -49,7 +57,9 @@ class SignInModal extends React.Component {
                         </div>
 
                         {/* <img src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
-                        <img src='https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D'></img>
+
+                        <img id='sign_in_img' src='https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D'></img>
+
 
                         <div className='container1'>
 
@@ -71,9 +81,9 @@ class SignInModal extends React.Component {
                         </div>
 
                         <div>
-                            <div>
+                            <NavLink to="/todo">
                                 <button className='loginButton'>로그인</button>
-                            </div>
+                            </NavLink>
                             <div>
                                 <button className='loginButton'>Github 로그인</button>
                             </div>
