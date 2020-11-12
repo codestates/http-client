@@ -5,18 +5,13 @@ class FindAccount extends React.Component {
 
   render() {
     return (
-      <div className='modal_signUp'>
+      <div className='modal'>
 
         <div className='modal_overlay'></div>
         <div className='modal_content'>
           <h2>e-mail 찾기</h2>
 
-          {/* <img src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
-
-
           <div className='container'>
-
-
 
             <div className='find_e-mail_box'>
               <div>
