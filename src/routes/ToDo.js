@@ -74,7 +74,7 @@ class ToDo extends React.Component {
     } = this.state;
     return (
       <>
-        <SignInModal />
+
 
         <form className="container-input" onSubmit={(e) => e.preventDefault()}>
           <div className="chkbox">
