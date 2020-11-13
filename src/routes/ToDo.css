@@ -1,0 +1,43 @@
+.container-input {
+  height: 150px;
+  border-bottom: 1px solid #bcbcbc;
+}
+.chkbox {
+  float: left;
+  height: 70%;
+  margin-top: 0px;
+  margin-right: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+.check-important:hover {
+  background-color: #ffd3d3;
+}
+.check-important {
+  display: inline-block;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  font-size: 10px;
+  padding: 0px, 0px;
+}
+.inputbox {
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+.input-button {
+  width: 100px;
+  display: inline-block;
+  cursor: pointer;
+}
+.input-what-description {
+  padding-right: 15px;
+}
+.input-when-description {
+  padding-right: 30px;
+}
+.input-what-field {
+}
+.input-when-field {
+  width: 200px;
+}
