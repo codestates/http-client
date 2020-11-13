@@ -8,7 +8,9 @@ import SignInModal from "./components/SignIn";
 import SignUpModal from "./components/SignUp";
 import FindAccount from "./components/Find_account"
 import CompletedFindEmail from "./components/Find_Email_completed"
-import CompletedFindPw from "./components/Find_PW_completed"
+import CompletedFindPw from "./components/Find_PW_completed" 
+import Edit from "./components/Edit";
+import Remove from "./components/Remove";
 import Footer from "./components/Footer";
 
 
@@ -18,13 +20,12 @@ import ToDo from "./routes/ToDo";
 import Completed from "./routes/Completed";
 import Important from "./routes/Important";
 
-
-
 // CSS
 import "./App.css";
 
 class App extends React.Component {
   state = {
+
     isLogin: false,
     userinfo: null
   }
@@ -46,6 +47,7 @@ class App extends React.Component {
   }
 
 
+
   render() {
     const { isLogin } = this.state;  //! 충돌 우려
     console.log(isLogin)
@@ -58,8 +60,9 @@ class App extends React.Component {
           <Nav />
         </div>
         <div className="screen">
-          <Route path={"/"} exact={true} component={isLogin ? ToDo : SignInModal} />
-          <Route path={"/todo"} component={ToDo} />
+          {/* <Route path={"/"} exact={true} component={isLogin ? ToDo : SignInModal} /> */}
+          <Route path={"/"} exact={true} component={ToDo} />
+          <Route path={"/todo"} exact={true} component={ToDo} />
           <Route path={"/mypage"} component={MyPage} />
           <Route path={"/completed"} component={Completed} />
           <Route path={"/Important"} component={Important} />
@@ -68,10 +71,10 @@ class App extends React.Component {
           <Route path={"/useremail"} component={CompletedFindEmail} />
           <Route path={"/userpw"} component={CompletedFindPw} />
 
+          <Route path={"/edit"} component={Edit} />
+          <Route path={"/remove"} component={Remove} />
         </div>
         <Footer />
-
-
       </HashRouter>
 
     );

@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "email": "white@gmail.com",
+    "password": "1111",
+    "name": "곤조남",
+    "mobile": "010-1234-5678"
+  },
+  {
+    "id": 1,
+    "email": "latte@gmail.com",
+    "password": "1111",
+    "name": "라떼씨",
+    "mobile": "010-1111-1111"
+  },
+  {
+    "id": 2,
+    "email": "black@gmail.com",
+    "password": "1111",
+    "name": "와칸다",
+    "mobile": "010-9999-9999"
+  },
+  {
+    "id": 3,
+    "email": "panther@gmail.com",
+    "password": "1111",
+    "name": "포에버",
+    "mobile": "010-7777-7777"
+  }
+]

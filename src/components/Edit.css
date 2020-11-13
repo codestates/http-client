@@ -1,0 +1,52 @@
+.myinfo-hr {
+  display: block;
+  border-bottom: 1px solid #ebebeb;
+}
+.myinfo-body {
+  display: block;
+  padding-left: 2%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.object-email,
+.object-pw,
+.object-name,
+.object-mobile {
+}
+
+.edit-email,
+.edit-pw,
+.edit-name,
+.edit-mobile {
+  float: left;
+  width: 70px;
+
+  font-size: medium;
+  text-align: center;
+}
+
+.print-email,
+.print-pw,
+.print-name,
+.print-mobile {
+  float: left;
+}
+
+.edit-button {
+  border: none;
+  background-color: pink;
+  width: 90px;
+  text-align: center;
+}
+
+.submit-button-area {
+  text-align: center;
+}
+.submit-button {
+  margin-top: 20px;
+  border: none;
+  background-color: hotpink;
+  width: 90px;
+  text-align: center;
+}

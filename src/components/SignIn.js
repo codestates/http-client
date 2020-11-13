@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+
 import axios from 'axios'
 
 
@@ -94,7 +95,7 @@ class SignInModal extends React.Component {
             </div>
         )
     }
-}
+
 
 
 export default SignInModal;

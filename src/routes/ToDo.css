@@ -1,12 +1,25 @@
 .container-input {
-  height: 100px;
+  height: 150px;
   border-bottom: 1px solid #bcbcbc;
 }
-.checkbox {
+.chkbox {
   float: left;
-  padding-top: 15px;
-  height: 50px;
-  padding-right: 20px;
+  height: 70%;
+  margin-top: 0px;
+  margin-right: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+.check-important:hover {
+  background-color: #ffd3d3;
+}
+.check-important {
+  display: inline-block;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  font-size: 10px;
+  padding: 0px, 0px;
 }
 .inputbox {
   padding-right: 20px;
@@ -14,6 +27,8 @@
 }
 .input-button {
   width: 100px;
+  display: inline-block;
+  cursor: pointer;
 }
 .input-what-description {
   padding-right: 15px;
