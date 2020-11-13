@@ -1,9 +1,9 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // components
-import Remove from "../components/Remove";
-import Edit from "../components/Edit";
+// import Remove from "../components/Remove";
+// import Edit from "../components/Edit";
 
 import "./MyPage.css";
 

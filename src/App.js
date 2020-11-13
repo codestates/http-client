@@ -3,7 +3,7 @@ import { HashRouter, Route } from "react-router-dom";
 
 // Components
 import Nav from "./components/Nav";
-import SignInModal from "./components/SignIn";
+// import SignInModal from "./components/SignIn";
 import SignUpModal from "./components/SignUp";
 import Edit from "./components/Edit";
 import Remove from "./components/Remove";

@@ -1,10 +1,10 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 
 // components
 import List from "../components/List";
 import SignInModal from "../components/SignIn";
-import SignUpModal from "../components/SignUp";
+// import SignUpModal from "../components/SignUp";
 
 import "./ToDo.css";
 

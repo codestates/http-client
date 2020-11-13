@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
+// import axios from "axios";
 
 import "./Edit.css";
 
