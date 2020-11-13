@@ -83,7 +83,7 @@ class SignInModal extends React.Component {
                             {/* <div onClick={this.handleClick} onChange={this.moveSignUp} id="to_signUp">아직 회원이 아니신가요?</div> */}
                         </div>
 
-                        {/* <img src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
+                        {/* <img id='sign_in_img' src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
                         <img id='sign_in_img' src='https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D'></img>
 
                         <div className='container1'>
