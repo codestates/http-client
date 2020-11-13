@@ -73,6 +73,7 @@ class ToDo extends React.Component {
     } = this.state;
     return (
       <>
+
         <div className="container-input">
           <form className="inputfield" onSubmit={(e) => e.preventDefault()}>
             <div className="chkbox">
@@ -102,6 +103,7 @@ class ToDo extends React.Component {
                 ></input>
               </div>
             </div>
+
             <button
               className="input-button"
               type="submit"
