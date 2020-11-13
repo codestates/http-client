@@ -121,12 +121,11 @@ render() {
                         </div>
                     </div>
 
-
-                    <img
-                        id="sign_in_img"
-                        src="https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D"
-                    ></img>
-
+                    <div className='findAccount_span'>
+                        <span>
+                            <NavLink to='/findaccount' className='findAccount_link'>e-mail | PW 찾기</NavLink>
+                        </span>
+                    </div>
 
                     <div>
                         {/* <NavLink to="/todo"> */}
@@ -138,14 +137,11 @@ render() {
                         <div className='alert-box'>{this.state.errorMessage}</div>
                     </div>
 
-
-                    <div className="PW_div">
-                        <span>PW</span>
-                        <input type="password"></input>
-                    </div>
                 </div>
+            </div>
+        </div>
+    )
+}
 
 
-)
-    }
 export default SignInModal;
