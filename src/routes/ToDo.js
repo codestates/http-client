@@ -1,10 +1,10 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 
 // components
 import List from "../components/List";
 import SignInModal from "../components/SignIn";
-import SignUpModal from "../components/SignUp";
+// import SignUpModal from "../components/SignUp";
 
 import "./ToDo.css";
 
@@ -57,7 +57,6 @@ class ToDo extends React.Component {
         important: this.state.important,
         complete: this.state.complete,
       });
-
     }
     this.props.history.push("/");
   };
@@ -75,44 +74,47 @@ class ToDo extends React.Component {
     return (
       <>
 
+        <div className="container-input">
+          <form className="inputfield" onSubmit={(e) => e.preventDefault()}>
+            <div className="chkbox">
+              <button
+                className="check-important"
+                important={{ important: true }}
+                onClick={this.makeItImportant}
+              >
+                &#11088;
+              </button>
+            </div>
+            <div className="inputbox">
+              <div className="input-when">
+                <span className="input-when-description">언제할까?</span>
+                <input
+                  className="input-when-field"
+                  type="date"
+                  onChange={this.handleInputValue("startDate")}
+                ></input>
+              </div>
+              <div className="input-what">
+                <span className="input-what-description">뭘할까?</span>
+                <input
+                  className="input-what-field"
+                  type="text"
+                  onChange={this.handleInputValue("content")}
+                ></input>
+              </div>
+            </div>
 
-        <form className="container-input" onSubmit={(e) => e.preventDefault()}>
-          <div className="chkbox">
             <button
-              className="check-important"
-              important={{ important: true }}
-              onClick={this.makeItImportant}
+              className="input-button"
+              type="submit"
+              onClick={this.inputToDo}
             >
-              &#11088;
+              입력!
             </button>
-          </div>
-          <div className="inputbox">
-            <div className="input-when">
-              <span className="input-what-description">언제할까?</span>
-              <input
-                className="input-what-field"
-                type="date"
-                onChange={this.handleInputValue("startDate")}
-              ></input>
-            </div>
-            <div className="input-what">
-              <span className="input-when-description">뭘할까?</span>
-              <input
-                className="input-when-field"
-                type="text"
-                onChange={this.handleInputValue("content")}
-              ></input>
-            </div>
-          </div>
-          <button
-            className="input-button"
-            type="submit"
-            onClick={this.inputToDo}
-          >
-            입력!
-          </button>
-          <div className="alert-box">{err !== "" ? err : null}</div>
-        </form>
+            <div className="alert-box">{err !== "" ? err : null}</div>
+          </form>
+        </div>
+
         <section className="container-list">
           <div className="todo">
             {todoList.map((onedayTodo, i) => (

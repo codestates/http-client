@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 
 import todoList from "../test_data_list.json";
 
@@ -15,6 +15,7 @@ class List extends React.Component {
       complete: props.complete,
       important: props.important,
     };
+    console.log(this.state);
   }
 
   // 1. Life Cycle에 반영

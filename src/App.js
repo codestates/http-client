@@ -4,15 +4,17 @@ import axios from "axios";
 
 // Components
 import Nav from "./components/Nav";
+import Welcome from "./components/Welcome";
 import SignInModal from "./components/SignIn";
 import SignUpModal from "./components/SignUp";
-import FindAccount from "./components/Find_account"
-import CompletedFindEmail from "./components/Find_Email_completed"
-import CompletedFindPw from "./components/Find_PW_completed"
+
+import FindAccount from "./components/Find_account";
+import CompletedFindEmail from "./components/Find_Email_completed";
+import CompletedFindPw from "./components/Find_PW_completed";
+
 import Edit from "./components/Edit";
 import Remove from "./components/Remove";
 import Footer from "./components/Footer";
-
 
 // Routes
 import MyPage from "./routes/MyPage";
@@ -22,6 +24,7 @@ import Important from "./routes/Important";
 
 // CSS
 import "./App.css";
+
 
 //fakedata
 import user from "./test_data_user.json"
@@ -43,7 +46,9 @@ class App extends React.Component {
   }
 
 
+
   //! 인증 성공. 사용자 정보를 호출하고, 이에 성공하면 로그인 상태를 바꾸기.
+
 
 
   // handleResponseSuccess() {   // ! 추후 알맞게 수정할 것
@@ -94,6 +99,7 @@ class App extends React.Component {
         <div className="screen">
 
 
+
           <Route
             path='/login'
             render={() => (
@@ -104,6 +110,7 @@ class App extends React.Component {
           <Route path={"/"} exact={true} component={isLogin ? ToDo : SignInModal} />
           {/* <Route path={"/todo"} exact={true} component={ToDo} /> */}
           <Route path={"/mypage"} component={MyPage} />
+
           <Route path={"/completed"} component={Completed} />
           <Route path={"/Important"} component={Important} />
           <Route path={"/signup"} component={SignUpModal} />
@@ -116,7 +123,6 @@ class App extends React.Component {
         </div>
         <Footer />
       </HashRouter>
-
     );
   }
 }

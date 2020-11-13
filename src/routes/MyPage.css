@@ -1,15 +1,15 @@
-.myinfo-hr {
-  display: block;
-  border-bottom: 1px solid #ebebeb;
+.myinfo-title {
+  font-size: x-large;
+  font-weight: bolder;
+  border-bottom: 1px gray solid;
+  margin-top: 50px;
+  margin-bottom: 40px;
 }
 .myinfo-body {
   float: left;
   display: block;
   padding-left: 2%;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ebebeb;
 }
-
 .object-email,
 .object-pw,
 .object-name,
@@ -33,8 +33,8 @@
 }
 
 .myinfobox {
-  float: right;
-  padding-right: 5%;
+  float: left;
+  padding-left: 45%;
 }
 .edit-button {
   border: none;

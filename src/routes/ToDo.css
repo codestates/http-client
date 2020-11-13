@@ -1,11 +1,19 @@
 .container-input {
   height: 150px;
-  border-bottom: 1px solid #bcbcbc;
+  padding-bottom: 10px;
+}
+.inputfield {
+  width: 430px;
+  height: 120px;
+  border: #bcbcbc solid;
+  border-style: outset;
+  border-radius: 25px;
 }
 .chkbox {
   float: left;
-  height: 70%;
-  margin-top: 0px;
+  height: 50%;
+  margin-top: 10px;
+  margin-left: 10px;
   margin-right: 10px;
   text-align: center;
   text-decoration: none;
@@ -13,31 +21,49 @@
 .check-important:hover {
   background-color: #ffd3d3;
 }
+.check-important.active {
+  background-color: hotpink;
+}
 .check-important {
   display: inline-block;
   cursor: pointer;
   background-color: white;
   border: none;
-  font-size: 10px;
-  padding: 0px, 0px;
+  text-align: center;
+  height: 50px;
+  border-radius: 25px;
 }
 .inputbox {
-  padding-right: 20px;
+  float: left;
+  padding-top: 10px;
+  padding-right: 10px;
   padding-bottom: 10px;
+  border-radius: 25px;
 }
 .input-button {
-  width: 100px;
+  margin-top: 10px;
+  margin-right: 10px;
+  width: 50px;
   display: inline-block;
   cursor: pointer;
+  text-align: center;
+  color: white;
+  background-color: hotpink;
 }
 .input-what-description {
-  padding-right: 15px;
-}
-.input-when-description {
-  padding-right: 30px;
+  padding-right: 20px;
 }
 .input-what-field {
+  padding: 0, 0;
+  margin: 0, 0;
+  width: 30px;
+  height: 5px;
+}
+.input-when-description {
+  padding-right: 10px;
 }
 .input-when-field {
-  width: 200px;
+}
+.container-list {
+  padding-top: 50px;
 }
