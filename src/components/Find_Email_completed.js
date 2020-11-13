@@ -1,7 +1,17 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
+//fakedata
+import user from '../test_data_user.json';
+
 class CompletedFindEmail extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: ''
+    }
+    console.log(this.props.history.location)
+  }
 
   render() {
     return (
