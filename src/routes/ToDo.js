@@ -57,6 +57,7 @@ class ToDo extends React.Component {
         important: this.state.important,
         complete: this.state.complete,
       });
+
     }
     this.props.history.push("/");
   };
