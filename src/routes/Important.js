@@ -35,6 +35,7 @@ class Important extends React.Component {
     return (
       <>
         <section className="container-list">
+          <div className="title-important">&#11088; 중요일정</div>
           <div className="todo">
             {importantList.map((onedayTodo, i) => (
               <List

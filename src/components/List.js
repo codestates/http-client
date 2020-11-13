@@ -15,6 +15,7 @@ class List extends React.Component {
       complete: props.complete,
       important: props.important,
     };
+    console.log(this.state);
   }
 
   // 1. Life Cycle에 반영

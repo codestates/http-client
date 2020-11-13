@@ -1,6 +1,7 @@
 .list {
   display: block;
   border-bottom: 1px solid #ebebeb;
+  width: 500px;
 }
 .list-id {
   display: none;
@@ -21,9 +22,10 @@
   border: none;
   font-size: 10px;
   padding: 0px, 0px;
+  padding-left: 3px;
 }
 .list-content {
-  width: 50%;
+  width: 67%;
   float: left;
   padding-right: 20px;
 }
