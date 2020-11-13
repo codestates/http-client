@@ -42,7 +42,7 @@ class App extends React.Component {
       username: null,
       mobile: null
     }
-    this.handleResponseSuccess = this.handleResponseSuccess.bind(this)
+
   }
 
 
@@ -76,7 +76,7 @@ class App extends React.Component {
         mobile: user[0].mobile
       }
     })
-    this.props.history.push("/")
+    // this.props.history.push("/")
   }
 
   // componentDidUpdate() {
@@ -84,31 +84,33 @@ class App extends React.Component {
   // }
 
   render() {
-    // console.log(user)
-
     const { isLogin } = this.state;
     // console.log(isLogin)
 
     return (
       <HashRouter>
 
-
         <div className="menu">
           <Nav />
         </div>
         <div className="screen">
 
+          {/* //*  백시우님께 : 
+      106번 줄 보시면 path가 "/list"로 설정이 되어있었습니다. 
+      그래서 props가 "/list"로 전달이 되고 정작 로그인여부가 작동이 되야할 곳인 "/"에 props가 전달이 되지 않는 오류가 생겼던 것입니다.
+      props가 엉뚱한 곳에 가있는데 계속 달라고 했던 거였네요 ㅠㅠ
 
-
+      그래서 props 전달과 동시에 로그인 성공시 isLogin을 true로 바꿔야 해서 112번 줄을 105~110번줄처럼 변경했습니다!
+ */}
           <Route
-            path='/login'
+            path='/'
             render={() => (
-              <SignInModal handleResponseSuccess={this.handleResponseSuccess} />
+              isLogin ? <ToDo /> : <SignInModal handleResponseSuccess={this.handleResponseSuccess} />
             )}
           />
 
-          <Route path={"/"} exact={true} component={isLogin ? ToDo : SignInModal} />
-          {/* <Route path={"/todo"} exact={true} component={ToDo} /> */}
+          {/* <Route path={"/"} exact={true} component={isLogin ? ToDo : SignInModal} /> */}
+          <Route path={"/todo"} component={ToDo} />
           <Route path={"/mypage"} component={MyPage} />
 
           <Route path={"/completed"} component={Completed} />

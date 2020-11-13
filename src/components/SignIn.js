@@ -6,8 +6,6 @@ import axios from 'axios'
 
 
 
-import axios from "axios";
-
 class SignInModal extends React.Component {
 
     constructor(props) {
@@ -18,7 +16,6 @@ class SignInModal extends React.Component {
             password: "",
             errorMessage: ""
         };
-
     }
     // e-mail, pw 입력 기능
     hadleInputValue = (key) => (text) => {
@@ -60,7 +57,7 @@ class SignInModal extends React.Component {
         else {
             if (user[0].email === this.state.email && user[0].password === this.state.password) {
                 this.props.handleResponseSuccess()
-                console.log(this.props)
+                // console.log(this.props)
             }
             else (
                 this.setState({
@@ -68,69 +65,43 @@ class SignInModal extends React.Component {
                 })
             )
         }
-        console.log(user)
+        // console.log(user)
 
     }
-  };
-
-  render() {
-    return (
-      <div className="modal hidden">
-        <div className="modal_overlay"></div>
-        <div className="modal_content">
-          <h1>너의 시간을 겟~⭐️</h1>
-
-          <div className="container">
-            <div className="signUp_div">
-              <NavLink to="/signup" className="signUp_link">
-                아직 회원이 아니신가요?
-              </NavLink>
-              {/* <div onClick={this.handleClick} onChange={this.moveSignUp} id="to_signUp">아직 회원이 아니신가요?</div> */}
-            </div>
 
 
     render() {
-
         return (
-
             <div className='modal hidden'>
-
-
                 <div className='modal_overlay'></div>
                 <div className='modal_content'>
+
                     <h1>너의 시간을 겟~⭐️</h1>
-
                     <div className='container'>
-
                         <div className='signUp_div'>
                             <NavLink to='/signup' className='signUp_link'>아직 회원이 아니신가요?</NavLink>
                             {/* <div onClick={this.handleClick} onChange={this.moveSignUp} id="to_signUp">아직 회원이 아니신가요?</div> */}
                         </div>
 
                         {/* <img src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
-
                         <img id='sign_in_img' src='https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D'></img>
 
-
                         <div className='container1'>
-
                             <div className='email_div'>
                                 <span className='email_span'>e-mail</span>
                                 <input type='email' onChange={this.hadleInputValue("email")}></input>
                             </div>
-
                             <div className='PW_div'>
                                 <span>PW</span>
                                 <input type='password' onChange={this.hadleInputValue("password")}></input>
                             </div>
                         </div>
 
-
-            <img
-              id="sign_in_img"
-              src="https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D"
-            ></img>
-
+                        <div className='findAccount_span'>
+                            <span>
+                                <NavLink to='/findaccount' className='findAccount_link'>e-mail | PW 찾기</NavLink>
+                            </span>
+                        </div>
 
                         <div>
                             {/* <NavLink to="/todo"> */}
@@ -141,14 +112,11 @@ class SignInModal extends React.Component {
                             </div>
                             <div className='alert-box'>{this.state.errorMessage}</div>
                         </div>
-
-
-              <div className="PW_div">
-                <span>PW</span>
-                <input type="password"></input>
-              </div>
+                    </div>
+                </div>
             </div>
-
+        )
+    }
 }
 
 export default SignInModal;
