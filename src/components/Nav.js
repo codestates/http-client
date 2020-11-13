@@ -15,7 +15,9 @@ const NavLinkStyle = {
 function Nav() {
   return (
     <ul className="nav">
-      <div className="nav-welcome"></div>
+      <div className="nav-welcome">
+        <Welcome />
+      </div>
       <li className="nav-todo">
         <Link to={"/todo"} style={NavLinkStyle}>
           홈
