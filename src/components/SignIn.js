@@ -16,7 +16,6 @@ class SignInModal extends React.Component {
             password: "",
             errorMessage: ""
         };
-
     }
     // e-mail, pw 입력 기능
     hadleInputValue = (key) => (text) => {
@@ -58,7 +57,7 @@ class SignInModal extends React.Component {
         else {
             if (user[0].email === this.state.email && user[0].password === this.state.password) {
                 this.props.handleResponseSuccess()
-                console.log(this.props)
+                // console.log(this.props)
             }
             else (
                 this.setState({
@@ -66,7 +65,7 @@ class SignInModal extends React.Component {
                 })
             )
         }
-        console.log(user)
+        // console.log(user)
 
     }
 
