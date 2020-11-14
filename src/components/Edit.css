@@ -4,6 +4,7 @@
 }
 .myinfo-body {
   display: block;
+  width: 100%;
   padding-left: 2%;
   padding-bottom: 20px;
   border-bottom: 1px solid #ebebeb;
@@ -13,17 +14,8 @@
 .object-pw,
 .object-name,
 .object-mobile {
-}
-
-.edit-email,
-.edit-pw,
-.edit-name,
-.edit-mobile {
-  float: left;
-  width: 70px;
-
-  font-size: medium;
-  text-align: center;
+  position: relative;
+  padding-right: 40%;
 }
 
 .print-email,
@@ -31,6 +23,18 @@
 .print-name,
 .print-mobile {
   float: left;
+  width: 60%;
+}
+
+.edit-email,
+.edit-pw,
+.edit-name,
+.edit-mobile {
+  float: left;
+  width: 40%;
+  height: 10pt;
+  font-size: small;
+  text-align: center;
 }
 
 .edit-button {
@@ -48,5 +52,6 @@
   border: none;
   background-color: hotpink;
   width: 90px;
+  font-size: medium;
   text-align: center;
 }

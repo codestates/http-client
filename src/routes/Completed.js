@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+// import axios from "axios";
 
 // components
 import List from "../components/List";
@@ -35,6 +35,7 @@ class Completed extends React.Component {
     return (
       <>
         <section className="container-list">
+          <div className="title-complete">&#9989; 완료일정</div>
           <div className="todo">
             {completeList.map((onedayTodo, i) => (
               <List

@@ -1,6 +1,6 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
+// import axios from "axios";
 
 import "./Edit.css";
 
@@ -31,6 +31,7 @@ class Edit extends React.Component {
     this.setState({ [key]: e.target.value });
   };
   inputEdit() {
+    const { email, password, name, mobile } = this.state;
     // const user = await axios.post("http://localhost:8000/mypage", {
     //     email: email,
     //     password: password,
@@ -38,10 +39,10 @@ class Edit extends React.Component {
     //     mobile: mobile
     // })  // 노드서버 구축완료시 활성화 & 테스트
     user.push({
-      content: this.state.content,
-      startDate: this.state.startDate,
-      important: this.state.important,
-      complete: this.state.complete,
+      email: email,
+      password: password,
+      name: name,
+      mobile: mobile,
     });
     this.props.history.push("/mypage");
   }
@@ -91,7 +92,10 @@ class Edit extends React.Component {
         </section>
         <div className="submit-button-area">
           <button className="submit-button">
-            <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
+            <Link
+              to={"/mypage"}
+              style={{ textDecoration: "none", color: "white" }}
+            >
               수정완료
             </Link>
           </button>
