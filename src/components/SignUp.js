@@ -14,12 +14,9 @@ class SignUpModal extends React.Component {
 
   handleInputValue = (key) => (text) => {
     console.log('잘 입력되나?')
-    console.log('k', key)
-    console.log('t', text)
+    // console.log('k', key)
+    // console.log('t', text)
   }
-
-
-
 
   render() {
     return (
@@ -29,7 +26,6 @@ class SignUpModal extends React.Component {
         <div className='modal_overlay'></div>
         <div className='modal_content'>
           <h1>회원 가입</h1>
-
 
           <div className='container'>
 
