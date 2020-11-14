@@ -39,7 +39,7 @@ class App extends React.Component {
       isLogin: false,
       email: null,
       password: null,
-      username: null,
+      userName: null,
       mobile: null
     }
 
@@ -59,7 +59,7 @@ class App extends React.Component {
   //         isLogin: false,
   //         email: res.data.email,
   //         password: res.data.password,
-  //         username: res.data.username,
+  //         userName: res.data.userName,
   //         mobile: res.data.mobile
   //       })
   //     })
@@ -72,7 +72,7 @@ class App extends React.Component {
       userinfo: {
         email: user[0].email,
         password: user[0].password,
-        username: user[0].name,
+        userName: user[0].name,
         mobile: user[0].mobile
       }
     })
@@ -103,7 +103,8 @@ class App extends React.Component {
       그래서 props 전달과 동시에 로그인 성공시 isLogin을 true로 바꿔야 해서 112번 줄을 105~110번줄처럼 변경했습니다!
  */}
           <Route
-            path='/'
+            path={"/"}
+            exact={true}
             render={() => (
               isLogin ? <ToDo /> : <SignInModal handleResponseSuccess={this.handleResponseSuccess} />
             )}

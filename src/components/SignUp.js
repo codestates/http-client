@@ -1,8 +1,22 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import user from '../test_data_user.json'
 
 
 class SignUpModal extends React.Component {
+  state = {
+    email: "",
+    userName: "",
+    mobile: "",
+    errorMessage: ""
+
+  }
+
+  handleInputValue = (key) => (text) => {
+    console.log('잘 입력되나?')
+    // console.log('k', key)
+    // console.log('t', text)
+  }
 
   render() {
     return (
@@ -12,9 +26,6 @@ class SignUpModal extends React.Component {
         <div className='modal_overlay'></div>
         <div className='modal_content'>
           <h1>회원 가입</h1>
-
-          {/* <img src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
-
 
           <div className='container'>
 
