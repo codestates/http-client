@@ -43,9 +43,16 @@ class FindAccount extends React.Component {
       }
     }
 
-    this.setState({
-      errorMessagePw: "'-'를 입력해주세요."
-    })
+    if (userIdInfo.mobile.length) {
+      this.setState({
+        errorMessageEmail: "'-'를 입력해주세요."
+      })
+    }
+    else {
+      this.setState({
+        errorMessagePw: "'-'를 입력해주세요."
+      })
+    }
   }
 
   handleFindEmailValue = () => {
@@ -57,7 +64,7 @@ class FindAccount extends React.Component {
     }
     if (userIdInfo.userName === user[0].name && userIdInfo.mobile === user[0].mobile) {
       // console.log(this.props)
-      this.props.history.push({ pathname: '/useremail', state: { email: userIdInfo.email } })  // CompletedFindEmail에 props로 입력 값 넘겨주기
+      this.props.history.push({ pathname: '/useremail', state: { userName: user[0].name, email: user[0].email } })  // CompletedFindEmail에 props로 입력 값 넘겨주기
     }
     else if (!userIdInfo.userName.length || !userIdInfo.mobile.length) {
       this.setState({
@@ -68,6 +75,10 @@ class FindAccount extends React.Component {
       this.setState({
         errorMessageEmail: "일치하는 e-mail이 없습니다."
       })
+      this.notFormedMobileNum()
+    }
+    else {
+      this.notFormedMobileNum()
     }
 
   }
@@ -80,7 +91,7 @@ class FindAccount extends React.Component {
       mobile: mobile
     }
     if (userPwInfo.email === user[0].email && userPwInfo.userName === user[0].name && userPwInfo.mobile === user[0].mobile) {
-      this.props.history.push('/userpw')
+      this.props.history.push({ pathname: "userpw", state: { pw: user[0].password } })
     }
     else if (!userPwInfo.email.length || !userPwInfo.userName.length || !userPwInfo.mobile.length) {
       this.setState({
@@ -103,9 +114,6 @@ class FindAccount extends React.Component {
       //     errorMessageEmail: "000-0000-0000 형식으로 입력해주세요."
       //   })
       // }
-
-
-
     }
   }
 
