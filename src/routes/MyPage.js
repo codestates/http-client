@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 // components
 import Remove from "../components/Remove";
 import Edit from "../components/Edit";
-
 import "./MyPage.css";
-
 function MyPage(props) {
-  console.log(props);
+  console.log('Mypage', props.userinfo);
   if (props.userinfo) {
     return (
       <>
@@ -61,5 +58,4 @@ function MyPage(props) {
     return <></>;
   }
 }
-
 export default MyPage;
