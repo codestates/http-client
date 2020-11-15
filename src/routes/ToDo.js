@@ -1,13 +1,10 @@
 import React from "react";
 // import axios from "axios";
-
 // components
 import List from "../components/List";
 import SignInModal from "../components/SignIn";
 // import SignUpModal from "../components/SignUp";
-
 import "./ToDo.css";
-
 // test data
 import todoList from "../test_data_list.json";
 
@@ -15,6 +12,8 @@ class ToDo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      email: props.email,
+      userName: props.userName,
       content: null,
       startDate: null,
       important: false,
@@ -22,19 +21,18 @@ class ToDo extends React.Component {
       err: "",
       todoList: [],
     };
+    // console.log(`${this.state.email}은 ${this.state.userName}`);
+    console.log("todoProps", props)
   }
-
   // 1. 컴포넌트 진입하자마자 전체 목록 가져오기
   getList = async () => {
     // const list = await axios.get("http://localhost:8000/main"); // 노드서버 구축완료시 활성화 & 테스트
     await this.setState({ todoList: todoList });
   };
-
   // 2. Life cycle에 반영
   componentDidMount() {
     this.getList();
   }
-
   // 3. 일정입력
   handleInputValue = (key) => (e) => {
     this.setState({ [key]: e.target.value });
@@ -60,7 +58,6 @@ class ToDo extends React.Component {
     }
     this.props.history.push("/");
   };
-
   // 4. 컴포넌트 최종내용 렌더링
   render() {
     const {
@@ -73,7 +70,6 @@ class ToDo extends React.Component {
     } = this.state;
     return (
       <>
-
         <div className="container-input">
           <form className="inputfield" onSubmit={(e) => e.preventDefault()}>
             <div className="chkbox">
@@ -103,7 +99,6 @@ class ToDo extends React.Component {
                 ></input>
               </div>
             </div>
-
             <button
               className="input-button"
               type="submit"
@@ -114,7 +109,6 @@ class ToDo extends React.Component {
             <div className="alert-box">{err !== "" ? err : null}</div>
           </form>
         </div>
-
         <section className="container-list">
           <div className="todo">
             {todoList.map((onedayTodo, i) => (
@@ -133,5 +127,4 @@ class ToDo extends React.Component {
     );
   }
 }
-
 export default ToDo;
