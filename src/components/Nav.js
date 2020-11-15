@@ -18,15 +18,13 @@ class Nav extends React.Component {
     super(props)
   }
 
-
-
   render() {
     console.log('Nav프롭', this.props)
 
     return (
       <ul className="nav">
         <div className="nav-welcome">
-          <Welcome userName={this.props.loginUserName} />
+          <Welcome userName={this.props.loginUserName} /> {/* welcome 컴포넌트로 전달 */}
           <SignOut logOut={this.props.resetLogin} />  {/* signOut 컴포넌트로 전달 */}
         </div>
 

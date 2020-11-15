@@ -4,27 +4,115 @@
     "email": "white@gmail.com",
     "password": "1111",
     "name": "성유리",
-    "mobile": "010-1234-5678"
+    "mobile": "010-1234-5678",
+    "list": [
+      {
+        "listId": 0,
+        "content": "쇼미더머니9 보기",
+        "startDate": "2020-11-02",
+        "complete": true,
+        "important": false
+      },
+      {
+        "listId": 1,
+        "content": "그것이알고싶다 보기",
+        "startDate": "2020-11-02",
+        "complete": false,
+        "important": false
+      },
+      {
+        "listId": 2,
+        "content": "한강 산책하기",
+        "startDate": "2020-11-04",
+        "complete": true,
+        "important": true
+      },
+      {
+        "listId": 3,
+        "content": "합정 북카페 가기",
+        "startDate": "2020-11-04",
+        "complete": true,
+        "important": true
+      },
+      {
+        "listId": 4,
+        "content": "오목집 족발 먹기",
+        "startDate": "2020-11-07",
+        "complete": false,
+        "important": false
+      },
+      {
+        "listId": 5,
+        "content": "베스킨라빈스 먹기",
+        "startDate": "2020-11-07",
+        "complete": true,
+        "important": false
+      },
+      {
+        "listId": 6,
+        "content": "라떼 간식 사기",
+        "startDate": "2020-11-08",
+        "complete": false,
+        "important": true
+      }
+    ]
   },
   {
     "id": 1,
     "email": "latte@gmail.com",
     "password": "1111",
     "name": "라떼씨",
-    "mobile": "010-1111-1111"
-  },
-  {
-    "id": 2,
-    "email": "black@gmail.com",
-    "password": "1111",
-    "name": "와칸다",
-    "mobile": "010-9999-9999"
-  },
-  {
-    "id": 3,
-    "email": "panther@gmail.com",
-    "password": "1111",
-    "name": "포에버",
-    "mobile": "010-7777-7777"
+    "mobile": "010-1111-1111",
+    "list": [
+      {
+        "listId": 0,
+        "content": "경복궁 가기",
+        "startDate": "2020-11-02",
+        "complete": true,
+        "important": false
+      },
+      {
+        "listId": 1,
+        "content": "롯데월드 가기",
+        "startDate": "2020-11-02",
+        "complete": false,
+        "important": false
+      },
+      {
+        "listId": 2,
+        "content": "에버랜드 가기",
+        "startDate": "2020-11-04",
+        "complete": true,
+        "important": true
+      },
+      {
+        "listId": 3,
+        "content": "성수동 놀러가기",
+        "startDate": "2020-11-04",
+        "complete": true,
+        "important": true
+      },
+      {
+        "listId": 4,
+        "content": "명동 쇼핑 가기",
+        "startDate": "2020-11-07",
+        "complete": false,
+        "important": false
+      },
+      {
+        "listId": 5,
+        "content": "압구정 놀러가기",
+        "startDate": "2020-11-07",
+        "complete": true,
+        "important": false
+      },
+      {
+        "listId": 6,
+        "content": "한강 산책",
+        "startDate": "2020-11-08",
+        "complete": false,
+        "important": true
+      }
+    ]
   }
 ]
