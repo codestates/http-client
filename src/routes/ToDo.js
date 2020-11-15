@@ -45,10 +45,11 @@ const ToDo = ({ email }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true); // loading 되었다고 알림
       try {
-        const response = await axios.get("http://localhost:8000/main");
-        setLoading(true);
+        const response = await axios.post("http://localhost:8000/main");
         setTodos(response.data.list);
+        setLoading(false); // 새로운 state로 render 될 때까지 loading 대기상태로 회귀
         console.log("읽기 완료");
       } catch (e) {
         console.log(e);
@@ -63,10 +64,6 @@ const ToDo = ({ email }) => {
   // 3. 새 일정 입력 메소드
   const onInsert = useCallback(
     (newTodo) => {
-      // axios.post("http://localhost:8000:main", { content, startDate })
-      // .then(res => {
-      //   setTodos(res.list)
-      // })
       const todo = {
         listId: nextListId.current,
         content: newTodo.content,
@@ -74,6 +71,17 @@ const ToDo = ({ email }) => {
         complete: false,
         important: false,
       };
+
+      // 서버에 POST
+      axios.post("http://localhost:8000/mypage", {
+        listId: todo.listId,
+        content: todo.content,
+        startDate: todo.startDate,
+        complete: todo.complete,
+        important: todo.important,
+      });
+
+      // 컴포넌트 내 일정 목록 최신화(re-rendering)
       setTodos((todos) => todos.concat(todo));
       nextListId.current += 1;
     },
@@ -99,6 +107,11 @@ const ToDo = ({ email }) => {
             : todo
         )
       );
+
+      // 서버에 POST
+      axios.post("http://localhost:8000/mypage", {
+        important: todo.important,
+      });
     },
     [todos]
   );
@@ -112,6 +125,11 @@ const ToDo = ({ email }) => {
           todo.listId === listId ? { ...todo, complete: !todo.complete } : todo
         )
       );
+
+      // 서버에 POST
+      axios.post("http://localhost:8000/mypage", {
+        complete: todo.complete,
+      });
     },
     [todos]
   );
@@ -139,4 +157,5 @@ const ToDo = ({ email }) => {
   );
 };
 
-export default ToDo;
+// 컴포넌트의 props가 바뀌지 않았다면 re-rendering 방지(= shouldComponentUpdate와 동일)
+export default React.memo(ToDo);

@@ -3,8 +3,6 @@ import React from "react";
 // components
 import List from "../components/List";
 
-import "./Completed.css";
-
 function Completed(props) {
   return (
     <>
