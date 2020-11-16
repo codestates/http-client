@@ -149,6 +149,7 @@ class SignInModal extends React.Component {
             </form>
           </div>
         </div>
+
       </div>
     );
   }
