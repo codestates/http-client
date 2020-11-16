@@ -90,7 +90,7 @@ class App extends React.Component {
       email: null,
       password: null,
       userName: null,
-      mobile: null,
+      // mobile: null,
     });
   };
 
