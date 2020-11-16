@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Redirect, Route } from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 import axios from "axios";
 
 // Components
@@ -13,6 +13,7 @@ import CompletedFindPw from "./components/Find_PW_completed";
 import Edit from "./components/Edit";
 import Remove from "./components/Remove";
 import Footer from "./components/Footer";
+
 
 // Routes
 import MyPage from "./routes/MyPage";
@@ -79,47 +80,55 @@ class App extends React.Component {
       email: null,
       password: null,
       userName: null,
-      mobile: null
-    })
+      mobile: null,
+    });
     // })
     this.doSignOut();
+  };
 
-  }
+  // Edit 컴포넌트의 결과를 끌어올린다.
+  adoptModifiedInfo = (data) => {
+    if (data.email !== "") this.setState({ email: data.email });
+    if (data.password !== "") this.setState({ password: data.password });
+    if (data.userName !== "") this.setState({ userName: data.userName });
+    if (data.mobile !== "") this.setState({ mobile: data.mobile });
+  };
 
-  // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다. 
+  // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다.
   componentDidMount() {
-    const userEmail = window.sessionStorage.getItem('email');
+    const userEmail = window.sessionStorage.getItem("email");
     if (userEmail) {
       this.handleResponseSuccess();
-    }
-    else {
+    } else {
       this.handleSignOut();
     }
   }
 
   doSignOut = () => {
     window.sessionStorage.clear();
-  }
+  };
 
   render() {
-    console.log("App_history", this.props)
-    console.log("세션스토리지", window.sessionStorage)
-    console.log('App스테이트', this.state)
-    const { isLogin, email, userName } = this.state;
+    console.log("세션스토리지", window.sessionStorage);
+    console.log("App스테이트", this.state);
+    const { isLogin, email, userName, password, mobile } = this.state;
     // console.log(isLogin)
     return (
       <HashRouter>
         <div className="menu">
           {/* 1. 로그인 성공시 해당 유저의 이름을 메뉴바 상단에 "***님 환영합니다." 라고 표시하기 위해 welcome 컴포넌트까지 건네줄 것
               2. 로그아웃기능을 위해 하위 컴포넌트인 Nav로, 그리고 다시 SignOut 컴포넌트로 내릴 것. */}
-          <Nav resetLogin={this.handleSignOut} loginUserInfo={this.state} />
+          <Nav
+            resetLogin={this.handleSignOut}
+            loginUserInfo={this.state}
+          />
         </div>
         <div className="screen">
           <Route
             path={"/"}
             exact={true}
             render={() =>
-              isLogin ? (   // 새로고침해도 로그인 상태를 유지시키기 위해 localstorage에 저장된 정보를 사용한다. local storage는 사용자가 지우지 않는 이상 영구적으로 계속 브라우저에 남아있음 (단, session storage는 브라우저가 닫은 겨우 사라지고, 브라우저 내에서 탬을 생성하는 경우에도 별도의 영역으로 할당됨.)
+              isLogin ? ( // 새로고침해도 로그인 상태를 유지시키기 위해 localstorage에 저장된 정보를 사용한다. local storage는 사용자가 지우지 않는 이상 영구적으로 계속 브라우저에 남아있음 (단, session storage는 브라우저가 닫은 겨우 사라지고, 브라우저 내에서 탬을 생성하는 경우에도 별도의 영역으로 할당됨.)
                 <ToDo email={email} userName={userName} />
               ) : (
                   <SignInModal
@@ -129,7 +138,22 @@ class App extends React.Component {
             }
           />
           <Route path={"/todo"} component={ToDo} />
-          <Route path={"/mypage"} component={MyPage} />
+          <Route
+            path={"/mypage"}
+            render={() =>
+              isLogin ? (
+                <MyPage
+                  userName={userName}
+                  email={email}
+                  password={password}
+                  mobile={mobile}
+                  adoptModifiedInfo={this.adoptModifiedInfo}
+                />
+              ) : (
+                  <MyPage />
+                )
+            }
+          />
           <Route path={"/completed"} component={Completed} />
           <Route path={"/Important"} component={Important} />
           <Route path={"/signup"} component={SignUpModal} />

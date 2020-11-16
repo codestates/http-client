@@ -15,11 +15,11 @@ const NavLinkStyle = {
 
 class Nav extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
 
   render() {
-    console.log('Nav프롭', this.props)
+    console.log("Nav프롭", this.props);
 
     return (
       <ul className="nav">
@@ -29,24 +29,24 @@ class Nav extends React.Component {
         </div>
 
         <li className="nav-todo">
-          <Link to={"/todo"} style={NavLinkStyle}>
+          <Link to={"/"} style={NavLinkStyle}>
             홈
         </Link>
         </li>
         <li className="nav-mypage">
           <Link to={"/mypage"} style={NavLinkStyle}>
             마이페이지
-        </Link>
+          </Link>
         </li>
         <li className="nav-completed">
           <Link to={"/completed"} style={NavLinkStyle}>
             완료일정
-        </Link>
+          </Link>
         </li>
         <li className="nav-important">
           <Link to={"/important"} style={NavLinkStyle}>
             중요일정
-        </Link>
+          </Link>
         </li>
       </ul>
     );

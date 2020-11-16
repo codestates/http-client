@@ -1,5 +1,4 @@
 import React from "react";
-
 // 리액트 기본 아이콘 로드
 // https://react-icons.github.io/react-icons/icons?name=md
 import {
@@ -9,12 +8,9 @@ import {
   MdCheckBox,
   MdRemoveCircleOutline,
 } from "react-icons/md";
-
 // node-sass 모듈의 조건부 CSS 적용 및 렌더링 기능 추가
 import cn from "classnames";
-
 import "./ListItem.scss";
-
 const ListItem = ({
   todo,
   onRemove,
@@ -31,7 +27,6 @@ const ListItem = ({
       >
         {important ? <MdStar /> : <MdStarBorder />}
       </div>
-
       {/* 완료버튼 */}
       <div
         className={cn("complete-check", { complete })}
@@ -40,7 +35,6 @@ const ListItem = ({
         <div className="content">{content}</div>
         {complete ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
-
       {/* 삭제버튼 */}
       <div className="remove" onClick={() => onRemove(listId)}>
         <MdRemoveCircleOutline />
@@ -48,6 +42,5 @@ const ListItem = ({
     </div>
   );
 };
-
 // 컴포넌트의 props가 바뀌지 않았다면 re-rendering 방지(= shouldComponentUpdate와 동일)
 export default React.memo(ListItem);

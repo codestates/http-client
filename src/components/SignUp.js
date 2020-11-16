@@ -5,8 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 
 //fakedate
-import user from '../test_data_user.json'
-
+import user from "../test_data_user.json";
 
 class SignUpModal extends React.Component {
   state = {
@@ -16,29 +15,29 @@ class SignUpModal extends React.Component {
     mobile: "",
     errorMessage: "",
     errorMessageMobile: "",
-    errorMessageEmail: ""
-  }
+    errorMessageEmail: "",
+  };
 
   //* 연락처 형식 헬퍼 함수: '-' 삽입 필수
   notFormedMobileNum = () => {
     const { mobile } = this.state;
     const userIdInfo = {
-      mobile: mobile
-    }
-    let count = 0
+      mobile: mobile,
+    };
+    let count = 0;
     for (let i = 0; i < userIdInfo.mobile.length; i++) {
-      if (userIdInfo.mobile[i] === '-') {
-        count++
+      if (userIdInfo.mobile[i] === "-") {
+        count++;
         if (count === 2) {
-          console.log('c', count)
-          return
+          console.log("c", count);
+          return;
         }
       }
     }
     this.setState({
       errorMessageMobile: "'-'를 입력해주세요."
-    })
-  }
+    });
+  };
 
 
   // 중복확인 --> 백앤드 팀원들에게 구현했는지 물어보기 우선, 기능플로우 부터 확인.
@@ -50,17 +49,17 @@ class SignUpModal extends React.Component {
     }
     for (let i = 0; i < user.length; i++) {
       if (!userInfo.email.length) {
-        return alert("항목을 입력해주세요.")
+        return alert("항목을 입력해주세요.");
 
       }
       else if (userInfo.email === user[i].email) {
-        return alert("이미 존재하는 e-mail입니다.")
+        return alert("이미 존재하는 e-mail입니다.");
       }
       else if (!userInfo.email.includes('@') || !userInfo.email.includes('.')) {
-        return alert("이메일 형식을 지켜주세요. ex) @, .com 등")
+        return alert("이메일 형식을 지켜주세요. ex) @, .com 등");
       }
     }
-    return alert("사용이 가능한 e-mail입니다.")
+    return alert("사용이 가능한 e-mail입니다.");
   }
 
 
@@ -80,20 +79,29 @@ class SignUpModal extends React.Component {
       email: this.state.email,
       password: this.state.password,
       userName: this.state.userName,
-      mobile: this.state.mobile
-    }
+      mobile: this.state.mobile,
+    };
 
-    if (!NewUserInformation.email.length || !NewUserInformation.password.length || !NewUserInformation.userName.length || !NewUserInformation.mobile.length) {
+    if (
+      !NewUserInformation.email.length ||
+      !NewUserInformation.password.length ||
+      !NewUserInformation.userName.length ||
+      !NewUserInformation.mobile.length
+    ) {
       this.setState({
-        errorMessage: "모든 항목은 필수입니다."
-      })
+        errorMessage: "모든 항목은 필수입니다.",
+      });
+    } else if (
+      NewUserInformation.email.length &&
+      NewUserInformation.password.length &&
+      NewUserInformation.userName.length &&
+      NewUserInformation.mobile.length
+    ) {
+      this.notFormedMobileNum();
     }
-    else if (NewUserInformation.email.length && NewUserInformation.password.length && NewUserInformation.userName.length && NewUserInformation.mobile.length) {
-      this.notFormedMobileNum()
-    }
-    this.notFormedMobileNum()
+    this.notFormedMobileNum();
     //! 해당 신규 유저의 정보를 서버로 post 요청을 한 후(DB추가 등),  res로 응답코드를 받든 뭐든 받으면 로그인 페이지로 리다이렉트
-    //* 서버 통신시 아래 코드를 테스트해보고 사용하기 
+    //* 서버 통신시 아래 코드를 테스트해보고 사용하기
     /*     else {
       axios.post('http', NewUserInformation)
       .then(response => {
@@ -105,67 +113,81 @@ class SignUpModal extends React.Component {
         })
       })
     } */
-
-  }
+  };
 
   render() {
     // console.log('user', user)
     // console.log(this.props.history)
     return (
-
-      <div className='modal'>
-
-        <div className='modal_overlay'></div>
-        <div className='modal_content'>
+      <div className="modal">
+        <div className="modal_overlay"></div>
+        <div className="modal_content">
           <h1>회원 가입</h1>
 
-          <div className='container'>
-
-            <form onSubmit={(e) => { e.preventDefault() }}>
-              <div className='container1'>
-
-                <div className='inputInfo'>
-                  <span className='email_span'>e-mail</span>
-                  <input type='email' onChange={this.handleInPutValue("email")}></input>
-                  <button className='check' onClick={this.handleClickduplicatedId}>중복 확인</button>
+          <div className="container">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <div className="container1">
+                <div className="inputInfo">
+                  <span className="email_span">e-mail</span>
+                  <input
+                    type="email"
+                    onChange={this.handleInPutValue("email")}
+                  ></input>
+                  <button
+                    className="check"
+                    onClick={this.handleClickduplicatedId}
+                  >
+                    중복 확인
+                  </button>
                   <div>{this.state.errorMessageEmail}</div>
-
                 </div>
 
                 <div>
                   <span>PW</span>
-                  <input type='password' onChange={this.handleInPutValue("password")}></input>
+                  <input
+                    type="password"
+                    onChange={this.handleInPutValue("password")}
+                  ></input>
                 </div>
 
                 <div>
                   <span>고객명</span>
-                  <input type='text' onChange={this.handleInPutValue("userName")}></input>
+                  <input
+                    type="text"
+                    onChange={this.handleInPutValue("userName")}
+                  ></input>
                 </div>
 
                 <div>
                   <span>연락처</span>
-                  <input type='text' onChange={this.handleInPutValue("mobile")}></input>
+                  <input
+                    type="text"
+                    onChange={this.handleInPutValue("mobile")}
+                  ></input>
                   <div>{this.state.errorMessageMobile}</div>
                 </div>
               </div>
               <div>
-
                 <div>{this.state.errorMessage}</div>
 
                 {/* <NavLink to='' className='signUp_link'> */}
-                <button className='signUp_btn' onClick={this.handClickAddNewUserInfo}>회원 가입</button>
+                <button
+                  className="signUp_btn"
+                  onClick={this.handClickAddNewUserInfo}
+                >
+                  회원 가입
+                </button>
                 {/* </NavLink> */}
-
               </div>
             </form>
-
-
           </div>
         </div>
       </div>
-
-    )
-
+    );
   }
 }
 

@@ -5,30 +5,14 @@
   margin-top: 50px;
   margin-bottom: 40px;
 }
-.myinfo-body {
-  float: left;
-  display: block;
-  padding-left: 2%;
-}
-.object-email,
-.object-pw,
-.object-name,
-.object-mobile {
-}
 
-.description-email,
-.description-pw,
-.description-name,
-.description-mobile {
+.description {
   float: left;
   width: 100px;
   text-align: center;
 }
 
-.print-email,
-.print-pw,
-.print-name,
-.print-mobile {
+.print {
   float: left;
 }
 

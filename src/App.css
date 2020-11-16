@@ -45,8 +45,9 @@
   text-align: center;
 }
 
-.modal { /*durl*/
- 
+.modal {
+  /*durl*/
+
   position: fixed;
   /* margin-top: 1%; */
   top: 0;
@@ -59,7 +60,6 @@
   z-index: 1;
 }
 
-
 /* .hidden {
   display: none;
 } */
@@ -69,7 +69,6 @@
   width: 1000%;
   height: 1000%;
   position: fixed;
-  
 }
 
 .modal_content {
@@ -80,10 +79,8 @@
   position: relative;
   top: 0px;
   border-radius: 10px;
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-  
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
-
 
 /* .modal_content h1 {
   margin: 0;
@@ -92,7 +89,6 @@
 /* .hidden {
   display: none;
 } */
-
 
 .container {
   /* background-color: pink; */
@@ -107,8 +103,8 @@
 .container1 {
   background-color: pink;
   max-width: 100%;
-  padding-right:50px;
-  padding-left:50px;
+  padding-right: 50px;
+  padding-left: 50px;
   padding-top: 10px;
   padding-bottom: 30px;
   /* align-items: center; */
@@ -117,31 +113,25 @@
 
 /* 사진크기 자동 조절 */
 #sign_in_img {
-  
   display: block;
   width: inherit;
   max-width: 100%;
   height: auto;
 }
 /* .container1 img{
-
   display: block;
   max-width: 100%;
   height: auto;
 } */
 
-input[type='email'],
-input[type='password'],
-input[type='text'] {
-
+input[type="email"],
+input[type="password"],
+input[type="text"] {
   width: 70%;
   font-size: 1.1rem;
-  padding: 0 ;
-  margin: 0.4rem ;
-  
+  padding: 0;
+  margin: 0.4rem;
 }
-
-
 
 .findAccount_span {
   text-align: right;
@@ -151,7 +141,6 @@ input[type='text'] {
 
 .findAccount_link {
   text-decoration: none;
-
 }
 
 .signUp_link {
@@ -161,16 +150,14 @@ input[type='text'] {
 .signUp_div {
   text-align: right;
   padding-bottom: 10px;
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
-
 
 .loginButton {
   margin-top: 30px;
   width: 70%;
   /* height: auto; */
   font-size: 1rem;
-  
 }
 
 .signUp_btn {
@@ -178,7 +165,6 @@ input[type='text'] {
   width: 100%;
   font-size: 2rem;
 }
-
 
 .check {
   text-align: right;
@@ -188,7 +174,6 @@ input[type='text'] {
 /*-----Find_account.css-----*/
 
 .find_e-mail_box {
-
   display: block;
   position: relative;
   background-color: pink;
@@ -197,7 +182,6 @@ input[type='text'] {
   /* padding-left:50px; */
   padding-top: 10px;
   padding-bottom: 30px;
-  
 }
 
 .line {
@@ -207,13 +191,11 @@ input[type='text'] {
   margin-bottom: 7%;
   width: 100%;
   height: 0px;
-  
-  border: 1px solid #C4C4C4;
-  
+
+  border: 1px solid #c4c4c4;
 }
 
 .find_pw_box {
-
   display: block;
   position: relative;
   background-color: pink;
@@ -222,11 +204,9 @@ input[type='text'] {
   padding-left:50px; */
   padding-top: 10px;
   padding-bottom: 30px;
-  
 }
 
 .findBtn {
-  
   margin-top: 10px;
   font-size: 1rem;
   width: 50%;
@@ -236,8 +216,6 @@ input[type='text'] {
 /*-----Find_completed.css-----*/
 
 .informaion {
-  
-  
   margin-top: 50%;
   /* line-height: 50%; */
 }
@@ -249,9 +227,6 @@ input[type='text'] {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
