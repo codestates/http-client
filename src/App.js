@@ -86,7 +86,12 @@ class App extends React.Component {
   };
 
   adoptModifiedInfo = () => {
-    this.setState({});
+    this.setState({
+      email: null,
+      password: null,
+      userName: null,
+      mobile: null,
+    });
   };
 
   // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다.
