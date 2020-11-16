@@ -53,6 +53,7 @@ const NewToDo = ({ onInsert }) => {
           name="startDate"
           value={newTodo.startDate}
           onChange={onChange}
+          type="date"
         />
         <input
           className="content"

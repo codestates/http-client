@@ -13,6 +13,13 @@ class SignInModal extends React.Component {
       errorMessage: "",
     };
     console.log("asdfasdfas", this.props);
+
+
+    /* ----------------소셜 로그인------------------- */
+
+
+
+    /* ----------------로그인----------------------- */
   }
   // e-mail, pw 입력 기능
   hadleInputValue = (key) => (text) => {
@@ -132,13 +139,17 @@ class SignInModal extends React.Component {
                 </button>
                 {/* </NavLink> */}
                 <div>
-                  <button className="loginButton">Github 로그인</button>
+                  <button className="loginButton"
+                    type="submit"
+
+                  >Github 로그인</button>
                 </div>
                 <div className="alert-box">{this.state.errorMessage}</div>
               </div>
             </form>
           </div>
         </div>
+
       </div>
     );
   }

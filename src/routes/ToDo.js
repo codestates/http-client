@@ -1,11 +1,14 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import axios from "axios";
+
 // components
 import List from "../components/List";
 import NewToDo from "../components/NewToDo";
 import "./ToDo.css";
+
 // test data
 import user from "../test_data_user.json";
+
 /*****************************************************************
                             리액트 훅 명세표
 (1) useState
@@ -23,7 +26,8 @@ import user from "../test_data_user.json";
  - "listId"와 같이 화면에 보여줄 필요도 없고 render로 관리할 필요도 없는 경우,
    즉, 다른 컴포넌트에서 참조(reference) 목적으로만 필요한 경우 사용
 ******************************************************************/
-const ToDo = ({ email }) => {
+
+const ToDo = ({ email, getTodos }) => {
   // 0. useState를 통한 일정들(todos) 관리
   let todo = {};
   for (let el of user) {
@@ -33,7 +37,7 @@ const ToDo = ({ email }) => {
   }
   const [todos, setTodos] = useState(todo); // todo state 관리
   const [isLoading, setLoading] = useState(false); // loading state 관리
-  console.log(todos);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true); // loading 되었다고 알림
@@ -48,8 +52,10 @@ const ToDo = ({ email }) => {
     };
     fetchData();
   }, []);
+
   // 2. listId를 메소드와 자식 컴포넌트들에 고유변수로 사용할 것임을 선언
   const nextListId = useRef(7);
+
   // 3. 새 일정 입력 메소드
   const onInsert = useCallback(
     (newTodo) => {
@@ -74,6 +80,7 @@ const ToDo = ({ email }) => {
     },
     [todos]
   );
+
   // 4. 삭제 클릭 메소드
   const onRemove = useCallback(
     (listId) => {
@@ -81,6 +88,7 @@ const ToDo = ({ email }) => {
     },
     [todos]
   );
+
   // 5. 중요 클릭 메소드
   const onToggleOfImportant = useCallback(
     (listId) => {
@@ -99,6 +107,7 @@ const ToDo = ({ email }) => {
     },
     [todos]
   );
+
   // 6. 완료 클릭 메소드
   const onToggleOfComplete = useCallback(
     (listId) => {
@@ -115,6 +124,12 @@ const ToDo = ({ email }) => {
     },
     [todos]
   );
+
+  // A$AP funckin' added on
+  useEffect(() => {
+    getTodos(todos);
+  }, [todos]);
+
   // 7. 컴포넌트 렌더링
   return (
     <>

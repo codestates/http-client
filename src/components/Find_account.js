@@ -96,8 +96,6 @@ class FindAccount extends React.Component {
           errorMessageEmail: "일치하는 e-mail이 없습니다.",
         });
         this.notFormedMobileNumOnFindEmail();
-      } else {
-        this.notFormedMobileNumOnFindEmail();
       }
     }
   };
@@ -136,14 +134,6 @@ class FindAccount extends React.Component {
           errorMessagePw: "비밀번호를 찾지 못하였습니다.",
         });
         this.notFormedMobileNumOnFindPw(); // 연락처 형식 맞추는게 우선순위이니.
-      } else {
-        this.notFormedMobileNumOnFindPw();
-
-        // if (!userIdInfo.mobile.includes('-')) {
-        //   this.setState({
-        //     errorMessageEmail: "000-0000-0000 형식으로 입력해주세요."
-        //   })
-        // }
       }
     }
   };
@@ -228,10 +218,6 @@ class FindAccount extends React.Component {
 
             <NavLink to='' className='signUp_link'>
               <button className='signUp_btn'>로그인 페이지로 돌아가기</button>
-            </NavLink>
-
-            <NavLink to='/signup' className='signUp_link'>
-              <button className='signUp_btn'>회원 가입</button>
             </NavLink>
 
             <NavLink to="/signup" className="signUp_link">

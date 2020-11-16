@@ -39,6 +39,18 @@
   margin-top: 40px;
   margin-left: 230px;
 }
+.footer {
+  position: absolute;
+  text-align: center;
+  display: block;
+  left: 0;
+  bottom: 0;
+  width: 80%;
+  height: 60px;
+  margin-left: 8px;
+  padding-top: 30px;
+  background-color: pink;
+}
 
 /*  Modal  */
 .App {
