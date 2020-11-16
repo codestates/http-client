@@ -12,6 +12,7 @@ import CompletedFindEmail from "./components/Find_Email_completed";
 import CompletedFindPw from "./components/Find_PW_completed";
 import Edit from "./components/Edit";
 import Remove from "./components/Remove";
+import RemoveUserCompleted from "./components/Remove_completed"
 import Footer from "./components/Footer";
 
 
@@ -148,6 +149,7 @@ class App extends React.Component {
                   password={password}
                   mobile={mobile}
                   adoptModifiedInfo={this.adoptModifiedInfo}
+                  signOut={this.handleSignOut}
                 />
               ) : (
                   <MyPage />
@@ -162,6 +164,7 @@ class App extends React.Component {
           <Route path={"/userpw"} component={CompletedFindPw} />
           <Route path={"/edit"} component={Edit} />
           <Route path={"/remove"} component={Remove} />
+          <Route path={"/remove_user_completed"} component={RemoveUserCompleted} />
         </div>
         <Footer />
       </HashRouter>

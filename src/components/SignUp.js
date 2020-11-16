@@ -99,7 +99,7 @@ class SignUpModal extends React.Component {
     ) {
       this.notFormedMobileNum();
     }
-    this.notFormedMobileNum();
+
     //! 해당 신규 유저의 정보를 서버로 post 요청을 한 후(DB추가 등),  res로 응답코드를 받든 뭐든 받으면 로그인 페이지로 리다이렉트
     //* 서버 통신시 아래 코드를 테스트해보고 사용하기
     /*     else {
