@@ -9,6 +9,7 @@ function MyPage(props) {
   if (props.userinfo) {
     return (
       <>
+
         <section className="myinfo-print">
           <div className="myinfo-title">&#129296; 회원정보</div>
           <div className="myinfo-body">

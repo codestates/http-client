@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Redirect, Route } from "react-router-dom";
 import axios from "axios";
 
 // Components
@@ -83,6 +83,7 @@ class App extends React.Component {
     })
     // })
     this.doSignOut();
+
   }
 
   // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다. 
@@ -101,6 +102,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log("App_history", this.props)
     console.log("세션스토리지", window.sessionStorage)
     console.log('App스테이트', this.state)
     const { isLogin, email, userName } = this.state;
@@ -110,7 +112,7 @@ class App extends React.Component {
         <div className="menu">
           {/* 1. 로그인 성공시 해당 유저의 이름을 메뉴바 상단에 "***님 환영합니다." 라고 표시하기 위해 welcome 컴포넌트까지 건네줄 것
               2. 로그아웃기능을 위해 하위 컴포넌트인 Nav로, 그리고 다시 SignOut 컴포넌트로 내릴 것. */}
-          <Nav resetLogin={this.handleSignOut} loginUserName={this.state.userName} />
+          <Nav resetLogin={this.handleSignOut} loginUserInfo={this.state} />
         </div>
         <div className="screen">
           <Route
