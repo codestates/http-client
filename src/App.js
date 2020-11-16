@@ -85,13 +85,12 @@ class App extends React.Component {
     this.doSignOut();
   };
 
-  adoptModifiedInfo = () => {
-    this.setState({
-      email: null,
-      password: null,
-      userName: null,
-      mobile: null,
-    });
+  // Edit 컴포넌트의 결과를 끌어올린다.
+  adoptModifiedInfo = (data) => {
+    if (data.email !== "") this.setState({ email: data.email });
+    if (data.password !== "") this.setState({ password: data.password });
+    if (data.userName !== "") this.setState({ userName: data.userName });
+    if (data.mobile !== "") this.setState({ mobile: data.mobile });
   };
 
   // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다.
@@ -147,6 +146,7 @@ class App extends React.Component {
                   email={email}
                   password={password}
                   mobile={mobile}
+                  adoptModifiedInfo={this.adoptModifiedInfo}
                 />
               ) : (
                 <MyPage />
