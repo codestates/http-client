@@ -15,7 +15,6 @@ import Remove from "./components/Remove";
 import RemoveUserCompleted from "./components/Remove_completed"
 import Footer from "./components/Footer";
 
-
 // Routes
 import MyPage from "./routes/MyPage";
 import ToDo from "./routes/ToDo";
@@ -37,6 +36,7 @@ class App extends React.Component {
       password: null,
       userName: null,
       mobile: null,
+      todos: [], // A$AP funckin' added on
     };
   }
 
@@ -95,11 +95,17 @@ class App extends React.Component {
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
   };
 
+  // A$AP funckin' added on
+  getTodos = (data) => {
+    this.setState({ todos: data });
+  };
+
   // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다.
   componentDidMount() {
     const userEmail = window.sessionStorage.getItem("email");
     if (userEmail) {
       this.handleResponseSuccess();
+      this.getTodos;
     } else {
       this.handleSignOut();
     }
@@ -112,17 +118,14 @@ class App extends React.Component {
   render() {
     console.log("세션스토리지", window.sessionStorage);
     console.log("App스테이트", this.state);
-    const { isLogin, email, userName, password, mobile } = this.state;
+    const { isLogin, email, userName, password, mobile, todos } = this.state;
     // console.log(isLogin)
     return (
       <HashRouter>
         <div className="menu">
           {/* 1. 로그인 성공시 해당 유저의 이름을 메뉴바 상단에 "***님 환영합니다." 라고 표시하기 위해 welcome 컴포넌트까지 건네줄 것
               2. 로그아웃기능을 위해 하위 컴포넌트인 Nav로, 그리고 다시 SignOut 컴포넌트로 내릴 것. */}
-          <Nav
-            resetLogin={this.handleSignOut}
-            loginUserInfo={this.state}
-          />
+          <Nav resetLogin={this.handleSignOut} loginUserInfo={this.state} />
         </div>
         <div className="screen">
           <Route
@@ -130,12 +133,17 @@ class App extends React.Component {
             exact={true}
             render={() =>
               isLogin ? ( // 새로고침해도 로그인 상태를 유지시키기 위해 localstorage에 저장된 정보를 사용한다. local storage는 사용자가 지우지 않는 이상 영구적으로 계속 브라우저에 남아있음 (단, session storage는 브라우저가 닫은 겨우 사라지고, 브라우저 내에서 탬을 생성하는 경우에도 별도의 영역으로 할당됨.)
-                <ToDo email={email} userName={userName} />
+                <ToDo
+                  email={email}
+                  userName={userName}
+                  todos={todos} // A$AP funckin' added on
+                  getTodos={this.getTodos} // A$AP funckin' added on
+                />
               ) : (
-                  <SignInModal
-                    handleResponseSuccess={this.handleResponseSuccess}
-                  />
-                )
+                <SignInModal
+                  handleResponseSuccess={this.handleResponseSuccess}
+                />
+              )
             }
           />
           <Route path={"/todo"} component={ToDo} />
@@ -152,12 +160,30 @@ class App extends React.Component {
                   signOut={this.handleSignOut}
                 />
               ) : (
-                  <MyPage />
-                )
+                <MyPage />
+              )
             }
           />
-          <Route path={"/completed"} component={Completed} />
-          <Route path={"/Important"} component={Important} />
+          <Route
+            path={"/completed"}
+            render={() =>
+              isLogin ? (
+                <Completed email={email} todos={todos} /> // A$AP funckin' added on
+              ) : (
+                <Completed />
+              )
+            }
+          />
+          <Route
+            path={"/important"}
+            render={() =>
+              isLogin ? (
+                <Important email={email} todos={todos} /> // A$AP funckin' added on
+              ) : (
+                <Important />
+              )
+            }
+          />
           <Route path={"/signup"} component={SignUpModal} />
           <Route path={"/findaccount"} component={FindAccount} />
           <Route path={"/useremail"} component={CompletedFindEmail} />
@@ -166,7 +192,9 @@ class App extends React.Component {
           <Route path={"/remove"} component={Remove} />
           <Route path={"/remove_user_completed"} component={RemoveUserCompleted} />
         </div>
-        <Footer />
+        <div className="footer">
+          <Footer />
+        </div>
       </HashRouter>
     );
   }

@@ -6,7 +6,7 @@ import Welcome from "../components/Welcome";
 import SignOut from "../components/SignOut";
 
 // CSS
-import "./Nav.css";
+import "./Nav.scss";
 
 const NavLinkStyle = {
   textDecoration: `none`,
@@ -24,14 +24,19 @@ class Nav extends React.Component {
     return (
       <ul className="nav">
         <div className="nav-welcome">
-          <Welcome userName={this.props.loginUserInfo.userName} /> {/* welcome 컴포넌트로 전달 */}
-          <SignOut logOut={this.props.resetLogin} loginStatus={this.props.loginUserInfo.isLogin} />  {/* signOut 컴포넌트로 전달 */}
+          <Welcome userName={this.props.loginUserInfo.userName} />{" "}
+          {/* welcome 컴포넌트로 전달 */}
+          <SignOut
+            logOut={this.props.resetLogin}
+            loginStatus={this.props.loginUserInfo.isLogin}
+          />{" "}
+          {/* signOut 컴포넌트로 전달 */}
         </div>
 
         <li className="nav-todo">
           <Link to={"/"} style={NavLinkStyle}>
             홈
-        </Link>
+          </Link>
         </li>
         <li className="nav-mypage">
           <Link to={"/mypage"} style={NavLinkStyle}>
