@@ -85,6 +85,10 @@ class App extends React.Component {
     this.doSignOut();
   };
 
+  adoptModifiedInfo = () => {
+    this.setState({});
+  };
+
   // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다.
   componentDidMount() {
     const userEmail = window.sessionStorage.getItem("email");
