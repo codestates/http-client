@@ -5,14 +5,15 @@ import axios from "axios";
 
 class SignInModal extends React.Component {
   constructor(props) {
-    console.log(props);
+    console.log("프롭스 사인인", props);
     super(props);
     this.state = {
+      id: "",
       email: "",
       password: "",
       errorMessage: "",
     };
-    console.log("asdfasdfas", this.props);
+    // console.log("props", this.props); // App.js 로부터 handleResponseSuccess()가 내려옴
 
 
     /* ----------------소셜 로그인------------------- */
@@ -34,54 +35,83 @@ class SignInModal extends React.Component {
   handleSignIn = () => {
     console.log("사인인state", this.state);
     const signInfo = {
+      id: this.state.id,
       email: this.state.email,
       password: this.state.password,
       errorMessage: this.state.errorMessage,
     };
 
-    for (let i = 0; i < user.length; i++) {
-      if (!signInfo.email.length || !signInfo.password.length) {
-        this.setState({
-          errorMessage: "e-mail과 PW를 입력하세요.",
-        });
-      }
-      //* 입력이 된 값으로 서버에 로그인 요청을 하고, props로 전달된 callback을 호출
-      // else {  //! 추후 알맞게 수정하기, 우선은 fackdata로
-      //     axios.post('http://localhost:8000/', signInfo)
-      //         .then(res => {
-      //             this.props.handleResponseSuccess()
-      //         })
-      //         .catch(error => {
-      //             this.setState({
-      //                 errorMessage: 'e-mail 혹은 PW가 일치하지 않습니다.'
-      //             })
-      //         })
-      // }
-      else {
-        if (
-          user[i].email === this.state.email &&
-          user[i].password === this.state.password
-        ) {
-          // this.doSignIn();
-          this.doSignIn();
-        } else
-          this.setState({
-            errorMessage: "e-mail 혹은 PW가 일치하지 않습니다.",
-          });
-      }
-      // console.log(user)
+    if (!signInfo.email.length || !signInfo.password.length) {
+      this.setState({
+        errorMessage: "e-mail과 비밀번호를 입력하세요."
+      })
     }
+    else {
+      axios.post("http://54.180.79.137:8000/signinMain", signInfo)
+        .then(response => {
+          console.log("뭘 받아옴?", response)
+          this.setState({
+            id: response.data.id,    // 서버에서 생성 및 전달받은 고유 유저id
+            email: response.data.email
+          })
+          this.doSignIn();
+          // this.props.handleResponseSuccess();
+        })
+        .catch(error => {
+          // console.log("??", error.response)
+          this.setState({
+            errorMessage: error.response.data
+          })
+        })
+    }
+
+    /*     fakedata 용 코드
+        for (let i = 0; i < user.length; i++) {
+          if (!signInfo.email.length || !signInfo.password.length) {
+            this.setState({
+              errorMessage: "e-mail과 PW를 입력하세요.",
+            });
+          }
+          //* 입력이 된 값으로 서버에 로그인 요청을 하고, props로 전달된 callback을 호출
+          // else {  //! 추후 알맞게 수정하기, 우선은 fackdata로
+          //     axios.post('http://localhost:8000/', signInfo)
+          //         .then(res => {
+          //             this.props.handleResponseSuccess()
+          //         })
+          //         .catch(error => {
+          //             this.setState({
+          //                 errorMessage: 'e-mail 혹은 PW가 일치하지 않습니다.'
+          //             })
+          //         })
+          // }
+          else {
+            if (
+              user[i].email === this.state.email &&
+              user[i].password === this.state.password
+            ) {
+              // this.doSignIn();
+              this.doSignIn();
+            } else
+              this.setState({
+                errorMessage: "e-mail 혹은 PW가 일치하지 않습니다.",
+              });
+          }
+          // console.log(user)
+        } */
   };
 
   //! session storage에 저장하여 로그인을 유지시킨다.
   doSignIn = () => {
-    const { email } = this.state;
+    const { id, email } = this.state;
+    window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("email", email);
-    this.props.handleResponseSuccess();
+    this.props.handleResponseSuccess();  // App.js로 state 끌어올려서 App.js의 isLogin을 true로 변경해주어 홈경로 또한 바뀌고 동시에 컴포넌트도 todo로 변경된다.
   };
 
   render() {
     console.log("사인 state", this.state);
+    console.log("유니크", this.state.id)
+    console.log("사인인,세션저장소", window.sessionStorage)
     return (
       <div className="modal hidden">
         <div className="modal_overlay"></div>
