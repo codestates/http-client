@@ -10,6 +10,7 @@ class SignInModal extends React.Component {
     this.state = {
       id: "",
       email: "",
+      name: "",
       password: "",
       errorMessage: "",
     };
@@ -40,15 +41,15 @@ class SignInModal extends React.Component {
       })
     }
     else {
-      axios.post("http://54.180.79.137:8000/signinMain", signInfo)
+      axios.post("http://54.180.79.137:8000/signin", signInfo)
         .then(response => {
           console.log("뭘 받아옴?", response)
           this.setState({
             id: response.data.id,    // 서버에서 생성 및 전달받은 고유 유저id
-            email: response.data.email
+            email: response.data.email,
+            name: response.data.name
           })
           this.doSignIn();
-          // this.props.handleResponseSuccess();
         })
         .catch(error => {
           // console.log("??", error.response)
@@ -95,15 +96,15 @@ class SignInModal extends React.Component {
 
   //! session storage에 저장하여 로그인을 유지시킨다.
   doSignIn = () => {
-    const { id, email } = this.state;
+    const { id, email, name } = this.state;
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("email", email);
+    window.sessionStorage.setItem("name", name);
     this.props.handleResponseSuccess();  // App.js로 state 끌어올려서 App.js의 isLogin을 true로 변경해주어 홈경로 또한 바뀌고 동시에 컴포넌트도 todo로 변경된다.
   };
 
   render() {
     console.log("사인 state", this.state);
-    console.log("유니크", this.state.id)
     console.log("사인인,세션저장소", window.sessionStorage)
     return (
       <div className="modal hidden">

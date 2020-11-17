@@ -43,7 +43,15 @@ class Remove extends React.Component {
       password: this.state.password
     };
 
-    if (!InputPw.password.length) {
+    axios.post("http://54.180.79.137:8000/remove", InputPw)
+      .then(response => {
+        console.log(response)
+      })
+
+
+    /* fake data
+
+     if (!InputPw.password.length) {
       this.setState({
         errorMessage: "비밀번호를 입력해주세요."
       });
@@ -59,7 +67,7 @@ class Remove extends React.Component {
       this.props.history.push({
         pathname: "/remove_user_completed"
       })
-    }
+    } */
   }
 
   //   //! 해당 신규 유저의 정보를 서버로 post 요청을 한 후(DB추가 등),  res로 응답코드를 받든 뭐든 받으면 로그인 페이지로 리다이렉트

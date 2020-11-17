@@ -1,12 +1,10 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import axios from "axios";
-
 // components
 import List from "../components/List";
 import NewToDo from "../components/NewToDo";
 import EditTodo from "../components/EditTodo";
 import "./ToDo.css";
-
 /*****************************************************************
                             리액트 훅 명세표
 (1) useState
@@ -24,50 +22,25 @@ import "./ToDo.css";
  - "todoId"와 같이 화면에 보여줄 필요도 없고 render로 관리할 필요도 없는 경우,
    즉, 다른 컴포넌트에서 참조(reference) 목적으로만 필요한 경우 사용
 ******************************************************************/
-
-const ToDo = ({ userId, getTodos }) => {
+const ToDo = ({ userId, todos, getTodos }) => {
   // 0. todo state
-  const [todoList, setTodoList] = useState({
-    userId: userId,
-    todoId: "",
-    content: "",
-    startDate: "",
-    important: "",
-    complete: "",
-    isEdit: false,
-  });
-
-  // 0. loading state
-  const [isLoading, setLoading] = useState(false);
-
+  const [todoList, setTodoList] = useState(todos);
   // 1. 렌더링 후 정보 로드
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true); // loading 되었다고 알림
-      try {
-        const res = await axios.get("http://54.180.79.137:8000/main");
-        setTodoList({
-          userId: res.userId,
-          todoId: res.todoId,
-          content: res.content,
-          startDate: res.content,
-          important: res.important,
-          complete: res.complete,
-        });
-        setLoading(false); // 새로운 state로 render 될 때까지 loading 대기상태로 회귀
-      } catch (e) {
-        console.log(e);
-      }
+      const res = await axios.get("http://54.180.79.137:8000/main");
+      console.log(res);
+      setTodoList(res);
     };
     fetchData();
+    console.log("useEffect가 성공적으로 적용되었읍니다.");
   }, [todoList]);
-
-  // 2. todoId를 메소드와 자식 컴포넌트들에 고유변수로 사용할 것임을 선언
-  const nexttodoId = useRef(7);
-
+  // // 2. todoId를 메소드와 자식 컴포넌트들에 고유변수로 사용할 것임을 선언
+  // const listLength = ;
+  const nexttodoId = useRef(10);
   // 3. 새 일정 입력 메소드
   const onInsert = useCallback(
-    (newTodo) => {
+    async (newTodo) => {
       const todo = {
         userId: newTodo.userId,
         todoId: nexttodoId.current,
@@ -78,14 +51,11 @@ const ToDo = ({ userId, getTodos }) => {
         deleteId: false,
       };
       // 서버에 POST
-      axios.post("http://54.180.79.137:8000/main", {
+      const req = await axios.post("http://54.180.79.137:8000/main", {
         userId: todo.userId,
-        todoId: todo.todoId,
         content: todo.content,
         startDate: todo.startDate,
-        complete: todo.complete,
         important: todo.important,
-        deleteId: todo.deleteId,
       });
       // 컴포넌트 내 일정 목록 최신화(re-rendering)
       setTodoList((todoList) => todoList.concat(todo));
@@ -93,7 +63,6 @@ const ToDo = ({ userId, getTodos }) => {
     },
     [todoList]
   );
-
   // 4. 삭제 클릭 메소드
   const onRemove = useCallback(
     (todoId) => {
@@ -103,7 +72,6 @@ const ToDo = ({ userId, getTodos }) => {
     },
     [todoList]
   );
-
   // 5. 중요 클릭 메소드
   const onToggleOfImportant = useCallback(
     (todoId) => {
@@ -119,7 +87,6 @@ const ToDo = ({ userId, getTodos }) => {
     },
     [todoList]
   );
-
   // 6. 완료 클릭 메소드
   const onToggleOfComplete = useCallback(
     (todoId) => {
@@ -133,7 +100,6 @@ const ToDo = ({ userId, getTodos }) => {
     },
     [todoList]
   );
-
   // 7. 수정 클릭 메소드
   const onToggleOfEdit = useCallback(
     (todoId) => {
@@ -146,7 +112,6 @@ const ToDo = ({ userId, getTodos }) => {
     },
     [todoList]
   );
-
   // 8. 글 수정
   const editContent = useCallback(
     (edited) => {
@@ -158,7 +123,6 @@ const ToDo = ({ userId, getTodos }) => {
     },
     [todoList]
   );
-
   // A$AP funckin' added on
   useEffect(() => {
     getTodos(todoList);
@@ -186,8 +150,8 @@ const ToDo = ({ userId, getTodos }) => {
           {todoList.isEdit ? (
             <EditTodo todoList={todoList} editContent={editContent} />
           ) : (
-            <></>
-          )}
+              <></>
+            )}
         </div>
       </section>
     </>

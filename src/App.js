@@ -29,7 +29,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLogin: false,
-      uesrId: null,
+      userId: null,
       email: null,
       password: null,
       name: null,
@@ -39,32 +39,36 @@ class App extends React.Component {
     };
   }
 
-  // 세션 저장소에 저장된 id를 불러와 req하자.
+  // 유저 정보를 저장하는 세션 저장소
   handleResponseSuccess() {
-
     this.setState({
       isLogin: true,
-
+      email: window.sessionStorage.getItem("email"),
+      userId: window.sessionStorage.getItem("id"),
+      name: window.sessionStorage.getItem("name")
     })
   }
-
-
-
 
 
   //로그아웃
   // 서버연동시 아래 코드 주석 해제하기
   handleSignOut = () => {
-    // axios.post("https://54.180.79.137:8000//signout")
-    //   .then(() => {
-    this.setState({
-      isLogin: false,
-      email: null,
-      password: null,
-      name: null,
-      mobile: null,
-    });
-    // })
+    axios.post("http://54.180.79.137:8000/signout")
+      .then((response) => {
+        console.log("사인아웃 리스폰스", response)
+        this.setState({
+          isLogin: false,
+          email: null,
+          password: null,
+          name: null,
+          mobile: null,
+        });
+        alert(response.data)
+      })
+      .catch(error => {
+        console.log(error.response)
+        alert('로그인에 실패하였습니다.')
+      })
     this.doSignOut();
   };
 
@@ -84,6 +88,7 @@ class App extends React.Component {
   // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다.
   componentDidMount() {
     const userEmail = window.sessionStorage.getItem("email");
+    const userId = window.sessionStorage.getItem("userId");
     if (userEmail) {
       this.handleResponseSuccess();
       this.getTodos;
@@ -97,7 +102,7 @@ class App extends React.Component {
   };
 
   render() {
-    console.log("세션스토리지", window.sessionStorage.getItem("email"));
+    console.log("세션스토리지", window.sessionStorage.getItem("id"));
     console.log("App스테이트", this.state);
     const { isLogin, userId, email, name, password, mobile, todos } = this.state;
     // console.log(isLogin)
@@ -115,13 +120,13 @@ class App extends React.Component {
             exact={true}
             render={() =>
               isLogin ? ( // 새로고침해도 로그인 상태를 유지시키기 위해 localstorage에 저장된 정보를 사용한다. local storage는 사용자가 지우지 않는 이상 영구적으로 계속 브라우저에 남아있음 (단, session storage는 브라우저가 닫은 겨우 사라지고, 브라우저 내에서 탬을 생성하는 경우에도 별도의 영역으로 할당됨.)
-                // <ToDo
-                //   email={email}
-                //   name={name}
-                //   todos={todos} // A$AP funckin' added on
-                //   getTodos={this.getTodos} // A$AP funckin' added on
-                // />
-                <MyPage />
+                <ToDo
+                  email={email}
+                  name={name}
+                  todos={todos} // A$AP funckin' added on
+                  getTodos={this.getTodos} // A$AP funckin' added on
+                />
+                // <MyPage />
               ) : (
                   <SignInModal
                     handleResponseSuccess={this.handleResponseSuccess.bind(this)}
@@ -135,6 +140,7 @@ class App extends React.Component {
             render={() =>
               isLogin ? (
                 <MyPage
+                  id={userId}
                   name={name}
                   email={email}
                   password={password}
