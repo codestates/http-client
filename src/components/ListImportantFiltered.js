@@ -4,7 +4,7 @@ import cn from "classnames";
 import "./ListImportantFiltered.scss";
 
 const ListImportantFiltered = ({ todo }) => {
-  const { listId, important, content, complete } = todo;
+  const { content, complete } = todo;
   return (
     <div className="list-important-item">
       {/* 완료버튼 */}

@@ -5,6 +5,12 @@
   &:nth-child(even) {
     background: #f8f8fa; // 짝수번째(even) 리스트들에 대한 배경스타일
   }
+
+  // 날짜
+  .stealth {
+    display: none;
+  }
+
   // 중요 아이콘
   .important-check {
     cursor: pointer;
