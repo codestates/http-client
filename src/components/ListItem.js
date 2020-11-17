@@ -22,12 +22,10 @@ const ListItem = ({
   onToggleOfComplete,
   onToggleOfEdit,
 }) => {
-  const { userId, todoId, content, startDate, important, complete } = todo;
+  const { todoId, content, startDate, important, complete } = todo;
   return (
     <div className="list-item">
-      <div className="stealth">
-        {userId} {startDate}
-      </div>
+      <div className="stealth">{startDate}</div>
 
       <div
         className={cn("important-check", { important })}

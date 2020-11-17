@@ -23,7 +23,6 @@ class MyPage extends React.Component {
   makeChange(data) {
     if (data.password !== "") this.setState({ password: data.password });
     if (data.name !== "") this.setState({ name: data.name });
-    if (data.mobile !== "") this.setState({ mobile: data.mobile });
     this.props.adoptModifiedInfo(data);
   }
 
@@ -80,12 +79,12 @@ class MyPage extends React.Component {
                     signOut: this.props.signOut, // 메소드화가 되어 전달되어질 것. ex) signOut();
                   }}
 
-                // to={"/remove"}
-                // style={{ textDecoration: "none", color: "white" }}
-                // email={email}
-                // password={password}
-                // name={name}
-                // mobile={mobile}
+                  // to={"/remove"}
+                  // style={{ textDecoration: "none", color: "white" }}
+                  // email={email}
+                  // password={password}
+                  // name={name}
+                  // mobile={mobile}
                 >
                   회원탈퇴
                 </Link>
