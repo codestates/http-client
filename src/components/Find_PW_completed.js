@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 class CompletedFindPw extends React.Component {
   render() {
+
     return (
       <div className="modal">
         <div className="modal_overlay"></div>
@@ -13,8 +14,7 @@ class CompletedFindPw extends React.Component {
             <h2>PW</h2>
             <div className="find_pw_box">
               <div className="information">
-                {`귀하의 PW은 ${1234}입니다.`}{" "}
-                {/* 재성님께서 멘트 통째로 보내주기로 함. */}
+                {this.props.location.state}
               </div>
             </div>
 
