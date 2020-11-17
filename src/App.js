@@ -31,7 +31,7 @@ class App extends React.Component {
       name: null,
       mobile: null,
       errorMessage: "",
-      todos: [], // A$AP funckin' added on
+      todos: [],
     };
   }
   // 세션 저장소에 저장된 id를 불러와 req하자.
@@ -53,9 +53,10 @@ class App extends React.Component {
   //로그아웃
   // 서버연동시 아래 코드 주석 해제하기
   handleSignOut = () => {
-    axios.post("http://54.180.79.137:8000/signout")
+    axios
+      .post("http://54.180.79.137:8000/signout")
       .then((response) => {
-        console.log("사인아웃 리스폰스", response)
+        console.log("사인아웃 리스폰스", response);
         this.setState({
           isLogin: false,
           email: null,
@@ -63,12 +64,12 @@ class App extends React.Component {
           name: null,
           mobile: null,
         });
-        alert(response.data)
+        alert(response.data);
       })
-      .catch(error => {
-        console.log(error.response)
-        alert('로그인에 실패하였습니다.')
-      })
+      .catch((error) => {
+        console.log(error.response);
+        alert("로그인에 실패하였습니다.");
+      });
     this.doSignOut();
   };
   // Edit 컴포넌트의 결과를 끌어올린다.
@@ -77,6 +78,11 @@ class App extends React.Component {
     if (data.password !== "") this.setState({ password: data.password });
     if (data.name !== "") this.setState({ name: data.name });
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
+  };
+
+  // ToDo 컴포넌트의 결과를 끌어올린다.
+  adoptRecentTodo = (data) => {
+    this.setState({ todos: data });
   };
 
   componentDidMount() {
@@ -121,15 +127,15 @@ class App extends React.Component {
                   userId={userId}
                   email={email}
                   name={name}
-                  todos={todos} // A$AP funckin' added on
-                  getTodos={this.getTodos} // A$AP funckin' added on
+                  todos={todos}
+                  adoptRecentTodo={this.adoptRecentTodo}
                 />
               ) : (
-                  // <MyPage />
-                  <SignInModal
-                    handleResponseSuccess={this.handleResponseSuccess.bind(this)}
-                  />
-                )
+                // <MyPage />
+                <SignInModal
+                  handleResponseSuccess={this.handleResponseSuccess.bind(this)}
+                />
+              )
             }
           />
           <Route path={"/todo"} component={ToDo} />
@@ -147,8 +153,8 @@ class App extends React.Component {
                   signOut={this.handleSignOut}
                 />
               ) : (
-                  <MyPage />
-                )
+                <MyPage />
+              )
             }
           />
           <Route
@@ -157,8 +163,8 @@ class App extends React.Component {
               isLogin ? (
                 <Completed email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                  <Completed />
-                )
+                <Completed />
+              )
             }
           />
           <Route
@@ -167,8 +173,8 @@ class App extends React.Component {
               isLogin ? (
                 <Important email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                  <Important />
-                )
+                <Important />
+              )
             }
           />
           <Route path={"/signup"} component={SignUpModal} />

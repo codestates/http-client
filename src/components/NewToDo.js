@@ -19,8 +19,9 @@ const NewToDo = ({ onInsert }) => {
   // 2. 버튼 메소드(엔터키 허용)
   const onSubmit = useCallback(
     (e) => {
-      if (newTodo.content.length === 0 || newTodo.startDate.length === 0) {
+      if (newTodo.content === "" || newTodo.startDate === "") {
         setNewTodo({ err: "뭐라도 쓰십쇼" });
+        return;
       } else {
         // ToDo 컴포넌트에 입력내용 반영
         onInsert(newTodo);
@@ -32,11 +33,6 @@ const NewToDo = ({ onInsert }) => {
         });
         // submit 이벤트로 인한 새로고침 방지
         e.preventDefault();
-
-        console.log(`
-      ** 새 일정: ${newTodo.content}
-      ** 시간: ${newTodo.startDate}
-      `);
       }
     },
     [onInsert, newTodo]

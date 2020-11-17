@@ -26,10 +26,11 @@
       }
     }
   }
+
   // 완료 체크박스
   .complete-check {
     cursor: pointer;
-    flex: 0.8;
+    flex: 0.6;
     display: flex;
     align-items: center;
     svg {
@@ -49,6 +50,21 @@
       }
     }
   }
+
+  // 수정 아이콘
+  .edit {
+    cursor: pointer;
+    flex: 0.1;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #ffa66b;
+    cursor: pointer;
+    &:hover {
+      color: #ee4d25; // 수정 아이콘 hover 시 색상스타일
+    }
+  }
+
   // 삭제 아이콘
   .remove {
     display: flex;
@@ -60,6 +76,7 @@
       color: #ee2579; // 삭제 아이콘 hover 시 색상스타일
     }
   }
+
   // 리스트 사이 구분선
   & + & {
     border-top: 1px solid #f2f2ff;

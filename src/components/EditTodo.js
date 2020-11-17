@@ -1,34 +1,28 @@
 import React, { useState, useCallback } from "react";
 import { MdModeEdit } from "react-icons/md";
+import "./EditTodo.scss";
+
 const EditTodo = ({ editContent }) => {
-  const [editedOne, setEditedOne] = useState({ content: "", err: "" });
+  const [editedOne, setEditedOne] = useState("");
   const onChange = (e) => {
     setEditedOne({ [e.target.key]: e.target.value });
   };
-  const onSubmit = useCallback(
-    (e) => {
-      if (editedOne.content === "") {
-        setEditedOne({ err: "고칠게 없는가..." });
-      } else {
-        editContent(editedOne); // ToDo 컴포넌트에 수정내용 반영
-        setEditedOne({ content: "", err: "" }); // 입력폼 초기화
-        e.preventDefault(); // submit 이벤트로 인한 새로고침 방지
-      }
-    },
-    [editContent, editedOne]
-  );
+  const onClick = useCallback(() => {
+    editContent(editedOne); // ToDo 컴포넌트에 수정내용 반영
+    setEditedOne(""); // 입력폼 초기화
+  }, [editContent, editedOne]);
   return (
     <>
-      <form className="edit-todo" onSubmit={onSubmit}>
+      <form className="edit-todo">
         <input
           className="editedOne"
           placeholder="수정할 글을 써주세요"
           name="content"
-          value={editedOne.content}
+          value={editedOne}
           onChange={onChange}
         />
       </form>
-      <button type="submit">
+      <button onClick={onClick}>
         <MdModeEdit />
       </button>
       <div>{editedOne.err !== "" ? editedOne.err : null}</div>

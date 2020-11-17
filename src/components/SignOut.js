@@ -1,6 +1,9 @@
 import { func } from "prop-types";
 import React from "react";
 
+// components
+import Button from "./Button";
+
 class SignOut extends React.Component {
   constructor(props) {
     super(props);
@@ -22,14 +25,17 @@ class SignOut extends React.Component {
             (App.js에서 isLogin이 false면 로그인모달이 나타나게끔 path경로 설정해놈)
          */
       <div>
-        <button
-          className="logOut_logIn_btn"
+        <Button
+          style={{
+            fontSize: `0.7rem`,
+            background: `#6f88ad`,
+          }}
           onClick={
             this.props.loginStatus === true ? this.props.logOut : this.reLogin
           }
         >
           {this.props.loginStatus === false ? "로그인" : "로그아웃"}
-        </button>
+        </Button>
       </div>
     );
   }

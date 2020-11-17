@@ -9,10 +9,15 @@ const Important = (props) => {
   return (
     <>
       <section className="container-list">
-        <div className="title-important">&#9989; 중요일정</div>
+        <div
+          className="title-important"
+          style={{ fontSize: `1.5rem`, fontWeight: `border` }}
+        >
+          &#127775; 중요일정
+        </div>
         <div className="todo">
           {filtered.map((todo) => (
-            <ListImportantFiltered key={todo.listId} todo={todo} />
+            <ListImportantFiltered key={todo.todoId} todo={todo} />
           ))}
         </div>
       </section>
