@@ -24,7 +24,7 @@ class Nav extends React.Component {
     return (
       <ul className="nav">
         <div className="nav-welcome">
-          <Welcome userName={this.props.loginUserInfo.userName} />{" "}
+          <Welcome name={this.props.loginUserInfo.name} />{" "}
           {/* welcome 컴포넌트로 전달 */}
           <SignOut
             logOut={this.props.resetLogin}
