@@ -1,46 +1,59 @@
 import React from "react";
 // 리액트 기본 아이콘 로드
 // https://react-icons.github.io/react-icons/icons?name=md
+
 import {
   MdStar,
   MdStarBorder,
   MdCheckBoxOutlineBlank,
   MdCheckBox,
+  MdModeEdit,
   MdRemoveCircleOutline,
 } from "react-icons/md";
+
 // node-sass 모듈의 조건부 CSS 적용 및 렌더링 기능 추가
 import cn from "classnames";
 import "./ListItem.scss";
+
 const ListItem = ({
   todo,
   onRemove,
   onToggleOfImportant,
   onToggleOfComplete,
+  onToggleOfEdit,
 }) => {
-  const { listId, important, content, complete } = todo;
+  const { userId, todoId, content, startDate, important, complete } = todo;
   return (
     <div className="list-item">
-      {/* 중요버튼 */}
+      <div className="stealth">
+        {userId} {startDate}
+      </div>
+
       <div
         className={cn("important-check", { important })}
-        onClick={() => onToggleOfImportant(listId)}
+        onClick={() => onToggleOfImportant(todoId)}
       >
         {important ? <MdStar /> : <MdStarBorder />}
       </div>
-      {/* 완료버튼 */}
+
       <div
         className={cn("complete-check", { complete })}
-        onClick={() => onToggleOfComplete(listId)}
+        onClick={() => onToggleOfComplete(todoId)}
       >
         <div className="content">{content}</div>
         {complete ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
-      {/* 삭제버튼 */}
-      <div className="remove" onClick={() => onRemove(listId)}>
+
+      <div className="edit" onClick={() => onToggleOfEdit(todoId)}>
+        <MdModeEdit />
+      </div>
+
+      <div className="remove" onClick={() => onRemove(todoId)}>
         <MdRemoveCircleOutline />
       </div>
     </div>
   );
 };
+
 // 컴포넌트의 props가 바뀌지 않았다면 re-rendering 방지(= shouldComponentUpdate와 동일)
 export default React.memo(ListItem);

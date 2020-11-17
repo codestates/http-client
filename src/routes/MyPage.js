@@ -21,7 +21,6 @@ class MyPage extends React.Component {
   }
 
   makeChange(data) {
-    if (data.email !== "") this.setState({ email: data.email });
     if (data.password !== "") this.setState({ password: data.password });
     if (data.name !== "") this.setState({ name: data.name });
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
@@ -35,13 +34,12 @@ class MyPage extends React.Component {
 
   // }
 
-
   componentDidMount() {
     this.makeChange;
   }
 
   render() {
-    console.log('마이페이지 props', this.props)
+    console.log("마이페이지 props", this.props);
     const { email, password, name, mobile } = this.state;
     return (
       <>
@@ -70,17 +68,17 @@ class MyPage extends React.Component {
           <div className="myinfobox">
             <div>
               <button className="remove-button">
-
                 {/* props내리기 --> 아래와 같이 작성하면 props.location 혹은 props.history.location에 아래 정보가 담겨 전달
                     전달받은 Remove.js는 this.props.location 혹은 this.props.history.location에 담긴 pw를 사용할 수 있음
                 */}
-                <Link to={{
-                  pathname: "/remove",
-                  state: {
-                    password: this.props.password
-                  },
-                  signOut: this.props.signOut   // 메소드화가 되어 전달되어질 것. ex) signOut();
-                }}
+                <Link
+                  to={{
+                    pathname: "/remove",
+                    state: {
+                      password: this.props.password,
+                    },
+                    signOut: this.props.signOut, // 메소드화가 되어 전달되어질 것. ex) signOut();
+                  }}
 
                 // to={"/remove"}
                 // style={{ textDecoration: "none", color: "white" }}

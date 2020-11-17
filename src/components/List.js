@@ -2,16 +2,23 @@ import React from "react";
 import ListItem from "./ListItem";
 import "./List.scss";
 
-const List = ({ todos, onRemove, onToggleOfImportant, onToggleOfComplete }) => {
+const List = ({
+  todoList,
+  onRemove,
+  onToggleOfImportant,
+  onToggleOfComplete,
+  onToggleOfEdit,
+}) => {
   return (
     <div className="todolist">
-      {todos.map((todo) => (
+      {todoList.map((todo) => (
         <ListItem
           key={todo.listId}
-          todo={todo}
+          todo={todo} // todo = { userId, todoId, content, startDate, important, complete } << ListItem.js
           onRemove={onRemove}
           onToggleOfImportant={onToggleOfImportant}
           onToggleOfComplete={onToggleOfComplete}
+          onToggleOfEdit={onToggleOfEdit}
         />
       ))}
     </div>

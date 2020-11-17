@@ -18,27 +18,20 @@ class SignInModal extends React.Component {
 
     /* ----------------소셜 로그인------------------- */
 
-
-
     /* ----------------로그인----------------------- */
   }
   // e-mail, pw 입력 기능
   hadleInputValue = (key) => (text) => {
-    console.log("잘 작성이 되나?");
-    // console.log('key', key)
-    // console.log('text', text)
     this.setState({
       [key]: text.target.value,
     });
   };
 
   handleSignIn = () => {
-    console.log("사인인state", this.state);
     const signInfo = {
       id: this.state.id,
       email: this.state.email,
       password: this.state.password,
-      errorMessage: this.state.errorMessage,
     };
 
     if (!signInfo.email.length || !signInfo.password.length) {
@@ -122,10 +115,7 @@ class SignInModal extends React.Component {
               <NavLink to="/signup" className="signUp_link">
                 아직 회원이 아니신가요?
               </NavLink>
-              {/* <div onClick={this.handleClick} onChange={this.moveSignUp} id="to_signUp">아직 회원이 아니신가요?</div> */}
             </div>
-
-            {/* <img id='sign_in_img' src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
             <img
               id="sign_in_img"
               src="https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D"
@@ -169,17 +159,15 @@ class SignInModal extends React.Component {
                 </button>
                 {/* </NavLink> */}
                 <div>
-                  <button className="loginButton"
-                    type="submit"
-
-                  >Github 로그인</button>
+                  <button className="loginButton" type="submit">
+                    Github 로그인
+                  </button>
                 </div>
                 <div className="alert-box">{this.state.errorMessage}</div>
               </div>
             </form>
           </div>
         </div>
-
       </div>
     );
   }
