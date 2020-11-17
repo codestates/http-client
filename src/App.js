@@ -32,44 +32,92 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLogin: false,
+      uesrId: null,
       email: null,
       password: null,
-      userName: null,
+      name: null,
       mobile: null,
-      todos: [], // A$AP funckin' added on
+      errorMessage: "",
+      todos: [], // A$AP funckin' added on  
     };
   }
 
+  // 세션 저장소에 저장된 id를 불러와 req하자.
+  handleResponseSuccess() {
+
+    // axios.post(`http://54.180.79.137:8000/main`)
+    //   .then(response => {
+    //     console.log("뭘 받아와?", response)
+    this.setState({
+      isLogin: true,
+
+      // email: response.data.email,
+      // password: response.data.password,
+      // name: response.data.name,
+      // mobile: response.data.mobile
+    })
+    // })
+    // .catch(error => {
+    //   this.setState({
+    //     errorMessage: error.response
+    //   })
+    // })
+
+    // async function getUser() {
+    //   try {
+    //     const response = await axios.get(`http://54.180.79.137:8000/main}`);
+    //     console.log("getUser", response)
+
+    //     this.setState({
+    //       isLogin: true,
+    //       email: response.data.email,
+    //       password: response.data.password,
+    //       name: response.data.name,
+    //       mobile: response.data.mobile
+    //     })
+
+    //   } catch (error) {
+    //     console.log(error)
+    //     this.setState({
+    //       errorMessage: error.response.data
+    //     })
+    //   }
+    // }
+  }
+
+
+
+
   //! 인증 성공. 사용자 정보를 호출하고, 이에 성공하면 로그인 상태를 바꾸기.
   // handleResponseSuccess() {   // ! 추후 알맞게 수정할 것
-  //   axios.get('http://localhost:8000')
+  //   axios.get('http://54.180.79.137:8000/main')
   //     .then(res => {
   //       console.log(res)
   //       this.setState({
   //         isLogin: false,
   //         email: res.data.email,
   //         password: res.data.password,
-  //         userName: res.data.userName,
+  //         name: res.data.name,
   //         mobile: res.data.mobile
   //       })
   //     })
   // }
 
-  // fakedata로 우선 구현
+  // fakedata 용 코드
   // 로그인 성공시 해당 유저로 상태변경
-  handleResponseSuccess = () => {
-    // ! 추후 알맞게 수정할 것
-    /// 로그인 성공하면 ToDo 컴포넌트로 해당 유저의 정보가 props로 전달이 됨
-    this.setState({
-      isLogin: true,
-      email: user[0].email,
-      password: user[0].password,
-      userName: user[0].name,
-      mobile: user[0].mobile,
-    });
+  // handleResponseSuccess = () => {
+  //   // ! 추후 알맞게 수정할 것
+  //   /// 로그인 성공하면 ToDo 컴포넌트로 해당 유저의 정보가 props로 전달이 됨
+  //   this.setState({
+  //     isLogin: true,
+  //     email: user[0].email,
+  //     password: user[0].password,
+  //     name: user[0].name,
+  //     mobile: user[0].mobile,
+  //   });
 
-    // this.props.history.push("/")
-  };
+  //   // this.props.history.push("/")
+  // };
 
   //로그아웃
   // 서버연동시 아래 코드 주석 해제하기
@@ -80,7 +128,7 @@ class App extends React.Component {
       isLogin: false,
       email: null,
       password: null,
-      userName: null,
+      name: null,
       mobile: null,
     });
     // })
@@ -91,7 +139,7 @@ class App extends React.Component {
   adoptModifiedInfo = (data) => {
     if (data.email !== "") this.setState({ email: data.email });
     if (data.password !== "") this.setState({ password: data.password });
-    if (data.userName !== "") this.setState({ userName: data.userName });
+    if (data.name !== "") this.setState({ name: data.name });
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
   };
 
@@ -116,9 +164,9 @@ class App extends React.Component {
   };
 
   render() {
-    console.log("세션스토리지", window.sessionStorage);
+    console.log("세션스토리지", window.sessionStorage.getItem("email"));
     console.log("App스테이트", this.state);
-    const { isLogin, email, userName, password, mobile, todos } = this.state;
+    const { isLogin, email, name, password, mobile, todos } = this.state;
     // console.log(isLogin)
     return (
       <HashRouter>
@@ -130,20 +178,22 @@ class App extends React.Component {
         <div className="screen">
           <Route
             path={"/"}
+            // path={"/mypage"}
             exact={true}
             render={() =>
               isLogin ? ( // 새로고침해도 로그인 상태를 유지시키기 위해 localstorage에 저장된 정보를 사용한다. local storage는 사용자가 지우지 않는 이상 영구적으로 계속 브라우저에 남아있음 (단, session storage는 브라우저가 닫은 겨우 사라지고, 브라우저 내에서 탬을 생성하는 경우에도 별도의 영역으로 할당됨.)
-                <ToDo
-                  email={email}
-                  userName={userName}
-                  todos={todos} // A$AP funckin' added on
-                  getTodos={this.getTodos} // A$AP funckin' added on
-                />
+                // <ToDo
+                //   email={email}
+                //   name={name}
+                //   todos={todos} // A$AP funckin' added on
+                //   getTodos={this.getTodos} // A$AP funckin' added on
+                // />
+                <MyPage />
               ) : (
-                <SignInModal
-                  handleResponseSuccess={this.handleResponseSuccess}
-                />
-              )
+                  <SignInModal
+                    handleResponseSuccess={this.handleResponseSuccess.bind(this)}
+                  />
+                )
             }
           />
           <Route path={"/todo"} component={ToDo} />
@@ -152,7 +202,7 @@ class App extends React.Component {
             render={() =>
               isLogin ? (
                 <MyPage
-                  userName={userName}
+                  name={name}
                   email={email}
                   password={password}
                   mobile={mobile}
@@ -160,8 +210,8 @@ class App extends React.Component {
                   signOut={this.handleSignOut}
                 />
               ) : (
-                <MyPage />
-              )
+                  <MyPage />
+                )
             }
           />
           <Route
@@ -170,8 +220,8 @@ class App extends React.Component {
               isLogin ? (
                 <Completed email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                <Completed />
-              )
+                  <Completed />
+                )
             }
           />
           <Route
@@ -180,8 +230,8 @@ class App extends React.Component {
               isLogin ? (
                 <Important email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                <Important />
-              )
+                  <Important />
+                )
             }
           />
           <Route path={"/signup"} component={SignUpModal} />
