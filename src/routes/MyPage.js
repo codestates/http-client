@@ -23,7 +23,6 @@ class MyPage extends React.Component {
   makeChange(data) {
     if (data.password !== "") this.setState({ password: data.password });
     if (data.name !== "") this.setState({ name: data.name });
-    if (data.mobile !== "") this.setState({ mobile: data.mobile });
     this.props.adoptModifiedInfo(data);
   }
 
