@@ -26,13 +26,12 @@ function reducer(state, action) {
 const Edit = ({ makeChange }) => {
   // reducer hook으로 한꺼번에 state 관리할 대상 정의
   const [state, dispatch] = useReducer(reducer, {
-    email: "",
     password: "",
-    userName: "",
+    name: "",
     mobile: "",
   });
 
-  const { email, password, userName, mobile } = state;
+  const { email, password, name, mobile } = state;
 
   // reducer hook 구동 대상("액션값")은 "이벤트 객체(e.target 값)"라고 설정
   const onChange = (e) => {
@@ -42,9 +41,8 @@ const Edit = ({ makeChange }) => {
   // reducer hook 구동 결과(state)를 부모(MyPage.js) 컴포넌트로 끌어올리기
   const onClick = useCallback(() => {
     console.log(`제출!! =======>
-    최종제출 이메일: ${state.email}
     최종제출 비밀번호: ${state.password}
-    최종제출 이름: ${state.userName}
+    최종제출 이름: ${state.name}
     최종제출 연락처: ${state.mobile}
     `);
 
@@ -57,16 +55,6 @@ const Edit = ({ makeChange }) => {
         <div className="myinfo-title">회원정보</div>
         <hr />
         <div>
-          <div>
-            <div className="description">e-mail</div>
-            <input
-              type="text"
-              name="email"
-              value={email}
-              placeholder="변경할 이메일을 입력하세요"
-              onChange={onChange}
-            ></input>
-          </div>
           <div>
             <div className="description">PW</div>
             <input
@@ -81,8 +69,8 @@ const Edit = ({ makeChange }) => {
             <div className="description">고객명</div>
             <input
               type="text"
-              name="userName"
-              value={userName}
+              name="name"
+              value={name}
               placeholder="변경할 고객명을 입력하세요"
               onChange={onChange}
             ></input>

@@ -5,38 +5,27 @@ import axios from "axios";
 
 class SignInModal extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       email: "",
       password: "",
       errorMessage: "",
     };
-    console.log("asdfasdfas", this.props);
-
-
     /* ----------------소셜 로그인------------------- */
-
-
 
     /* ----------------로그인----------------------- */
   }
   // e-mail, pw 입력 기능
   hadleInputValue = (key) => (text) => {
-    console.log("잘 작성이 되나?");
-    // console.log('key', key)
-    // console.log('text', text)
     this.setState({
       [key]: text.target.value,
     });
   };
 
   handleSignIn = () => {
-    console.log("사인인state", this.state);
     const signInfo = {
       email: this.state.email,
       password: this.state.password,
-      errorMessage: this.state.errorMessage,
     };
 
     for (let i = 0; i < user.length; i++) {
@@ -46,30 +35,18 @@ class SignInModal extends React.Component {
         });
       }
       //* 입력이 된 값으로 서버에 로그인 요청을 하고, props로 전달된 callback을 호출
-      // else {  //! 추후 알맞게 수정하기, 우선은 fackdata로
-      //     axios.post('http://localhost:8000/', signInfo)
-      //         .then(res => {
-      //             this.props.handleResponseSuccess()
-      //         })
-      //         .catch(error => {
-      //             this.setState({
-      //                 errorMessage: 'e-mail 혹은 PW가 일치하지 않습니다.'
-      //             })
-      //         })
-      // }
       else {
-        if (
-          user[i].email === this.state.email &&
-          user[i].password === this.state.password
-        ) {
-          // this.doSignIn();
-          this.doSignIn();
-        } else
-          this.setState({
-            errorMessage: "e-mail 혹은 PW가 일치하지 않습니다.",
+        axios
+          .post("http://54.180.79.137:8000/signin", signInfo)
+          .then((res) => {
+            this.props.handleResponseSuccess(res);
+          })
+          .catch((error) => {
+            this.setState({
+              errorMessage: "e-mail 혹은 PW가 일치하지 않습니다.",
+            });
           });
       }
-      // console.log(user)
     }
   };
 
@@ -92,10 +69,7 @@ class SignInModal extends React.Component {
               <NavLink to="/signup" className="signUp_link">
                 아직 회원이 아니신가요?
               </NavLink>
-              {/* <div onClick={this.handleClick} onChange={this.moveSignUp} id="to_signUp">아직 회원이 아니신가요?</div> */}
             </div>
-
-            {/* <img id='sign_in_img' src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
             <img
               id="sign_in_img"
               src="https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D"
@@ -139,17 +113,15 @@ class SignInModal extends React.Component {
                 </button>
                 {/* </NavLink> */}
                 <div>
-                  <button className="loginButton"
-                    type="submit"
-
-                  >Github 로그인</button>
+                  <button className="loginButton" type="submit">
+                    Github 로그인
+                  </button>
                 </div>
                 <div className="alert-box">{this.state.errorMessage}</div>
               </div>
             </form>
           </div>
         </div>
-
       </div>
     );
   }
