@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 //Fake Data
@@ -9,7 +10,7 @@ class FindAccount extends React.Component {
     super(props);
     this.state = {
       email: "",
-      userName: "",
+      name: "",
       mobile: "",
       errorMessageEmail: "",
       errorMessagePw: "",
@@ -25,26 +26,27 @@ class FindAccount extends React.Component {
     });
   };
 
-  //* 연락처 형식 헬퍼 함수: '-' 삽입 필수
-  notFormedMobileNumOnFindEmail = () => {
-    const { mobile } = this.state;
-    const userIdInfo = {
-      mobile: mobile,
-    };
-    let count = 0;
-    for (let i = 0; i < userIdInfo.mobile.length; i++) {
-      if (userIdInfo.mobile[i] === "-") {
-        count++;
-        if (count === 2) {
-          console.log("c", count);
-          return;
+  /* //! 백앤드 분들께 구현 요청하기 due to sign up function flows 
+    //* 연락처 형식 헬퍼 함수: '-' 삽입 필수
+    notFormedMobileNumOnFindEmail = () => {
+      const { mobile } = this.state;
+      const userIdInfo = {
+        mobile: mobile,
+      };
+      let count = 0;
+      for (let i = 0; i < userIdInfo.mobile.length; i++) {
+        if (userIdInfo.mobile[i] === "-") {
+          count++;
+          if (count === 2) {
+            console.log("c", count);
+            return;
+          }
         }
       }
-    }
-    this.setState({
-      errorMessageEmail: "'-'를 입력해주세요.",
-    });
-  };
+      this.setState({
+        errorMessageEmail: "'-'를 입력해주세요.",
+      });
+    }; 
 
   notFormedMobileNumOnFindPw = () => {
     const { mobile } = this.state;
@@ -64,78 +66,124 @@ class FindAccount extends React.Component {
     this.setState({
       errorMessagePw: "'-'를 입력해주세요.",
     });
-  };
+  };*/
   //*----------------------------------
 
   handleFindEmailValue = () => {
-    const { email, userName, mobile } = this.state;
+    const { email, name, mobile } = this.state;
     const userIdInfo = {
-      email: email,
-      userName: userName,
+      name: name,
       mobile: mobile
     };
-    for (let i = 0; i < user.length; i++) {
-      if (
-        userIdInfo.userName === user[i].name &&
-        userIdInfo.mobile === user[i].mobile
-      ) {
-        // console.log(this.props)
-        this.props.history.push({
-          pathname: "/useremail",
-          state: { userName: user[i].name, email: user[i].email },
-        }); // CompletedFindEmail에 props로 입력 값 넘겨주기
-      } else if (!userIdInfo.userName.length || !userIdInfo.mobile.length) {
-        this.setState({
-          errorMessageEmail: "모든 항목을 입력하세요.",
-        });
-      } else if (
-        userIdInfo.userName !== user[i].name ||
-        userIdInfo.mobile !== user[i].mobile
-      ) {
-        this.setState({
-          errorMessageEmail: "일치하는 e-mail이 없습니다.",
-        });
-        this.notFormedMobileNumOnFindEmail();
-      }
+
+    if (!userIdInfo.name.length || !userIdInfo.mobile.length) {
+      this.setState({
+        errorMessageEmail: "모든 항목을 입력하세요."
+      })
     }
+    else {
+      axios.post("http://54.180.79.137:8000/searchinfo/email", userIdInfo)
+        .then(response => {
+          this.props.history.push({
+            pathname: "/useremail",
+            state: response.data     // CompletedFindEmail에 props로 입력 값 넘겨주기
+          })
+        })
+        .catch(error => {
+          this.setState({
+            errorMessageEmail: error.response.data
+          })
+        })
+    }
+
+    /*     fakedata 용 코드
+        
+            for (let i = 0; i < user.length; i++) {
+              if (
+                userIdInfo.name === user[i].name &&
+                userIdInfo.mobile === user[i].mobile
+              ) {
+                // console.log(this.props)
+                this.props.history.push({
+                  pathname: "/useremail",
+                  state: { name: user[i].name, email: user[i].email },
+                }); // CompletedFindEmail에 props로 입력 값 넘겨주기
+              } else if (!userIdInfo.name.length || !userIdInfo.mobile.length) {
+                this.setState({
+                  errorMessageEmail: "모든 항목을 입력하세요.",
+                });
+              } else if (
+                userIdInfo.name !== user[i].name ||
+                userIdInfo.mobile !== user[i].mobile
+              ) {
+                this.setState({
+                  errorMessageEmail: "일치하는 e-mail이 없습니다.",
+                });
+                // this.notFormedMobileNumOnFindEmail();
+              }
+            } */
   };
 
   handleFindPwValue = () => {
-    const { email, userName, mobile } = this.state;
+    const { email, name, mobile } = this.state;
     const userPwInfo = {
       email: email,
-      userName: userName,
+      name: name,
       mobile: mobile
     };
-    for (let i = 0; i < user.length; i++) {
-      if (
-        userPwInfo.email === user[i].email &&
-        userPwInfo.userName === user[i].name &&
-        userPwInfo.mobile === user[i].mobile
-      ) {
-        this.props.history.push({
-          pathname: "userpw",
-          state: { pw: user[i].password },
-        });
-      } else if (
-        !userPwInfo.email.length ||
-        !userPwInfo.userName.length ||
-        !userPwInfo.mobile.length
-      ) {
-        this.setState({
-          errorMessagePw: "모든 항목을 입력하세요.",
-        });
-      } else if (
-        userPwInfo.email !== user[i].email ||
-        userPwInfo.userName !== user[i].name ||
-        userPwInfo.mobile !== user[i].mobile
-      ) {
-        this.setState({
-          errorMessagePw: "비밀번호를 찾지 못하였습니다.",
-        });
-        this.notFormedMobileNumOnFindPw(); // 연락처 형식 맞추는게 우선순위이니.
-      }
+
+    if (!userPwInfo.email.length || !userPwInfo.name.length || !userPwInfo.mobile.length) {
+      this.setState({
+        errorMessagePw: "모든 항목을 입력하세요."
+      })
     }
+    else {
+      axios.post("http://54.180.79.137:8000/searchinfo/password", userPwInfo)
+        .then(response => {
+          this.props.history.push({
+            pathname: "/userpw",
+            state: response.data
+          })
+        })
+        .catch(error => {
+          console.log(error.response)
+          this.setState({
+            errorMessagePw: error.response.data
+          })
+        })
+    }
+
+
+    /*     fakedata 용 코드
+       for (let i = 0; i < user.length; i++) {
+         if (
+           userPwInfo.email === user[i].email &&
+           userPwInfo.name === user[i].name &&
+           userPwInfo.mobile === user[i].mobile
+         ) {
+           this.props.history.push({
+             pathname: "userpw",
+             state: { pw: user[i].password },
+           });
+         } else if (
+           !userPwInfo.email.length ||
+           !userPwInfo.name.length ||
+           !userPwInfo.mobile.length
+         ) {
+           this.setState({
+             errorMessagePw: "모든 항목을 입력하세요.",
+           });
+         } else if (
+           userPwInfo.email !== user[i].email ||
+           userPwInfo.name !== user[i].name ||
+           userPwInfo.mobile !== user[i].mobile
+         ) {
+           this.setState({
+             errorMessagePw: "비밀번호를 찾지 못하였습니다.",
+           });
+           // this.notFormedMobileNumOnFindPw(); // 연락처 형식 맞추는게 우선순위이니.
+         }
+       } */
   };
 
   render() {
@@ -154,7 +202,7 @@ class FindAccount extends React.Component {
                   <span>고객명</span>
                   <input
                     type="text"
-                    onChange={this.handleInputValue("userName")}
+                    onChange={this.handleInputValue("name")}
                   ></input>
                 </div>
 
@@ -194,7 +242,7 @@ class FindAccount extends React.Component {
                   <span>고객명</span>
                   <input
                     type="text"
-                    onChange={this.handleInputValue("userName")}
+                    onChange={this.handleInputValue("name")}
                   ></input>
                 </div>
 

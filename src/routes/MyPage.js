@@ -12,18 +12,18 @@ class MyPage extends React.Component {
     this.state = {
       email: this.props.email,
       password: this.props.password,
-      userName: this.props.userName,
+      name: this.props.name,
       mobile: this.props.mobile,
     };
     console.log(`로그인 유저정보
-  * 이름: ${this.state.userName}   * 이메일: ${this.state.email}    * 비밀번호: ${this.state.password}   * 연락처: ${this.state.mobile}
+  * 이름: ${this.state.name}   * 이메일: ${this.state.email}    * 비밀번호: ${this.state.password}   * 연락처: ${this.state.mobile}
   `);
   }
 
   makeChange(data) {
     if (data.email !== "") this.setState({ email: data.email });
     if (data.password !== "") this.setState({ password: data.password });
-    if (data.userName !== "") this.setState({ userName: data.userName });
+    if (data.name !== "") this.setState({ name: data.name });
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
     this.props.adoptModifiedInfo(data);
   }
@@ -42,7 +42,7 @@ class MyPage extends React.Component {
 
   render() {
     console.log('마이페이지 props', this.props)
-    const { email, password, userName, mobile } = this.state;
+    const { email, password, name, mobile } = this.state;
     return (
       <>
         <section>
@@ -60,7 +60,7 @@ class MyPage extends React.Component {
             </div>
             <div>
               <div className="description">고객명</div>
-              <div className="print">{userName}</div>
+              <div className="print">{name}</div>
             </div>
             <div>
               <div className="description">연락처</div>
@@ -86,7 +86,7 @@ class MyPage extends React.Component {
                 // style={{ textDecoration: "none", color: "white" }}
                 // email={email}
                 // password={password}
-                // userName={userName}
+                // name={name}
                 // mobile={mobile}
                 >
                   회원탈퇴

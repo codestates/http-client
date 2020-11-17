@@ -28,11 +28,11 @@ const Edit = ({ makeChange }) => {
   const [state, dispatch] = useReducer(reducer, {
     email: "",
     password: "",
-    userName: "",
+    name: "",
     mobile: "",
   });
 
-  const { email, password, userName, mobile } = state;
+  const { email, password, name, mobile } = state;
 
   // reducer hook 구동 대상("액션값")은 "이벤트 객체(e.target 값)"라고 설정
   const onChange = (e) => {
@@ -44,7 +44,7 @@ const Edit = ({ makeChange }) => {
     console.log(`제출!! =======>
     최종제출 이메일: ${state.email}
     최종제출 비밀번호: ${state.password}
-    최종제출 이름: ${state.userName}
+    최종제출 이름: ${state.name}
     최종제출 연락처: ${state.mobile}
     `);
 
@@ -81,8 +81,8 @@ const Edit = ({ makeChange }) => {
             <div className="description">고객명</div>
             <input
               type="text"
-              name="userName"
-              value={userName}
+              name="name"
+              value={name}
               placeholder="변경할 고객명을 입력하세요"
               onChange={onChange}
             ></input>
