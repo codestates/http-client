@@ -1,7 +1,6 @@
 import React from "react";
 import { HashRouter, Route } from "react-router-dom";
 import axios from "axios";
-
 // Components
 import Nav from "./components/Nav";
 import Welcome from "./components/Welcome";
@@ -14,16 +13,13 @@ import Edit from "./components/Edit";
 import Remove from "./components/Remove";
 import RemoveUserCompleted from "./components/Remove_completed";
 import Footer from "./components/Footer";
-
 // Routes
 import MyPage from "./routes/MyPage";
 import ToDo from "./routes/ToDo";
 import Completed from "./routes/Completed";
 import Important from "./routes/Important";
-
 // CSS
 import "./App.css";
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -35,21 +31,25 @@ class App extends React.Component {
       name: null,
       mobile: null,
       errorMessage: "",
-      todos: [], // A$AP funckin' added on  
+      todos: [], // A$AP funckin' added on
     };
   }
-
-  // 유저 정보를 저장하는 세션 저장소
-  handleResponseSuccess() {
+  // 세션 저장소에 저장된 id를 불러와 req하자.
+  handleResponseSuccess = () => {
+    axios
+      .get("http://54.180.79.137:8000/main", {
+        headers: { authorization: JSON.parse(window.sessionStorage.id) },
+      })
+      .then((res) => {
+        this.setState({ todos: res });
+      });
     this.setState({
       isLogin: true,
       email: window.sessionStorage.getItem("email"),
       userId: window.sessionStorage.getItem("id"),
-      name: window.sessionStorage.getItem("name")
-    })
-  }
-
-
+      name: window.sessionStorage.getItem("name"),
+    });
+  };
   //로그아웃
   // 서버연동시 아래 코드 주석 해제하기
   handleSignOut = () => {
@@ -71,7 +71,6 @@ class App extends React.Component {
       })
     this.doSignOut();
   };
-
   // Edit 컴포넌트의 결과를 끌어올린다.
   adoptModifiedInfo = (data) => {
     if (data.email !== "") this.setState({ email: data.email });
@@ -80,32 +79,30 @@ class App extends React.Component {
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
   };
 
-  // A$AP funckin' added on
-  getTodos = (data) => {
-    this.setState({ todos: data });
-  };
-
-  // 변경된 유저정보 상태를 유지시켜 로그인 상태 혹은 로그아웃 상태를 유지시킨다.
   componentDidMount() {
     const userEmail = window.sessionStorage.getItem("email");
     const userId = window.sessionStorage.getItem("userId");
     if (userEmail) {
       this.handleResponseSuccess();
-      this.getTodos;
+      console.log(`렌더링 되었읍니다.`);
+      console.log(this.state.todos[0]);
     } else {
       this.handleSignOut();
     }
   }
-
   doSignOut = () => {
     window.sessionStorage.clear();
   };
-
   render() {
-    console.log("세션스토리지", window.sessionStorage.getItem("id"));
-    console.log("App스테이트", this.state);
-    const { isLogin, userId, email, name, password, mobile, todos } = this.state;
-    // console.log(isLogin)
+    const {
+      isLogin,
+      userId,
+      email,
+      name,
+      password,
+      mobile,
+      todos,
+    } = this.state;
     return (
       <HashRouter>
         <div className="menu">
@@ -121,13 +118,14 @@ class App extends React.Component {
             render={() =>
               isLogin ? ( // 새로고침해도 로그인 상태를 유지시키기 위해 localstorage에 저장된 정보를 사용한다. local storage는 사용자가 지우지 않는 이상 영구적으로 계속 브라우저에 남아있음 (단, session storage는 브라우저가 닫은 겨우 사라지고, 브라우저 내에서 탬을 생성하는 경우에도 별도의 영역으로 할당됨.)
                 <ToDo
+                  userId={userId}
                   email={email}
                   name={name}
                   todos={todos} // A$AP funckin' added on
                   getTodos={this.getTodos} // A$AP funckin' added on
                 />
-                // <MyPage />
               ) : (
+                  // <MyPage />
                   <SignInModal
                     handleResponseSuccess={this.handleResponseSuccess.bind(this)}
                   />

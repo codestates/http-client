@@ -22,22 +22,56 @@ import "./ToDo.css";
  - "todoId"와 같이 화면에 보여줄 필요도 없고 render로 관리할 필요도 없는 경우,
    즉, 다른 컴포넌트에서 참조(reference) 목적으로만 필요한 경우 사용
 ******************************************************************/
-const ToDo = ({ userId, todos, getTodos }) => {
+
+const ToDo = ({ userId, todos }) => {
   // 0. todo state
   const [todoList, setTodoList] = useState(todos);
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
+  const sessionid = JSON.parse(window.sessionStorage.id);
+
   // 1. 렌더링 후 정보 로드
+  // A$AP funckin' added on
   useEffect(() => {
     const fetchData = async () => {
-      const res = await axios.get("http://54.180.79.137:8000/main");
-      console.log(res);
-      setTodoList(res);
+      setErr("");
+      setLoading(true);
+      try {
+        const res = await axios.get("http://54.180.79.137:8000/main", {
+          headers: { authorization: sessionid },
+        });
+        setTodoList(res);
+        setLoading(false);
+      } catch (err) {
+        setErr(err);
+      }
     };
     fetchData();
-    console.log("useEffect가 성공적으로 적용되었읍니다.");
+    console.log(`최초 fetch 결과
+    ${todoList}`);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setErr("");
+      setLoading(true);
+      try {
+        const res = await axios.get("http://54.180.79.137:8000/main");
+        setTodoList(res);
+        setLoading(false);
+      } catch (err) {
+        setErr(err);
+      }
+    };
+    fetchData();
+    console.log(`수정 fetch 결과
+      ${todoList}`);
   }, [todoList]);
+
   // // 2. todoId를 메소드와 자식 컴포넌트들에 고유변수로 사용할 것임을 선언
   // const listLength = ;
   const nexttodoId = useRef(10);
+
   // 3. 새 일정 입력 메소드
   const onInsert = useCallback(
     async (newTodo) => {
@@ -123,10 +157,6 @@ const ToDo = ({ userId, todos, getTodos }) => {
     },
     [todoList]
   );
-  // A$AP funckin' added on
-  useEffect(() => {
-    getTodos(todoList);
-  }, [todoList]);
 
   // 9. 컴포넌트 렌더링
   return (

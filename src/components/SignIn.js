@@ -2,10 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import user from "../test_data_user.json";
 import axios from "axios";
-
 class SignInModal extends React.Component {
   constructor(props) {
-    console.log("프롭스 사인인", props);
     super(props);
     this.state = {
       id: "",
@@ -15,10 +13,7 @@ class SignInModal extends React.Component {
       errorMessage: "",
     };
     // console.log("props", this.props); // App.js 로부터 handleResponseSuccess()가 내려옴
-
-
     /* ----------------소셜 로그인------------------- */
-
     /* ----------------로그인----------------------- */
   }
   // e-mail, pw 입력 기능
@@ -27,38 +22,36 @@ class SignInModal extends React.Component {
       [key]: text.target.value,
     });
   };
-
   handleSignIn = () => {
     const signInfo = {
       id: this.state.id,
       email: this.state.email,
       password: this.state.password,
     };
-
     if (!signInfo.email.length || !signInfo.password.length) {
       this.setState({
-        errorMessage: "e-mail과 비밀번호를 입력하세요."
-      })
-    }
-    else {
-      axios.post("http://54.180.79.137:8000/signin", signInfo)
-        .then(response => {
-          console.log("뭘 받아옴?", response)
+        errorMessage: "e-mail과 비밀번호를 입력하세요.",
+      });
+    } else {
+      axios
+        .post("http://54.180.79.137:8000/signin", signInfo, {
+          withCreditentials: true,
+        })
+        .then((response) => {
           this.setState({
-            id: response.data.id,    // 서버에서 생성 및 전달받은 고유 유저id
+            id: response.data.id, // 서버에서 생성 및 전달받은 고유 유저id
             email: response.data.email,
-            name: response.data.name
-          })
+            name: response.data.name,
+          });
           this.doSignIn();
         })
-        .catch(error => {
+        .catch((error) => {
           // console.log("??", error.response)
           this.setState({
-            errorMessage: error.response.data
-          })
-        })
+            errorMessage: error.response.data,
+          });
+        });
     }
-
     /*     fakedata 용 코드
         for (let i = 0; i < user.length; i++) {
           if (!signInfo.email.length || !signInfo.password.length) {
@@ -93,7 +86,6 @@ class SignInModal extends React.Component {
           // console.log(user)
         } */
   };
-
   //! session storage에 저장하여 로그인을 유지시킨다.
   doSignIn = () => {
     const { id, email, name } = this.state;
@@ -102,7 +94,6 @@ class SignInModal extends React.Component {
     window.sessionStorage.setItem("name", name);
     this.props.handleResponseSuccess();  // App.js로 state 끌어올려서 App.js의 isLogin을 true로 변경해주어 홈경로 또한 바뀌고 동시에 컴포넌트도 todo로 변경된다.
   };
-
   render() {
     console.log("사인 state", this.state);
     console.log("사인인,세션저장소", window.sessionStorage)
@@ -121,7 +112,6 @@ class SignInModal extends React.Component {
               id="sign_in_img"
               src="https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D"
             ></img>
-
             {/*-------------- e-mail pw 입력칸 ----------------- */}
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="container1">
@@ -140,7 +130,6 @@ class SignInModal extends React.Component {
                   ></input>
                 </div>
               </div>
-
               <div className="findAccount_span">
                 <span>
                   <NavLink to="/findaccount" className="findAccount_link">
@@ -148,7 +137,6 @@ class SignInModal extends React.Component {
                   </NavLink>
                 </span>
               </div>
-
               <div>
                 {/* <NavLink to="/todo"> */}
                 <button
@@ -173,5 +161,4 @@ class SignInModal extends React.Component {
     );
   }
 }
-
 export default SignInModal;

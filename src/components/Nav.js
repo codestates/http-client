@@ -19,8 +19,6 @@ class Nav extends React.Component {
   }
 
   render() {
-    console.log("Nav프롭", this.props);
-
     return (
       <ul className="nav">
         <div className="nav-welcome">
