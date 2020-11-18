@@ -91,11 +91,11 @@ class SignInModal extends React.Component {
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("email", email);
     window.sessionStorage.setItem("name", name);
-    this.props.handleResponseSuccess();  // App.js로 state 끌어올려서 App.js의 isLogin을 true로 변경해주어 홈경로 또한 바뀌고 동시에 컴포넌트도 todo로 변경된다.
+    this.props.handleResponseSuccess(); // App.js로 state 끌어올려서 App.js의 isLogin을 true로 변경해주어 홈경로 또한 바뀌고 동시에 컴포넌트도 todo로 변경된다.
   };
   render() {
     console.log("사인 state", this.state);
-    console.log("사인인,세션저장소", window.sessionStorage)
+    console.log("사인인,세션저장소", window.sessionStorage);
     return (
       <div className="modal hidden">
         <div className="modal_overlay"></div>

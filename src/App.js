@@ -42,14 +42,16 @@ class App extends React.Component {
       // headers: { id: window.sessionStorage.id },
       // })
       // console.
-      .post("http://54.180.79.137:8000/main2", { id: window.sessionStorage.getItem("id") })
+      .post("http://54.180.79.137:8000/main2", {
+        id: window.sessionStorage.getItem("id"),
+      })
       .then((res) => {
-        console.log('메인2 성공', res)
-        this.setState({ todos: res });
+        console.log("메인2 성공", res.data);
+        this.setState({ todos: res.data });
       })
       .catch((error) => {
-        console.log("메인2 에러", error.response)
-      })
+        console.log("메인2 에러", error.response);
+      });
     this.setState({
       isLogin: true,
       email: window.sessionStorage.getItem("email"),
@@ -96,28 +98,26 @@ class App extends React.Component {
     if (data.name !== "") this.setState({ name: data.name });
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
   };
-
   // ToDo 컴포넌트의 결과를 끌어올린다.
   adoptRecentTodo = (data) => {
     this.setState({ todos: data });
   };
-
   componentDidMount() {
     const userEmail = window.sessionStorage.getItem("email");
     const userId = window.sessionStorage.getItem("userId");
     if (userEmail) {
       this.handleResponseSuccess();
-      console.log(`렌더링 되었읍니다.`);
-      console.log(this.state.todos[0]);
     } else {
       this.handleSignOut();
     }
+    this.adoptRecentTodo;
+    console.log("메인2 변경감지", this.state);
   }
   doSignOut = () => {
     window.sessionStorage.clear();
   };
   render() {
-    console.log("App state 변경값", this.state)
+    console.log("App state 변경값", this.state);
     const {
       isLogin,
       userId,
