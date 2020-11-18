@@ -3,15 +3,65 @@
 .screen {
 } */
 
+/* signOut */
 
+.logOut_logIn_btn {
+  margin-top: 6%;
+  font-size: 0.7rem;
+}
+
+/* nav */
+
+.welcome {
+  position: absolute;
+  display: block;
+  left: 40px;
+  top: 80px;
+  z-index: 1;
+  color: pink;
+  text-align: center;
+  font-size: small;
+}
+.menu {
+  position: fixed;
+  display: block;
+  box-sizing: border-box;
+  float: left;
+  width: 23%;
+  height: 100vh;
+}
+.screen {
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  float: left;
+  width: 70%;
+  margin-top: 40px;
+  margin-left: 230px;
+}
+.footer {
+  position: absolute;
+  text-align: center;
+  display: block;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  margin-left: 8px;
+  padding-top: 30px;
+  background-color: pink;
+}
+
+/*  Modal  */
 .App {
   text-align: center;
 }
 
-.modal { /*durl*/
- 
+.modal {
+  /*durl*/
+
   position: fixed;
-  margin-top: 1%;
+  /* margin-top: 1%; */
   top: 0;
   left: 0;
   width: 100%;
@@ -22,7 +72,6 @@
   z-index: 1;
 }
 
-
 /* .hidden {
   display: none;
 } */
@@ -32,21 +81,18 @@
   width: 1000%;
   height: 1000%;
   position: fixed;
-  
 }
 
 .modal_content {
   background-color: white;
-  padding: 30px 100px;
+  width: 29%;
+  padding: 1% 5%;
   text-align: center;
   position: relative;
   top: 0px;
   border-radius: 10px;
-  width: 30%;
-  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-  
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
 }
-
 
 /* .modal_content h1 {
   margin: 0;
@@ -56,12 +102,11 @@
   display: none;
 } */
 
-
 .container {
   /* background-color: pink; */
 
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 5%;
 
   /* align-items: center; */
   display: block;
@@ -70,8 +115,8 @@
 .container1 {
   background-color: pink;
   max-width: 100%;
-  padding-right:50px;
-  padding-left:50px;
+  padding-right: 50px;
+  padding-left: 50px;
   padding-top: 10px;
   padding-bottom: 30px;
   /* align-items: center; */
@@ -80,31 +125,25 @@
 
 /* 사진크기 자동 조절 */
 #sign_in_img {
-  
   display: block;
   width: inherit;
   max-width: 100%;
   height: auto;
 }
 /* .container1 img{
-
   display: block;
   max-width: 100%;
   height: auto;
 } */
 
-input[type='email'],
-input[type='password'],
-input[type='text'] {
-
+input[type="email"],
+input[type="password"],
+input[type="text"] {
   width: 70%;
   font-size: 1.1rem;
-  padding: 1rem ;
-  margin: 0.4rem ;
-  
+  padding: 0;
+  margin: 0.4rem;
 }
-
-
 
 .findAccount_span {
   text-align: right;
@@ -114,7 +153,6 @@ input[type='text'] {
 
 .findAccount_link {
   text-decoration: none;
-
 }
 
 .signUp_link {
@@ -124,16 +162,14 @@ input[type='text'] {
 .signUp_div {
   text-align: right;
   padding-bottom: 10px;
-  font-size: 1.0rem;
+  font-size: 1rem;
 }
-
 
 .loginButton {
   margin-top: 30px;
-  width: 100%;
+  width: 70%;
   /* height: auto; */
-  font-size: 2rem;
-  
+  font-size: 1rem;
 }
 
 .signUp_btn {
@@ -141,7 +177,6 @@ input[type='text'] {
   width: 100%;
   font-size: 2rem;
 }
-
 
 .check {
   text-align: right;
@@ -151,7 +186,6 @@ input[type='text'] {
 /*-----Find_account.css-----*/
 
 .find_e-mail_box {
-
   display: block;
   position: relative;
   background-color: pink;
@@ -160,7 +194,6 @@ input[type='text'] {
   /* padding-left:50px; */
   padding-top: 10px;
   padding-bottom: 30px;
-  
 }
 
 .line {
@@ -170,13 +203,11 @@ input[type='text'] {
   margin-bottom: 7%;
   width: 100%;
   height: 0px;
-  
-  border: 1px solid #C4C4C4;
-  
+
+  border: 1px solid #c4c4c4;
 }
 
 .find_pw_box {
-
   display: block;
   position: relative;
   background-color: pink;
@@ -185,11 +216,9 @@ input[type='text'] {
   padding-left:50px; */
   padding-top: 10px;
   padding-bottom: 30px;
-  
 }
 
 .findBtn {
-  
   margin-top: 10px;
   font-size: 1rem;
   width: 50%;
@@ -199,8 +228,6 @@ input[type='text'] {
 /*-----Find_completed.css-----*/
 
 .informaion {
-  
-  
   margin-top: 50%;
   /* line-height: 50%; */
 }
@@ -212,9 +239,6 @@ input[type='text'] {
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
-
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

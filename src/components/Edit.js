@@ -1,104 +1,89 @@
-import React from "react";
-import { Route, Link } from "react-router-dom";
-import axios from "axios";
+import React, { useCallback, useReducer } from "react";
+import { Link } from "react-router-dom";
 
-import "./Edit.css";
+// components
+import Button from "../components/Button";
 
-// test data
-import user from "../test_data_user.json";
+import "./Edit.scss";
 
-class Edit extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: null,
-      email: null,
-      password: null,
-      name: null,
-      mobile: null,
-      currentUser: [],
-    };
-    console.log(props);
-  }
+/*****************************************************************
+                            리액트 훅 명세표
 
-  // 1. Life Cycle에 반영
-  componentDidMount() {
-    this.handleInputValue();
-  }
+(1) useReducer
+ - Input 개체가 다수일 때, 이것들에 의한 state 변화를 한번에 관리하기 위함
+ - 클래스 컴포넌트에서 e.target.value들에 대한 setState를 한번에 한 것과 동일
+ - 
 
-  // 2. 변경사항 입력
-  handleInputValue = (key) => (e) => {
-    this.setState({ [key]: e.target.value });
+(2) useCallback
+ - ToDo.js 컴포넌트의 주석 참조 부탁드립니다.
+******************************************************************/
+
+// reducer hook 액션 정의
+function reducer(state, action) {
+  return {
+    ...state,
+    [action.name]: action.value,
   };
-  inputEdit() {
-    // const user = await axios.post("http://localhost:8000/mypage", {
-    //     email: email,
-    //     password: password,
-    //     name: name,
-    //     mobile: mobile
-    // })  // 노드서버 구축완료시 활성화 & 테스트
-    user.push({
-      content: this.state.content,
-      startDate: this.state.startDate,
-      important: this.state.important,
-      complete: this.state.complete,
-    });
-    this.props.history.push("/mypage");
-  }
-
-  // 3. 컴포넌트 최종내용 렌더링
-  render() {
-    const { email, password, name, mobile, isEdit } = this.state;
-    return (
-      <>
-        <section className="myinfo-print">
-          <div className="myinfo-title">회원정보</div>
-          <hr className="myinfo-hr" />
-          <div className="myinfo-body">
-            <div className="object-email">
-              <div className="description-email">e-mail</div>
-              <input
-                type="text"
-                className="edit-email"
-                onChange={this.handleInputValue("email")}
-              ></input>
-            </div>
-            <div className="object-pw">
-              <div className="description-pw">PW</div>
-              <input
-                type="text"
-                className="edit-pw"
-                onChange={this.handleInputValue("password")}
-              ></input>
-            </div>
-            <div className="object-name">
-              <div className="description-name">고객명</div>
-              <input
-                type="text"
-                className="edit-name"
-                onChange={this.handleInputValue("name")}
-              ></input>
-            </div>
-            <div className="object-mobile">
-              <div className="description-mobile">연락처</div>
-              <input
-                type="text"
-                className="edit-mobile"
-                onChange={this.handleInputValue("mobile")}
-              ></input>
-            </div>
-          </div>
-        </section>
-        <div className="submit-button-area">
-          <button className="submit-button">
-            <Link to={"/"} style={{ textDecoration: "none", color: "white" }}>
-              수정완료
-            </Link>
-          </button>
-        </div>
-      </>
-    );
-  }
 }
+
+const Edit = ({ makeChange }) => {
+  // reducer hook으로 한꺼번에 state 관리할 대상 정의
+  const [state, dispatch] = useReducer(reducer, {
+    password: "",
+    name: "",
+  });
+
+  const { password, name } = state;
+
+  // reducer hook 구동 대상("액션값")은 "이벤트 객체(e.target 값)"라고 설정
+  const onChange = (e) => {
+    dispatch(e.target);
+  };
+
+  // reducer hook 구동 결과(state)를 부모(MyPage.js) 컴포넌트로 끌어올리기
+  const onClick = useCallback(() => {
+    console.log(`제출!! =======>
+    최종제출 비밀번호: ${state.password}
+    최종제출 이름: ${state.name}
+    `);
+
+    makeChange(state);
+  }, [makeChange, state]);
+
+  return (
+    <>
+      <section className="editpage">
+        <div className="myinfo-title">&#9997; 회원정보 수정</div>
+        <div>
+          <div>
+            <div className="description">PW</div>
+            <input
+              className="editbox"
+              type="text"
+              name="password"
+              value={password}
+              placeholder="변경할 비밀번호를 입력하세요"
+              onChange={onChange}
+            ></input>
+          </div>
+          <div>
+            <div className="description">고객명</div>
+            <input
+              className="editbox"
+              type="text"
+              name="name"
+              value={name}
+              placeholder="변경할 고객명을 입력하세요"
+              onChange={onChange}
+            ></input>
+          </div>
+        </div>
+      </section>
+      <div>
+        <Button onClick={onClick}>수정</Button>
+      </div>
+    </>
+  );
+};
 
 export default Edit;

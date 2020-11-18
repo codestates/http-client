@@ -1,18 +1,59 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// CSS
-import "./Nav.css";
+// components
+import Welcome from "../components/Welcome";
+import SignOut from "../components/SignOut";
 
-function Nav () {
+// CSS
+import "./Nav.scss";
+
+const NavLinkStyle = {
+  textDecoration: `none`,
+  color: `white`,
+};
+
+class Nav extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     return (
-        <div className="nav">
-            <Link className="nav-todo" to={"/todo"}>홈</Link>
-            <Link className="nav-mypage" to={"/mypage"}>마이페이지</Link>
-            <Link className="nav-completed" to={"/completed"}>완료일정</Link>
-            <Link className="nav-important" to={"/important"}>중요일정</Link>
+      <ul className="nav">
+        <div className="nav-welcome">
+          <Welcome name={this.props.loginUserInfo.name} />{" "}
+          {/* welcome 컴포넌트로 전달 */}
+          <SignOut
+            logOut={this.props.resetLogin}
+            loginStatus={this.props.loginUserInfo.isLogin}
+          />{" "}
+          {/* signOut 컴포넌트로 전달 */}
         </div>
+
+        <li className="nav-todo">
+          <Link to={"/"} style={NavLinkStyle}>
+            홈
+          </Link>
+        </li>
+        <li className="nav-mypage">
+          <Link to={"/mypage"} style={NavLinkStyle}>
+            마이페이지
+          </Link>
+        </li>
+        <li className="nav-completed">
+          <Link to={"/completed"} todos={this.props.todos} style={NavLinkStyle}>
+            완료일정
+          </Link>
+        </li>
+        <li className="nav-important">
+          <Link to={"/important"} todos={this.props.todos} style={NavLinkStyle}>
+            중요일정
+          </Link>
+        </li>
+      </ul>
     );
+  }
 }
 
 export default Nav;

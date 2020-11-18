@@ -1,43 +1,74 @@
 .container-input {
   height: 150px;
-  border-bottom: 1px solid #bcbcbc;
+  padding-bottom: 10px;
+}
+.inputfield {
+  width: 350px;
+  height: 80px;
+  border: #bcbcbc solid;
+  border-style: outset;
+  border-radius: 25px;
 }
 .chkbox {
   float: left;
-  height: 70%;
-  margin-top: 0px;
-  margin-right: 10px;
+  height: 80%;
+  margin-top: 2%;
+  margin-left: 3%;
+  margin-right: 2%;
   text-align: center;
   text-decoration: none;
 }
 .check-important:hover {
   background-color: #ffd3d3;
 }
+.check-important.active {
+  background-color: hotpink;
+}
 .check-important {
   display: inline-block;
   cursor: pointer;
   background-color: white;
   border: none;
-  font-size: 10px;
-  padding: 0px, 0px;
+  text-align: center;
+  height: 100%;
+  border-radius: 25px;
 }
 .inputbox {
-  padding-right: 20px;
-  padding-bottom: 10px;
+  float: left;
+  padding-top: 2%;
+  border-radius: 25px;
 }
 .input-button {
-  width: 100px;
+  margin-top: 48px;
+  width: 50px;
   display: inline-block;
   cursor: pointer;
+  text-align: center;
+  color: white;
+  background-color: hotpink;
 }
-.input-what-description {
-  padding-right: 15px;
+.input-when {
+  margin-bottom: 10px;
 }
-.input-when-description {
-  padding-right: 30px;
-}
-.input-what-field {
+/* .input-what {
 }
 .input-when-field {
-  width: 200px;
+} */
+.input-when-description {
+  padding-top: 8px;
+  padding-right: 10px;
+}
+.input-what-field {
+  float: left;
+  padding: 1px, 1px;
+  max-width: 150px;
+  font-size: 10pt;
+}
+.input-what-description {
+  float: left;
+  padding-top: 8px;
+  padding-right: 20px;
+}
+.container-list {
+  padding-top: 50px;
 }

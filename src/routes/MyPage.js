@@ -1,98 +1,115 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 // components
 import Remove from "../components/Remove";
 import Edit from "../components/Edit";
-
-import "./MyPage.css";
-
-// test data
-import user from "../test_data_user.json";
+import Button from "../components/Button";
+import "./MyPage.scss";
 
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: null,
-      email: null,
-      password: null,
-      name: null,
-      mobile: null,
-      currentUser: [],
+      email: this.props.email,
+      password: this.props.password,
+      name: this.props.name,
+      mobile: this.props.mobile,
     };
+    console.log(`로그인 유저정보
+  * 이름: ${this.state.name}   * 이메일: ${this.state.email}    * 비밀번호: ${this.state.password}   * 연락처: ${this.state.mobile}
+  `);
   }
 
-  // 1. 로그인 성공 유저 정보 확인
-  getUser = async () => {
-    // const user = await axiox.get("http://localhost:8000/mypage"); // 노드서버 구축완료시 활성화 & 테스트
-    await this.setState({
-      id: user[0].id,
-      email: user[0].email,
-      password: user[0].password,
-      name: user[0].name,
-      mobile: user[0].mobile,
-      currentUser: user[0],
-    });
-  };
+  makeChange(data) {
+    if (data.password !== "") this.setState({ password: data.password });
+    if (data.name !== "") this.setState({ name: data.name });
+    this.props.adoptModifiedInfo(data);
+  }
 
-  // 2. Life Cycle에 반영
+  /* 1. history.push.location을 이용해 props를 회원탈퇴 컴포넌트로 이동 
+     2. pw도 같이 담아 보내기 
+  */
+  // tossUserPwToSignOut = ({ history }) => {
+
+  // }
+
   componentDidMount() {
-    this.getUser();
+    this.makeChange;
   }
 
-  // 3. 컴포넌트 최종내용 렌더링
   render() {
-    const { email, password, name, mobile, isEdit } = this.state;
+    console.log("마이페이지 props", this.props);
+    const { email, password, name, mobile } = this.state;
     return (
       <>
-        <section className="myinfo-print">
-          <div className="myinfo-title">회원정보</div>
-          <hr className="myinfo-hr" />
-          <div className="myinfo-body">
-            <div className="object-email">
-              <div className="description-email">e-mail</div>
-              <div className="print-email">{email}</div>
+        <br />
+        <br />
+        <section className="mypage">
+          <div className="myinfo-title">&#129296; 회원정보</div>
+          <div>
+            <div className="email-info">
+              <div className="description">e-mail</div>
+              <div className="print">{email}</div>
             </div>
-            <div className="object-pw">
-              <div className="description-pw">PW</div>
-              <div className="print-pw">{password}</div>
+            <div className="pw-info">
+              <div className="description">PW</div>
+              <div className="print">******</div>
             </div>
-            <div className="object-name">
-              <div className="description-name">고객명</div>
-              <div className="print-name">{name}</div>
+            <div className="name-info">
+              <div className="description">고객명</div>
+              <div className="print">{name}</div>
             </div>
-            <div className="object-mobile">
-              <div className="description-mobile">연락처</div>
-              <div className="print-mobile">{mobile}</div>
+            <div className="mobile-info">
+              <div className="description">연락처</div>
+              <div className="print">010-****-****</div>
             </div>
           </div>
           <div className="myinfobox">
             <div>
-              <button className="edit-button">
+              <Button>
+                {/* props내리기 --> 아래와 같이 작성하면 props.location 혹은 props.history.location에 아래 정보가 담겨 전달
+                    전달받은 Remove.js는 this.props.location 혹은 this.props.history.location에 담긴 pw를 사용할 수 있음
+                */}
                 <Link
-                  to={"/edit"}
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  회원정보 수정
-                </Link>
-              </button>
-            </div>
-            <div>
-              <button className="remove-button">
-                <Link
-                  to={"/remove"}
-                  style={{ textDecoration: "none", color: "white" }}
+                  to={{
+                    pathname: "/remove",
+                    state: {
+                      password: this.props.password,
+                    },
+                    signOut: this.props.signOut, // 메소드화가 되어 전달되어질 것. ex) signOut();
+                  }}
+                  style={{ color: `white`, textDecoration: `none` }}
+
+                  // to={"/remove"}
+                  // style={{ textDecoration: "none", color: "white" }}
+                  // email={email}
+                  // password={password}
+                  // name={name}
+                  // mobile={mobile}
                 >
                   회원탈퇴
                 </Link>
-              </button>
+              </Button>
             </div>
           </div>
+        </section>
+        <br />
+        <br />
+        <br />
+        <hr />
+        <br />
+        <br />
+        <br />
+        <section>
+          <Edit
+            to={"/edit"}
+            style={{ textDecoration: "none", color: "black" }}
+            makeChange={this.makeChange.bind(this)}
+          />
         </section>
       </>
     );
   }
 }
-
 export default MyPage;

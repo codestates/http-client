@@ -1,0 +1,70 @@
+import React, { useState, useCallback } from "react";
+import { MdAdd } from "react-icons/md";
+
+import "./NewToDo.scss";
+
+const NewToDo = ({ onInsert }) => {
+  // 0. useState를 통한 새 일정({content, startDate}) 관리
+  const [newTodo, setNewTodo] = useState({
+    content: "",
+    startDate: "",
+    err: "",
+  });
+
+  // 1. 입력받은 내용을 새 일정(content)에 반영
+  const onChange = (e) => {
+    setNewTodo({ ...newTodo, [e.target.name]: e.target.value });
+  };
+
+  // 2. 버튼 메소드(엔터키 허용)
+  const onSubmit = useCallback(
+    (e) => {
+      if (newTodo.content === "" || newTodo.startDate === "") {
+        setNewTodo({ err: "뭐라도 쓰십쇼" });
+        return;
+      } else {
+        // ToDo 컴포넌트에 입력내용 반영
+        onInsert(newTodo);
+        // 입력폼 초기화
+        setNewTodo({
+          content: "",
+          startDate: "",
+          err: "",
+        });
+        // submit 이벤트로 인한 새로고침 방지
+        e.preventDefault();
+      }
+    },
+    [onInsert, newTodo]
+  );
+
+  // 3. 컴포넌트 렌더링
+  return (
+    <>
+      <form className="new-todo" onSubmit={onSubmit}>
+        <input
+          className="startDate"
+          placeholder="YYYY-MM-DD"
+          name="startDate" // onChange 이벤트 입력을 위한 {name: value} 지정
+          value={newTodo.startDate}
+          onChange={onChange}
+          type="date"
+        />
+        <input
+          className="content"
+          placeholder="할 일을 입력하시오"
+          // onChange 이벤트 입력을 위한 {name: value} 지정
+          name="content"
+          value={newTodo.content}
+          onChange={onChange}
+        />
+        <button type="submit">
+          <MdAdd />
+        </button>
+      </form>
+      <div>{newTodo.err !== "" ? newTodo.err : null}</div>
+    </>
+  );
+};
+
+export default NewToDo;

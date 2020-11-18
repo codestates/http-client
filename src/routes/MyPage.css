@@ -1,40 +1,24 @@
-.myinfo-hr {
-  display: block;
-  border-bottom: 1px solid #ebebeb;
-}
-.myinfo-body {
-  float: left;
-  display: block;
-  padding-left: 2%;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ebebeb;
+.myinfo-title {
+  font-size: x-large;
+  font-weight: bolder;
+  border-bottom: 1px gray solid;
+  margin-top: 50px;
+  margin-bottom: 40px;
 }
 
-.object-email,
-.object-pw,
-.object-name,
-.object-mobile {
-}
-
-.description-email,
-.description-pw,
-.description-name,
-.description-mobile {
+.description {
   float: left;
   width: 100px;
   text-align: center;
 }
 
-.print-email,
-.print-pw,
-.print-name,
-.print-mobile {
+.print {
   float: left;
 }
 
 .myinfobox {
-  float: right;
-  padding-right: 5%;
+  float: left;
+  padding-left: 45%;
 }
 .edit-button {
   border: none;
