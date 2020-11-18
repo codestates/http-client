@@ -34,10 +34,9 @@ class SignInModal extends React.Component {
       });
     } else {
       axios
-        .post("http://54.180.79.137:8000/signin", signInfo, {
-          withCreditentials: true,
-        })
+        .post("http://54.180.79.137:8000/signin", signInfo)
         .then((response) => {
+          console.log("뭘받아와?", response);
           this.setState({
             id: response.data.id, // 서버에서 생성 및 전달받은 고유 유저id
             email: response.data.email,
@@ -92,11 +91,11 @@ class SignInModal extends React.Component {
     window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("email", email);
     window.sessionStorage.setItem("name", name);
-    this.props.handleResponseSuccess();  // App.js로 state 끌어올려서 App.js의 isLogin을 true로 변경해주어 홈경로 또한 바뀌고 동시에 컴포넌트도 todo로 변경된다.
+    this.props.handleResponseSuccess(); // App.js로 state 끌어올려서 App.js의 isLogin을 true로 변경해주어 홈경로 또한 바뀌고 동시에 컴포넌트도 todo로 변경된다.
   };
   render() {
     console.log("사인 state", this.state);
-    console.log("사인인,세션저장소", window.sessionStorage)
+    console.log("사인인,세션저장소", window.sessionStorage);
     return (
       <div className="modal hidden">
         <div className="modal_overlay"></div>

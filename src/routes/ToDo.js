@@ -4,6 +4,7 @@ import axios from "axios";
 import List from "../components/List";
 import NewToDo from "../components/NewToDo";
 import EditTodo from "../components/EditTodo";
+import Button from "../components/Button";
 import "./ToDo.css";
 /*****************************************************************
                             리액트 훅 명세표
@@ -23,12 +24,11 @@ import "./ToDo.css";
    즉, 다른 컴포넌트에서 참조(reference) 목적으로만 필요한 경우 사용
 ******************************************************************/
 
-const ToDo = ({ todos, adoptRecentTodo }) => {
+const ToDo = ({ userId, todos, adoptRecentTodo }) => {
   // 0. todo state
   const [todoList, setTodoList] = useState(todos);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
-  const sessionid = JSON.parse(window.sessionStorage.id);
 
   // 1-1. 렌더링 후 정보 로드
   useEffect(() => {
@@ -36,10 +36,10 @@ const ToDo = ({ todos, adoptRecentTodo }) => {
       setErr("");
       setLoading(true);
       try {
-        const res = await axios.get("http://54.180.79.137:8000/main", {
-          headers: { authorization: sessionid },
+        const res = await axios.post("http://54.180.79.137:8000/main2", {
+          id: userId,
         });
-        setTodoList(res);
+        setTodoList(res.data);
         setLoading(false);
         return; // clean-up
       } catch (err) {
@@ -47,8 +47,6 @@ const ToDo = ({ todos, adoptRecentTodo }) => {
       }
     };
     fetchData();
-    adoptRecentTodo(todoList);
-
     console.log(
       `[작성된 ToDo의 ID] ${todoList.map((todo) => {
         return todo.todoId;
@@ -76,13 +74,6 @@ const ToDo = ({ todos, adoptRecentTodo }) => {
         important: false,
         deleteId: false,
       };
-      // 서버에 POST
-      const req = await axios.post("http://54.180.79.137:8000/main", {
-        userId: todo.userId,
-        content: todo.content,
-        startDate: todo.startDate,
-        important: todo.important,
-      });
       // 컴포넌트 내 일정 목록 최신화(re-rendering)
       setTodoList((todoList) => todoList.concat(todo));
       nexttodoId.current += 1;
@@ -156,7 +147,16 @@ const ToDo = ({ todos, adoptRecentTodo }) => {
     [todoList]
   );
 
-  // 9. 컴포넌트 렌더링
+  // 9. 최종 적용
+  const onAdopt = async () => {
+    adoptRecentTodo(todoList);
+    // 서버에 POST
+    const res = await axios.post("http://54.180.79.137:8000/main2", {
+      userId: todoList.userId,
+    });
+  };
+
+  // 10. 컴포넌트 렌더링
   return (
     <>
       {/* 일정입력 컴포넌트 */}
@@ -172,8 +172,9 @@ const ToDo = ({ todos, adoptRecentTodo }) => {
           />
         </div>
       </section>
+      <Button onClick={() => onAdopt}>정보반영</Button>
     </>
   );
 };
 // 컴포넌트의 props가 바뀌지 않았다면 re-rendering 방지(= shouldComponentUpdate와 동일)
-export default React.memo(ToDo);
+export default ToDo;
