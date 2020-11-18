@@ -34,10 +34,9 @@ class SignInModal extends React.Component {
       });
     } else {
       axios
-        .post("http://54.180.79.137:8000/signin", signInfo, {
-          withCreditentials: true,
-        })
+        .post("http://54.180.79.137:8000/signin", signInfo)
         .then((response) => {
+          console.log("뭘받아와?", response)
           this.setState({
             id: response.data.id, // 서버에서 생성 및 전달받은 고유 유저id
             email: response.data.email,

@@ -1,10 +1,13 @@
 import React, { useState, useCallback } from "react";
 import { MdModeEdit } from "react-icons/md";
+
 const EditTodo = ({ editContent }) => {
   const [editedOne, setEditedOne] = useState({ content: "", err: "" });
+
   const onChange = (e) => {
     setEditedOne({ [e.target.key]: e.target.value });
   };
+
   const onSubmit = useCallback(
     (e) => {
       if (editedOne.content === "") {
@@ -17,12 +20,13 @@ const EditTodo = ({ editContent }) => {
     },
     [editContent, editedOne]
   );
+
   return (
     <>
       <form className="edit-todo" onSubmit={onSubmit}>
         <input
           className="editedOne"
-          placeholder="수정할 글을 써주세요"
+          placeholder="글을 수정해주세요"
           name="content"
           value={editedOne.content}
           onChange={onChange}
@@ -35,4 +39,5 @@ const EditTodo = ({ editContent }) => {
     </>
   );
 };
+
 export default EditTodo;

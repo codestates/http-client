@@ -1,22 +1,11 @@
 import React from "react";
 
-const linkStyle = {
-  color: `white`,
-  textDecoration: `none`,
-};
-
-const wordStyle = {
-  color: `hotpink`,
-  fontSize: `large`,
-  textDecoration: `none`,
-};
-
 function Footer() {
   return (
-    <div style={wordStyle}>
+    <div>
       Built with {` `}
       <a
-        style={linkStyle}
+        className="link"
         href="https://www.codestates.com/"
         target="_blank"
         rel="noreferrer"

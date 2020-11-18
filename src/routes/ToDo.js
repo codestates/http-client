@@ -23,54 +23,46 @@ import "./ToDo.css";
    즉, 다른 컴포넌트에서 참조(reference) 목적으로만 필요한 경우 사용
 ******************************************************************/
 
-const ToDo = ({ userId, todos }) => {
+const ToDo = ({ todos, adoptRecentTodo }) => {
   // 0. todo state
   const [todoList, setTodoList] = useState(todos);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
-  const sessionid = JSON.parse(window.sessionStorage.id);
+  const sessionid = window.sessionStorage.id;
 
-  // 1. 렌더링 후 정보 로드
-  // A$AP funckin' added on
+  // 1-1. 렌더링 후 정보 로드
   useEffect(() => {
     const fetchData = async () => {
       setErr("");
       setLoading(true);
       try {
-        const res = await axios.get("http://54.180.79.137:8000/main", {
-          headers: { authorization: sessionid },
+        const res = await axios.get("http://54.180.79.137:8000/main2", {
+          id: sessionid
         });
         setTodoList(res);
         setLoading(false);
+        return; // clean-up
       } catch (err) {
         setErr(err);
       }
     };
     fetchData();
-    console.log(`최초 fetch 결과
-    ${todoList}`);
-  }, []);
+    adoptRecentTodo(todoList);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setErr("");
-      setLoading(true);
-      try {
-        const res = await axios.get("http://54.180.79.137:8000/main");
-        setTodoList(res);
-        setLoading(false);
-      } catch (err) {
-        setErr(err);
-      }
-    };
-    fetchData();
-    console.log(`수정 fetch 결과
-      ${todoList}`);
+    console.log(
+      `[작성된 ToDo의 ID] ${todoList.map((todo) => {
+        return todo.todoId;
+      })}`
+    );
   }, [todoList]);
 
   // // 2. todoId를 메소드와 자식 컴포넌트들에 고유변수로 사용할 것임을 선언
-  // const listLength = ;
-  const nexttodoId = useRef(10);
+  const listLength = Math.max(
+    todoList.map((todo) => {
+      return todo.todoId;
+    })
+  );
+  const nexttodoId = useRef(listLength);
 
   // 3. 새 일정 입력 메소드
   const onInsert = useCallback(
@@ -97,6 +89,7 @@ const ToDo = ({ userId, todos }) => {
     },
     [todoList]
   );
+
   // 4. 삭제 클릭 메소드
   const onRemove = useCallback(
     (todoId) => {
@@ -106,6 +99,7 @@ const ToDo = ({ userId, todos }) => {
     },
     [todoList]
   );
+
   // 5. 중요 클릭 메소드
   const onToggleOfImportant = useCallback(
     (todoId) => {
@@ -121,6 +115,7 @@ const ToDo = ({ userId, todos }) => {
     },
     [todoList]
   );
+
   // 6. 완료 클릭 메소드
   const onToggleOfComplete = useCallback(
     (todoId) => {
@@ -134,6 +129,7 @@ const ToDo = ({ userId, todos }) => {
     },
     [todoList]
   );
+
   // 7. 수정 클릭 메소드
   const onToggleOfEdit = useCallback(
     (todoId) => {
@@ -143,15 +139,17 @@ const ToDo = ({ userId, todos }) => {
           todo.todoId === todoId ? { ...todo, isEdit: true } : todo
         )
       );
+      editContent();
     },
     [todoList]
   );
+
   // 8. 글 수정
   const editContent = useCallback(
     (edited) => {
       setTodoList(
         todoList.map((todo) =>
-          todo.edited ? { ...todo, content: edited, isEdit: false } : todo
+          todo.edited ? { ...todo, content: edited } : todo
         )
       );
     },
@@ -162,9 +160,7 @@ const ToDo = ({ userId, todos }) => {
   return (
     <>
       {/* 일정입력 컴포넌트 */}
-      <div className="input-field">
-        <NewToDo onInsert={onInsert} />
-      </div>
+      <NewToDo onInsert={onInsert} />
       <section className="container-list">
         <div className="todo">
           <List
@@ -174,14 +170,6 @@ const ToDo = ({ userId, todos }) => {
             onToggleOfComplete={onToggleOfComplete}
             onToggleOfEdit={onToggleOfEdit}
           />
-        </div>
-        {/* 글 수정 컴포넌트 */}
-        <div className="edit-todo">
-          {todoList.isEdit ? (
-            <EditTodo todoList={todoList} editContent={editContent} />
-          ) : (
-              <></>
-            )}
         </div>
       </section>
     </>

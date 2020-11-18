@@ -42,12 +42,12 @@ class Nav extends React.Component {
           </Link>
         </li>
         <li className="nav-completed">
-          <Link to={"/completed"} style={NavLinkStyle}>
+          <Link to={"/completed"} todos={this.props.todos} style={NavLinkStyle}>
             완료일정
           </Link>
         </li>
         <li className="nav-important">
-          <Link to={"/important"} style={NavLinkStyle}>
+          <Link to={"/important"} todos={this.props.todos} style={NavLinkStyle}>
             중요일정
           </Link>
         </li>
