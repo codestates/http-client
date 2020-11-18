@@ -9,10 +9,15 @@ const Completed = (props) => {
   return (
     <>
       <section className="container-list">
-        <div className="title-complete">&#9989; 완료일정</div>
+        <div
+          className="title-complete"
+          style={{ fontSize: `1.5rem`, fontWeight: `border` }}
+        >
+          &#9989; 완료일정
+        </div>
         <div className="todo">
           {filtered.map((todo) => (
-            <ListCompleteFiltered key={todo.listId} todo={todo} />
+            <ListCompleteFiltered key={todo.todoId} todo={todo} />
           ))}
         </div>
       </section>

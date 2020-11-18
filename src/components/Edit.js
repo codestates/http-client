@@ -1,7 +1,10 @@
 import React, { useCallback, useReducer } from "react";
 import { Link } from "react-router-dom";
 
-import "./Edit.css";
+// components
+import Button from "../components/Button";
+
+import "./Edit.scss";
 
 /*****************************************************************
                             리액트 훅 명세표
@@ -49,13 +52,13 @@ const Edit = ({ makeChange }) => {
 
   return (
     <>
-      <section>
-        <div className="myinfo-title">회원정보</div>
-        <hr />
+      <section className="editpage">
+        <div className="myinfo-title">&#9997; 회원정보 수정</div>
         <div>
           <div>
             <div className="description">PW</div>
             <input
+              className="editbox"
               type="text"
               name="password"
               value={password}
@@ -66,6 +69,7 @@ const Edit = ({ makeChange }) => {
           <div>
             <div className="description">고객명</div>
             <input
+              className="editbox"
               type="text"
               name="name"
               value={name}
@@ -76,7 +80,7 @@ const Edit = ({ makeChange }) => {
         </div>
       </section>
       <div>
-        <button onClick={onClick}>수정</button>
+        <Button onClick={onClick}>수정</Button>
       </div>
     </>
   );

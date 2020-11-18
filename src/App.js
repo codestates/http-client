@@ -31,31 +31,51 @@ class App extends React.Component {
       name: null,
       mobile: null,
       errorMessage: "",
-      todos: [], // A$AP funckin' added on
+      todos: [],
     };
   }
   // 세션 저장소에 저장된 id를 불러와 req하자.
   handleResponseSuccess = () => {
     axios
-      .get("http://54.180.79.137:8000/main", {
-        headers: { authorization: JSON.parse(window.sessionStorage.id) },
+      // .post("http://54.180.79.137:8000/main2", {
+      // headers: { authorization: JSON.parse(window.sessionStorage.id) },
+      // headers: { id: window.sessionStorage.id },
+      // })
+      // console.
+      .post("http://54.180.79.137:8000/main2", {
+        id: window.sessionStorage.getItem("id"),
       })
       .then((res) => {
-        this.setState({ todos: res });
+        console.log("메인2 성공", res.data);
+        this.setState({ todos: res.data });
+      })
+      .catch((error) => {
+        console.log("메인2 에러", error.response);
       });
     this.setState({
       isLogin: true,
       email: window.sessionStorage.getItem("email"),
       userId: window.sessionStorage.getItem("id"),
       name: window.sessionStorage.getItem("name"),
-    });
+    })
+
   };
   //로그아웃
   // 서버연동시 아래 코드 주석 해제하기
   handleSignOut = () => {
-    axios.post("http://54.180.79.137:8000/signout")
+    axios({
+      method: "POST",
+      url: "http://54.180.79.137:8000/signout",
+      headers: {
+        "Content-Type": "application/json",
+        // accept: "application/json",
+        // Cookie: window.sessionStorage.getItem("id"),
+        withCreadentials: true,
+        credentials: "include"
+      }
+    })
       .then((response) => {
-        console.log("사인아웃 리스폰스", response)
+        console.log("사인아웃 리스폰스", response);
         this.setState({
           isLogin: false,
           email: null,
@@ -63,12 +83,12 @@ class App extends React.Component {
           name: null,
           mobile: null,
         });
-        alert(response.data)
+        alert(response.data);
       })
-      .catch(error => {
-        console.log(error.response)
-        alert('로그인에 실패하였습니다.')
-      })
+      .catch((error) => {
+        console.log(error.response);
+        alert(" 못 나 가 ! ");
+      });
     this.doSignOut();
   };
   // Edit 컴포넌트의 결과를 끌어올린다.
@@ -78,22 +98,26 @@ class App extends React.Component {
     if (data.name !== "") this.setState({ name: data.name });
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
   };
-
+  // ToDo 컴포넌트의 결과를 끌어올린다.
+  adoptRecentTodo = (data) => {
+    this.setState({ todos: data });
+  };
   componentDidMount() {
     const userEmail = window.sessionStorage.getItem("email");
     const userId = window.sessionStorage.getItem("userId");
     if (userEmail) {
       this.handleResponseSuccess();
-      console.log(`렌더링 되었읍니다.`);
-      console.log(this.state.todos[0]);
     } else {
       this.handleSignOut();
     }
+    this.adoptRecentTodo;
+    console.log("메인2 변경감지", this.state);
   }
   doSignOut = () => {
     window.sessionStorage.clear();
   };
   render() {
+    console.log("App state 변경값", this.state);
     const {
       isLogin,
       userId,
@@ -121,8 +145,8 @@ class App extends React.Component {
                   userId={userId}
                   email={email}
                   name={name}
-                  todos={todos} // A$AP funckin' added on
-                  getTodos={this.getTodos} // A$AP funckin' added on
+                  todos={todos}
+                  adoptRecentTodo={this.adoptRecentTodo}
                 />
               ) : (
                   // <MyPage />
