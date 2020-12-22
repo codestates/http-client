@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 class CompletedFindEmail extends React.Component {
   render() {
+    console.log(this.props)
     return (
       <div className="modal">
         <div className="modal_overlay"></div>
@@ -12,8 +13,7 @@ class CompletedFindEmail extends React.Component {
           <div className="container">
             <div className="find_e-mail_box">
               <div className="information">
-                {`귀하의 e-mail은 성유리gmail.com입니다.`}{" "}
-                {/* 재성님께서 멘트 통째로 보내주기로 함. */}
+                {this.props.location.state}
               </div>
             </div>
 

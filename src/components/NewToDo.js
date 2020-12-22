@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import axios from "axios";
 import { MdAdd } from "react-icons/md";
 
 import "./NewToDo.scss";
@@ -20,23 +19,20 @@ const NewToDo = ({ onInsert }) => {
   // 2. 버튼 메소드(엔터키 허용)
   const onSubmit = useCallback(
     (e) => {
-      if (newTodo.content.length === 0 || newTodo.startDate.length === 0) {
+      if (newTodo.content === "" || newTodo.startDate === "") {
         setNewTodo({ err: "뭐라도 쓰십쇼" });
+        return;
       } else {
         // ToDo 컴포넌트에 입력내용 반영
         onInsert(newTodo);
-
         // 입력폼 초기화
         setNewTodo({
           content: "",
           startDate: "",
+          err: "",
         });
-        e.preventDefault(); // submit 이벤트로 인한 새로고침 방지
-
-        console.log(`
-      ** 새 일정: ${newTodo.content}
-      ** 시간: ${newTodo.startDate}
-      `);
+        // submit 이벤트로 인한 새로고침 방지
+        e.preventDefault();
       }
     },
     [onInsert, newTodo]
@@ -49,10 +45,10 @@ const NewToDo = ({ onInsert }) => {
         <input
           className="startDate"
           placeholder="YYYY-MM-DD"
-          // onChange 이벤트 입력을 위한 {name: value} 지정
-          name="startDate"
+          name="startDate" // onChange 이벤트 입력을 위한 {name: value} 지정
           value={newTodo.startDate}
           onChange={onChange}
+          type="date"
         />
         <input
           className="content"

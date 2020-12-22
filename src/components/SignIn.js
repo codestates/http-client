@@ -2,79 +2,100 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import user from "../test_data_user.json";
 import axios from "axios";
-
 class SignInModal extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
+      id: "",
       email: "",
+      name: "",
       password: "",
       errorMessage: "",
     };
-    console.log("asdfasdfas", this.props);
+    // console.log("props", this.props); // App.js 로부터 handleResponseSuccess()가 내려옴
+    /* ----------------소셜 로그인------------------- */
+    /* ----------------로그인----------------------- */
   }
   // e-mail, pw 입력 기능
   hadleInputValue = (key) => (text) => {
-    console.log("잘 작성이 되나?");
-    // console.log('key', key)
-    // console.log('text', text)
     this.setState({
       [key]: text.target.value,
     });
   };
-
   handleSignIn = () => {
-    console.log("사인인state", this.state);
     const signInfo = {
+      id: this.state.id,
       email: this.state.email,
       password: this.state.password,
-      errorMessage: this.state.errorMessage,
     };
-
-    for (let i = 0; i < user.length; i++) {
-      if (!signInfo.email.length || !signInfo.password.length) {
-        this.setState({
-          errorMessage: "e-mail과 PW를 입력하세요.",
-        });
-      }
-      //* 입력이 된 값으로 서버에 로그인 요청을 하고, props로 전달된 callback을 호출
-      // else {  //! 추후 알맞게 수정하기, 우선은 fackdata로
-      //     axios.post('http://localhost:8000/', signInfo)
-      //         .then(res => {
-      //             this.props.handleResponseSuccess()
-      //         })
-      //         .catch(error => {
-      //             this.setState({
-      //                 errorMessage: 'e-mail 혹은 PW가 일치하지 않습니다.'
-      //             })
-      //         })
-      // }
-      else {
-        if (
-          user[i].email === this.state.email &&
-          user[i].password === this.state.password
-        ) {
-          // this.doSignIn();
-          this.doSignIn();
-        } else
+    if (!signInfo.email.length || !signInfo.password.length) {
+      this.setState({
+        errorMessage: "e-mail과 비밀번호를 입력하세요.",
+      });
+    } else {
+      axios
+        .post("http://54.180.79.137:8000/signin", signInfo)
+        .then((response) => {
+          console.log("뭘받아와?", response)
           this.setState({
-            errorMessage: "e-mail 혹은 PW가 일치하지 않습니다.",
+            id: response.data.id, // 서버에서 생성 및 전달받은 고유 유저id
+            email: response.data.email,
+            name: response.data.name,
           });
-      }
-      // console.log(user)
+          this.doSignIn();
+        })
+        .catch((error) => {
+          // console.log("??", error.response)
+          this.setState({
+            errorMessage: error.response.data,
+          });
+        });
     }
+    /*     fakedata 용 코드
+        for (let i = 0; i < user.length; i++) {
+          if (!signInfo.email.length || !signInfo.password.length) {
+            this.setState({
+              errorMessage: "e-mail과 PW를 입력하세요.",
+            });
+          }
+          //* 입력이 된 값으로 서버에 로그인 요청을 하고, props로 전달된 callback을 호출
+          // else {  //! 추후 알맞게 수정하기, 우선은 fackdata로
+          //     axios.post('http://localhost:8000/', signInfo)
+          //         .then(res => {
+          //             this.props.handleResponseSuccess()
+          //         })
+          //         .catch(error => {
+          //             this.setState({
+          //                 errorMessage: 'e-mail 혹은 PW가 일치하지 않습니다.'
+          //             })
+          //         })
+          // }
+          else {
+            if (
+              user[i].email === this.state.email &&
+              user[i].password === this.state.password
+            ) {
+              // this.doSignIn();
+              this.doSignIn();
+            } else
+              this.setState({
+                errorMessage: "e-mail 혹은 PW가 일치하지 않습니다.",
+              });
+          }
+          // console.log(user)
+        } */
   };
-
   //! session storage에 저장하여 로그인을 유지시킨다.
   doSignIn = () => {
-    const { email } = this.state;
+    const { id, email, name } = this.state;
+    window.sessionStorage.setItem("id", id);
     window.sessionStorage.setItem("email", email);
-    this.props.handleResponseSuccess();
+    window.sessionStorage.setItem("name", name);
+    this.props.handleResponseSuccess(); // App.js로 state 끌어올려서 App.js의 isLogin을 true로 변경해주어 홈경로 또한 바뀌고 동시에 컴포넌트도 todo로 변경된다.
   };
-
   render() {
     console.log("사인 state", this.state);
+    console.log("사인인,세션저장소", window.sessionStorage);
     return (
       <div className="modal hidden">
         <div className="modal_overlay"></div>
@@ -85,15 +106,11 @@ class SignInModal extends React.Component {
               <NavLink to="/signup" className="signUp_link">
                 아직 회원이 아니신가요?
               </NavLink>
-              {/* <div onClick={this.handleClick} onChange={this.moveSignUp} id="to_signUp">아직 회원이 아니신가요?</div> */}
             </div>
-
-            {/* <img id='sign_in_img' src='https://gdimg.gmarket.co.kr/1496139073/still/600?ver=1537817021'></img> */}
             <img
               id="sign_in_img"
               src="https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D"
             ></img>
-
             {/*-------------- e-mail pw 입력칸 ----------------- */}
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="container1">
@@ -112,7 +129,6 @@ class SignInModal extends React.Component {
                   ></input>
                 </div>
               </div>
-
               <div className="findAccount_span">
                 <span>
                   <NavLink to="/findaccount" className="findAccount_link">
@@ -120,7 +136,6 @@ class SignInModal extends React.Component {
                   </NavLink>
                 </span>
               </div>
-
               <div>
                 {/* <NavLink to="/todo"> */}
                 <button
@@ -132,7 +147,9 @@ class SignInModal extends React.Component {
                 </button>
                 {/* </NavLink> */}
                 <div>
-                  <button className="loginButton">Github 로그인</button>
+                  <button className="loginButton" type="submit">
+                    Github 로그인
+                  </button>
                 </div>
                 <div className="alert-box">{this.state.errorMessage}</div>
               </div>
@@ -143,5 +160,4 @@ class SignInModal extends React.Component {
     );
   }
 }
-
 export default SignInModal;

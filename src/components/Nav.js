@@ -6,7 +6,7 @@ import Welcome from "../components/Welcome";
 import SignOut from "../components/SignOut";
 
 // CSS
-import "./Nav.css";
+import "./Nav.scss";
 
 const NavLinkStyle = {
   textDecoration: `none`,
@@ -19,13 +19,15 @@ class Nav extends React.Component {
   }
 
   render() {
-    console.log("Nav프롭", this.props);
-
     return (
       <ul className="nav">
         <div className="nav-welcome">
-          <Welcome userName={this.props.loginUserName} />
-          <SignOut logOut={this.props.resetLogin} />{" "}
+          <Welcome name={this.props.loginUserInfo.name} />{" "}
+          {/* welcome 컴포넌트로 전달 */}
+          <SignOut
+            logOut={this.props.resetLogin}
+            loginStatus={this.props.loginUserInfo.isLogin}
+          />{" "}
           {/* signOut 컴포넌트로 전달 */}
         </div>
 
@@ -40,12 +42,12 @@ class Nav extends React.Component {
           </Link>
         </li>
         <li className="nav-completed">
-          <Link to={"/completed"} style={NavLinkStyle}>
+          <Link to={"/completed"} todos={this.props.todos} style={NavLinkStyle}>
             완료일정
           </Link>
         </li>
         <li className="nav-important">
-          <Link to={"/important"} style={NavLinkStyle}>
+          <Link to={"/important"} todos={this.props.todos} style={NavLinkStyle}>
             중요일정
           </Link>
         </li>
