@@ -57,8 +57,7 @@ class App extends React.Component {
       email: window.sessionStorage.getItem("email"),
       userId: window.sessionStorage.getItem("id"),
       name: window.sessionStorage.getItem("name"),
-    })
-
+    });
   };
   //로그아웃
   // 서버연동시 아래 코드 주석 해제하기
@@ -71,8 +70,8 @@ class App extends React.Component {
         // accept: "application/json",
         // Cookie: window.sessionStorage.getItem("id"),
         withCreadentials: true,
-        credentials: "include"
-      }
+        credentials: "include",
+      },
     })
       .then((response) => {
         console.log("사인아웃 리스폰스", response);
@@ -149,11 +148,11 @@ class App extends React.Component {
                   adoptRecentTodo={this.adoptRecentTodo}
                 />
               ) : (
-                  // <MyPage />
-                  <SignInModal
-                    handleResponseSuccess={this.handleResponseSuccess.bind(this)}
-                  />
-                )
+                // <MyPage />
+                <SignInModal
+                  handleResponseSuccess={this.handleResponseSuccess.bind(this)}
+                />
+              )
             }
           />
           <Route path={"/todo"} component={ToDo} />
@@ -171,8 +170,8 @@ class App extends React.Component {
                   signOut={this.handleSignOut}
                 />
               ) : (
-                  <MyPage />
-                )
+                <MyPage />
+              )
             }
           />
           <Route
@@ -181,8 +180,8 @@ class App extends React.Component {
               isLogin ? (
                 <Completed email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                  <Completed />
-                )
+                <Completed />
+              )
             }
           />
           <Route
@@ -191,8 +190,8 @@ class App extends React.Component {
               isLogin ? (
                 <Important email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                  <Important />
-                )
+                <Important />
+              )
             }
           />
           <Route path={"/signup"} component={SignUpModal} />
