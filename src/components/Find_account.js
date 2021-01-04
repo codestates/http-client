@@ -138,7 +138,7 @@ class FindAccount extends React.Component {
       })
     }
     else {
-      axios.post("http://54.180.79.137:8000/searchinfo/password", userPwInfo)
+      axios.post("https://api.get-todo.com/searchinfo/password", userPwInfo)
         .then(response => {
           this.props.history.push({
             pathname: "/userpw",
