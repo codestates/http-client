@@ -51,7 +51,7 @@ class SignUpModal extends React.Component {
       message: duplicatedIdMsg
     }
 
-    axios.post("http://54.180.79.137:8000/searchinfo/email", userInfo.email)
+    axios.post("https://api.get-todo.com/searchinfo/email", userInfo.email)
       .then(response => {
         // console.log('중복이메일?', response)
         this.setState({
@@ -113,7 +113,7 @@ class SignUpModal extends React.Component {
     //   this.notFormedMobileNum();  //! 코드 순서 때문에 알고리즘 무용지물. 백앤드분들께 -- 규칙 적용해달라 요청하기.
     // }
 
-    axios.post('http://54.180.79.137:8000/signup', NewUserInformation)
+    axios.post('https://api.get-todo.com/signup', NewUserInformation)
       .then(response => {
         console.log('res', response)
         this.props.history.push("/")
