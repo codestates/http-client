@@ -43,7 +43,7 @@ class Remove extends React.Component {
       password: this.state.password
     };
 
-    axios.post("http://54.180.79.137:8000/remove", InputPw)
+    axios.post("https://api.get-todo.com/remove", InputPw)
       .then(response => {
         console.log(response)
       })
