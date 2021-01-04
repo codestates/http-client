@@ -36,15 +36,21 @@ class App extends React.Component {
   }
   // 세션 저장소에 저장된 id를 불러와 req하자.
   handleResponseSuccess = () => {
-    axios
-      // .post("http://54.180.79.137:8000/main2", {
-      // headers: { authorization: JSON.parse(window.sessionStorage.id) },
-      // headers: { id: window.sessionStorage.id },
-      // })
-      // console.
-      .get("https://api.get-todo.com/getMain", {
-        id: window.sessionStorage.getItem("id"),
-      })
+    // axios
+    // .get("https://api.get-todo.com/getMain", {
+    //   id: window.sessionStorage.getItem("id"),
+    // })
+    axios({
+      method: "GET",
+      url: "https://api.get-todo.com/getMain",
+      headers: {
+        "Content-Type": "application/json",
+        // accept: "application/json",
+        // Cookie: window.sessionStorage.getItem("id"),
+        withCreadentials: true,
+        credentials: "include",
+      },
+    })
       .then((res) => {
         console.log("메인2 성공", res.data);
         this.setState({ todos: res.data });
