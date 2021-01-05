@@ -1,7 +1,6 @@
 import React from "react";
 import { HashRouter, Route } from "react-router-dom";
 import axios from "axios";
-
 // Components
 import Nav from "./components/Nav";
 import Welcome from "./components/Welcome";
@@ -14,15 +13,13 @@ import Edit from "./components/Edit";
 import Remove from "./components/Remove";
 import RemoveUserCompleted from "./components/Remove_completed";
 import Footer from "./components/Footer";
-import ImportantTodo from "./components/Todo/ImportantTodo";
-
 // Routes
 import MyPage from "./routes/MyPage";
 import ToDo from "./routes/ToDo";
-
+import Completed from "./routes/Completed";
+import Important from "./routes/Important";
 // CSS
 import "./App.css";
-import { useStore } from "react-redux";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -35,28 +32,25 @@ class App extends React.Component {
       mobile: null,
       errorMessage: "",
       todos: [],
-
-      // 테스트를 위해 강제로 로그인을 적용했던 내용들입니다
-      // isLogin: true,
-      // userId: 1,
-      // email: "user1@gmail.com",
-      // password: "123",
-      // name: "User1",
-      // mobile: "010-1234-1234",
     };
   }
-
   // 세션 저장소에 저장된 id를 불러와 req하자.
   handleResponseSuccess = () => {
-    axios
-      // .post("http://54.180.79.137:8000/main2", {
-      // headers: { authorization: JSON.parse(window.sessionStorage.id) },
-      // headers: { id: window.sessionStorage.id },
-      // })
-      // console.
-      .get("https://api.get-todo.com/getMain", {
-        id: window.sessionStorage.getItem("userId"),
-      })
+    // axios
+    // .get("https://api.get-todo.com/getMain", {
+    //   id: window.sessionStorage.getItem("id"),
+    // })
+    axios({
+      method: "GET",
+      url: "https://api.get-todo.com/getMain",
+      headers: {
+        "Content-Type": "application/json",
+        // accept: "application/json",
+        // Cookie: window.sessionStorage.getItem("id"),
+        withCreadentials: true,
+        credentials: "include",
+      },
+    })
       .then((res) => {
         console.log("메인2 성공", res.data);
         this.setState({ todos: res.data });
@@ -67,11 +61,10 @@ class App extends React.Component {
     this.setState({
       isLogin: true,
       email: window.sessionStorage.getItem("email"),
-      userId: window.sessionStorage.getItem("userId"),
+      userId: window.sessionStorage.getItem("id"),
       name: window.sessionStorage.getItem("name"),
     });
   };
-
   //로그아웃
   // 서버연동시 아래 코드 주석 해제하기
   handleSignOut = () => {
@@ -103,7 +96,6 @@ class App extends React.Component {
       });
     this.doSignOut();
   };
-
   // Edit 컴포넌트의 결과를 끌어올린다.
   adoptModifiedInfo = (data) => {
     if (data.email !== "") this.setState({ email: data.email });
@@ -111,7 +103,10 @@ class App extends React.Component {
     if (data.name !== "") this.setState({ name: data.name });
     if (data.mobile !== "") this.setState({ mobile: data.mobile });
   };
-
+  // ToDo 컴포넌트의 결과를 끌어올린다.
+  adoptRecentTodo = (data) => {
+    this.setState({ todos: data });
+  };
   componentDidMount() {
     const userEmail = window.sessionStorage.getItem("email");
     const userId = window.sessionStorage.getItem("userId");
@@ -124,14 +119,11 @@ class App extends React.Component {
     this.adoptRecentTodo;
     console.log("메인2 변경감지", this.state);
   }
-
   doSignOut = () => {
     window.sessionStorage.clear();
   };
-
   render() {
     console.log("App state 변경값", this.state);
-
     const {
       isLogin,
       userId,
@@ -141,7 +133,6 @@ class App extends React.Component {
       mobile,
       todos,
     } = this.state;
-
     return (
       <HashRouter>
         <div className="menu">
@@ -156,7 +147,13 @@ class App extends React.Component {
             exact={true}
             render={() =>
               isLogin ? ( // 새로고침해도 로그인 상태를 유지시키기 위해 localstorage에 저장된 정보를 사용한다. local storage는 사용자가 지우지 않는 이상 영구적으로 계속 브라우저에 남아있음 (단, session storage는 브라우저가 닫은 겨우 사라지고, 브라우저 내에서 탬을 생성하는 경우에도 별도의 영역으로 할당됨.)
-                <ToDo userId={userId} todos={todos} />
+                <ToDo
+                  userId={userId}
+                  email={email}
+                  name={name}
+                  todos={todos}
+                  adoptRecentTodo={this.adoptRecentTodo}
+                />
               ) : (
                 // <MyPage />
                 <SignInModal
@@ -165,10 +162,10 @@ class App extends React.Component {
               )
             }
           />
-          {/* <Route path={"/todo"} component={ToDo} /> */}
+          <Route path={"/todo"} component={ToDo} />
           <Route
             path={"/mypage"}
-            component={() =>
+            render={() =>
               isLogin ? (
                 <MyPage
                   id={userId}
@@ -185,8 +182,18 @@ class App extends React.Component {
             }
           />
           <Route
+            path={"/completed"}
+            render={() =>
+              isLogin ? (
+                <Completed email={email} todos={todos} /> // A$AP funckin' added on
+              ) : (
+                <Completed />
+              )
+            }
+          />
+          <Route
             path={"/important"}
-            component={() =>
+            render={() =>
               isLogin ? (
                 <ImportantTodo
                   todos={() => {
@@ -200,7 +207,6 @@ class App extends React.Component {
               )
             }
           />
-
           <Route path={"/signup"} component={SignUpModal} />
           <Route path={"/findaccount"} component={FindAccount} />
           <Route path={"/useremail"} component={CompletedFindEmail} />

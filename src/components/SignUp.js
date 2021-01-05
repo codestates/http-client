@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
+//fakedate
+import user from "../test_data_user.json";
+
 class SignUpModal extends React.Component {
   state = {
     name: "",
@@ -49,15 +52,15 @@ class SignUpModal extends React.Component {
     axios
       .post("https://api.get-todo.com/searchinfo/overlapEmail", userInfo)
       .then((response) => {
-        // console.log('중복이메일?', response)
+        console.log("중복이메일?", response);
         // this.setState({
-        //   duplicatedIdMsg: response,
-        // });
+        //   duplicatedIdMsg: response
+        // })
       })
       .catch((error) => {
-        this.setState({
-          duplicatedIdMsg: error,
-        });
+        // this.setState({
+        //   duplicatedIdMsg: error.response.data
+        // })
       });
 
     /* fakeData 사용 코드

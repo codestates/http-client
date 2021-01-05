@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../image/logo.png";
-
+import user from "../test_data_user.json";
 import axios from "axios";
 class SignInModal extends React.Component {
   constructor(props) {
