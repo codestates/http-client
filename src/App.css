@@ -126,9 +126,9 @@
 
 /* 사진크기 자동 조절 */
 #sign_in_img {
-  display: block;
+  /* display: block; */
   width: inherit;
-  max-width: 100%;
+  max-width: 60%;
   height: auto;
 }
 /* .container1 img{

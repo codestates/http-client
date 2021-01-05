@@ -61,6 +61,11 @@ class SignUpModal extends React.Component {
         // this.setState({
         //   duplicatedIdMsg: error.response.data
         // })
+      })
+      .catch((error) => {
+        // this.setState({
+        //   duplicatedIdMsg: error.response.data
+        // })
       });
 
     /* fakeData 사용 코드
