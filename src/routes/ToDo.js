@@ -1,205 +1,163 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import axios from "axios";
+import Axios from "axios";
+
 // components
-import List from "../components/List";
-import NewToDo from "../components/NewToDo";
-import EditTodo from "../components/EditTodo";
-import Button from "../components/Button";
+import TodoTemplate from "../components/Todo/TodoTemplate";
+import TodoList from "../components/Todo/TodoList";
+import TodoInsert from "../components/Todo/TodoInsert";
+
+// 리덕스 사용
+import { useDispatch } from "react-redux";
+import {
+  makeTodo,
+  clickImportant,
+  clickComplete,
+  // editTodo,
+  // deleteTodo,
+} from "../_actions/todo_action";
+
+// moment.js 사용
+import Moment from "react-moment";
 import "./ToDo.css";
-/*****************************************************************
-                            리액트 훅 명세표
-(1) useState
- - 일정들을 "todos"로 정의(class 컴포넌트의 this.state에 대응됨)
- - todos는 [ {todo1}, {todo2}, {todo3}, ... ] 의 모습임
- - 즉, todos에는 이미 각 todo들의
-   { userId, todoId, content, startDate, important, complete }
-   이 담겨있음
-(2) useCallback
- - 일정입력 이벤트에 쓰일 "onChange 메소드"를 정의하여 "재사용"할 수 있게 함
- - 이때 "재사용"이란 의미는 render 여부와 관계없이 컴포넌트에 유지함을 의미
- - 일반적으로 useCallback로 감싼 메소드는 컴포넌트의 render 대상에서 제외되므로
-   이는 컴포넌트의 성능 향상에 도움됨
-(3) useRef
- - "todoId"와 같이 화면에 보여줄 필요도 없고 render로 관리할 필요도 없는 경우,
-   즉, 다른 컴포넌트에서 참조(reference) 목적으로만 필요한 경우 사용
-******************************************************************/
 
-const ToDo = ({ userId, todos, adoptRecentTodo }) => {
-  // 0. todo state
-  const [todoList, setTodoList] = useState(todos);
-  const [loading, setLoading] = useState(false);
-  const [err, setErr] = useState("");
+const ToDo = (props) => {
+  // 리덕스 dispatch 기능정의
+  const dispatch = useDispatch();
+  const [todos, setTodos] = useState([]);
 
-  // 1-1. 렌더링 후 정보 로드
   useEffect(() => {
-    const fetchData = async () => {
-      setErr("");
-      setLoading(true);
-      try {
-        const res = await axios.get("https://api.get-todo.com/getMain", {
-          // id: userId,
-        });
-        // await axios({
-        //   method: "GET",
-        //   url: "https://api.get-todo.com/getMain",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //     // accept: "application/json",
-        //     // Cookie: window.sessionStorage.getItem("id"),
-        //     withCreadentials: true,
-        //     credentials: "include",
-        //   },
-        // })
-        setTodoList(res.data);
-        setLoading(false);
-        return; // clean-up
-      } catch (err) {
-        setErr(err);
-      }
-    };
-    fetchData();
-    console.log(
-      `[작성된 ToDo의 ID] ${todoList.map((todo) => {
-        return todo.todoId;
-      })}`
+    Axios.get("https://api.get-todo.com/getMain", props.userId).then((res) =>
+      setTodos(res.data)
     );
-  }, [todoList]);
+  }, []);
 
-  // // 2. todoId를 메소드와 자식 컴포넌트들에 고유변수로 사용할 것임을 선언
-  const listLength = Math.max(
-    todoList.map((todo) => {
-      return todo.todoId;
-    })
-  );
-  const nexttodoId = useRef(listLength);
+  // 고유값으로 사용될 id.. 하지만 이것은 컴포넌트 렌더링에 영향을 미쳐선 안된다. 따라서 ref를 이용하여 컴포넌트 바깥에서 다룬다
+  // const nextId = useRef(todos.length + 1);
 
-  // 3. 새 일정 입력 메소드
-  const onInsert = useCallback(
-    async (newTodo) => {
-      const todo = {
-        userId: newTodo.userId,
-        todoId: nexttodoId.current,
-        content: newTodo.content,
-        startDate: newTodo.startDate,
-        complete: false,
-        important: false,
-        deleteId: false,
-      };
-      // 컴포넌트 내 일정 목록 최신화(re-rendering)
-      setTodoList((todoList) => todoList.concat(todo));
-      nexttodoId.current += 1;
-    },
-    [todoList]
-  );
+  // 일정 추가
+  const onInsert = useCallback((content, startDate) => {
+    let body = {
+      id: props.userId,
+      // todoId: nextId.current,
+      content: content,
+      startDate: startDate,
+      important: false,
+    };
 
-  // 4. 삭제 클릭 메소드
-  const onRemove = useCallback(
-    (todoId) => {
-      setTodoList((todoList) =>
-        todoList.filter((todo) => todo.todoId !== todoId)
-      );
-    },
-    [todoList]
-  );
+    dispatch(makeTodo(body)).then((res) => {
+      if (res.payload.newTodo) {
+        alert("새 Todo 저장 성공! :)");
+        window.location.replace("/");
+      } else {
+        alert("일정등록 실패");
+        window.location.replace("/");
+      }
+    });
 
-  // 5. 중요 클릭 메소드
-  const onToggleOfImportant = useCallback(
-    (todoId) => {
-      // 새로운 일정 객체를 만든 후 state에 구현(원본불변)
-      setTodoList((todoList) =>
-        todoList.map((todo) =>
-          todo.todoId === todoId
-            ? { ...todo, important: !todo.important }
-            : todo
-        )
-      );
-      // 서버에 POST
-    },
-    [todoList]
-  );
+    // nextId.current += 1;
+  }, []);
 
-  // 6. 완료 클릭 메소드
-  const onToggleOfComplete = useCallback(
-    (todoId) => {
-      // 클릭된 일정의 todoId의 important 값을 반대 boolean 값으로 변경하여 state에 구현
-      setTodoList(
-        todoList.map((todo) =>
-          todo.todoId === todoId ? { ...todo, complete: !todo.complete } : todo
-        )
-      );
-      // 서버에 POST
-    },
-    [todoList]
-  );
+  // 중요 토글
+  const onToggleOfImportant = useCallback((todoId) => {
+    let body = {
+      id: props.userId,
+      todoId: todoId,
+    };
 
-  // 7. 수정 클릭 메소드
-  const onToggleOfEdit = useCallback(
-    (todoId) => {
-      // 클릭된 일정의 todoId의 important 값을 반대 boolean 값으로 변경하여 state에 구현
-      setTodoList(
-        todoList.map((todo) =>
-          todo.todoId === todoId ? { ...todo, isEdit: true } : todo
-        )
-      );
-      editContent();
-    },
-    [todoList]
-  );
+    dispatch(clickImportant(body)).then((res) => {
+      if (res.payload.isImportant) {
+        alert("일정에 중요표시 했어요! :)");
+        window.location.replace("/");
+      } else {
+        alert("중요표시 실패");
+        window.location.replace("/");
+      }
+    });
+  }, []);
 
-  // 8. 글 수정
-  const editContent = useCallback(
-    (edited) => {
-      setTodoList(
-        todoList.map((todo) =>
-          todo.edited ? { ...todo, content: edited } : todo
-        )
-      );
-    },
-    [todoList]
-  );
+  // 완료 토글
+  const onToggleOfComplete = useCallback((todoId) => {
+    let body = {
+      id: props.userId,
+      todoId: todoId,
+    };
 
-  // 9. 최종 적용
-  const onAdopt = async () => {
-    adoptRecentTodo(todoList);
-    // 서버에 POST
-    // const res = await axios.post("http://54.180.79.137:8000/main2", {
-    //   userId: todoList.userId,
-    // });
+    dispatch(clickComplete(body)).then((res) => {
+      if (res.payload.isComplete) {
+        alert("일정을 완료했어요! :)");
+        window.location.replace("/");
+      } else {
+        alert("완료체크 실패");
+        window.location.replace("/");
+      }
+    });
+  }, []);
 
-    await axios({
-      method: "GET",
-      url: "https://api.get-todo.com/getMain",
-      headers: {
-        "Content-Type": "application/json",
-        // accept: "application/json",
-        // Cookie: window.sessionStorage.getItem("id"),
-        withCreadentials: true,
-        credentials: "include",
-      },
-    })
+  // 일정 내용 수정
+  // const editContent = useCallback((todoId) => {
+  //   let body = {
+  //     userId: props.userId,
+  //     todoId: todoId,
+  //     content: ???
+  //   };
 
+  //   dispatch(
+  //     editTodo(body)).then((res) => {
+  //       if (res.payload.fixedTodo) {
+  //         alert("일정을 수정했어요! :)");
+  //         window.location.replace("/");
+  //       }
+  //       else {
+  //         alert("일정 수정 실패")
+  //         window.location.replace("/");
+  //       }
+  //     })
+  // }, []);
 
-  };
+  // 일정 삭제
+  const onRemove = useCallback((todoId) => {
+    alert("삭제했어요(테스트 Alert)");
+    // let body = {
+    //   id: props.userId,
+    //   todoId: todoId,
+    // };
 
-  // 10. 컴포넌트 렌더링
+    // dispatch(
+    //   deleteTodo(body)).then((res) => {
+    //     if (res.payload.isDelete) {
+    //       alert("일정을 삭제했어요! :)");
+    //       window.location.replace("/");
+    //     }
+    //     else {
+    //       alert("삭제 실패")
+    //       window.location.replace("/");
+    //     }
+    //   })
+  }, []);
+
   return (
-    <>
-      {/* 일정입력 컴포넌트 */}
-      <NewToDo onInsert={onInsert} />
-      <section className="container-list">
-        <div className="todo">
-          <List
-            todoList={todoList}
-            onRemove={onRemove}
-            onToggleOfImportant={onToggleOfImportant}
-            onToggleOfComplete={onToggleOfComplete}
-            onToggleOfEdit={onToggleOfEdit}
-          />
-        </div>
-      </section>
-      <Button onClick={() => onAdopt}>정보반영</Button>
-    </>
+    <TodoTemplate>
+      <TodoInsert onInsert={onInsert} />
+      <Moment
+        format="MMM, YYYY"
+        style={{
+          color: `lightcoral`,
+          fontSize: `1.2rem`,
+          fontWeight: `800`,
+          opacity: `0.4`,
+        }}
+      >
+        {todos.forEach((todo) => todo.startDate)}
+      </Moment>
+      <TodoList
+        todos={todos}
+        onToggleOfImportant={onToggleOfImportant}
+        onToggleOfComplete={onToggleOfComplete}
+        onRemove={onRemove}
+        // onToggleOfEdit={onToggleOfEdit}
+      />
+    </TodoTemplate>
   );
 };
-// 컴포넌트의 props가 바뀌지 않았다면 re-rendering 방지(= shouldComponentUpdate와 동일)
-export default ToDo;
+
+export default React.memo(ToDo);

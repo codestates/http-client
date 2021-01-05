@@ -155,11 +155,11 @@ class App extends React.Component {
                   adoptRecentTodo={this.adoptRecentTodo}
                 />
               ) : (
-                  // <MyPage />
-                  <SignInModal
-                    handleResponseSuccess={this.handleResponseSuccess.bind(this)}
-                  />
-                )
+                // <MyPage />
+                <SignInModal
+                  handleResponseSuccess={this.handleResponseSuccess.bind(this)}
+                />
+              )
             }
           />
           <Route path={"/todo"} component={ToDo} />
@@ -177,8 +177,8 @@ class App extends React.Component {
                   signOut={this.handleSignOut}
                 />
               ) : (
-                  <MyPage />
-                )
+                <MyPage />
+              )
             }
           />
           <Route
@@ -187,18 +187,24 @@ class App extends React.Component {
               isLogin ? (
                 <Completed email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                  <Completed />
-                )
+                <Completed />
+              )
             }
           />
           <Route
             path={"/important"}
             render={() =>
               isLogin ? (
-                <Important email={email} todos={todos} /> // A$AP funckin' added on
+                <ImportantTodo
+                  todos={() => {
+                    axios
+                      .get("https://api.get-todo.com/important", userId)
+                      .then((res) => res.data);
+                  }}
+                />
               ) : (
-                  <Important />
-                )
+                <ImportantTodo />
+              )
             }
           />
           <Route path={"/signup"} component={SignUpModal} />

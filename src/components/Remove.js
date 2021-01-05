@@ -6,14 +6,11 @@ import { NavLink } from "react-router-dom";
 import user from "../test_data_user.json";
 
 class Remove extends React.Component {
-
   state = {
     isModalOpen: true,
     password: "",
     errorMessage: "",
   };
-
-
 
   /*  모달 닫기 : isModalOpen이 true면 모달창이 떠있도록 셋팅 후 삼항연산자로 아래 렌더부분을 모두 감싸고, 
       아래 closemodal이벤트로 isModaalOpen의 상태를 false로 변경시켜주어 모달을 끄게 하자. 
@@ -21,10 +18,9 @@ class Remove extends React.Component {
       */
   closeModal = () => {
     this.setState({
-      isModalOpen: false
+      isModalOpen: false,
     });
-    this.props.history.push("/mypage")
-
+    this.props.history.push("/mypage");
   };
 
   handleInPutValue = (key) => (text) => {
@@ -36,18 +32,15 @@ class Remove extends React.Component {
     });
   };
 
-
   // 유저 정보를 삭제하는 기능 이벤트
   handleClickRemoveUserInfo = () => {
     const InputPw = {
-      password: this.state.password
+      password: this.state.password,
     };
 
-    axios.post("https://api.get-todo.com/remove", InputPw)
-      .then(response => {
-        console.log(response)
-      })
-
+    axios.post("https://api.get-todo.com/remove", InputPw).then((response) => {
+      console.log(response);
+    });
 
     /* fake data
 
@@ -68,7 +61,7 @@ class Remove extends React.Component {
         pathname: "/remove_user_completed"
       })
     } */
-  }
+  };
 
   //   //! 해당 신규 유저의 정보를 서버로 post 요청을 한 후(DB추가 등),  res로 응답코드를 받든 뭐든 받으면 로그인 페이지로 리다이렉트
   //   //* 서버 통신시 아래 코드를 테스트해보고 사용하기
@@ -85,17 +78,15 @@ class Remove extends React.Component {
   //       } */
   // };
 
-
   render() {
     // console.log('user', user)
     // console.log('사인아웃 props', this.props)
     // console.log("signout", this.props.history)
     return (
       <>
-        {this.state.isModalOpen === true ?
-
+        {this.state.isModalOpen === true ? (
           <div className="modal">
-            <div className="modal_overlay" onClick={this.closeModal} ></div>
+            <div className="modal_overlay" onClick={this.closeModal}></div>
             <div className="modal_content">
               <h1>진짜 탈퇴하게유...?</h1>
 
@@ -114,7 +105,6 @@ class Remove extends React.Component {
                         onChange={this.handleInPutValue("password")}
                       ></input>
                     </div>
-
                   </div>
                   <div>
                     <div>{this.state.errorMessage}</div>
@@ -124,14 +114,13 @@ class Remove extends React.Component {
                       onClick={this.handleClickRemoveUserInfo}
                     >
                       계정 삭제
-                </button>
-
+                    </button>
                   </div>
                 </form>
               </div>
             </div>
           </div>
-          : null}
+        ) : null}
       </>
     );
   }
