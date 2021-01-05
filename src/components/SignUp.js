@@ -1,11 +1,6 @@
-import React from 'react'
-import axios from 'axios'
-import { NavLink } from 'react-router-dom'
-
-
-
-//fakedate
-import user from "../test_data_user.json";
+import React from "react";
+import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 class SignUpModal extends React.Component {
   state = {
@@ -48,21 +43,22 @@ class SignUpModal extends React.Component {
     const { email, duplicatedIdMsg } = this.state;
     const userInfo = {
       email: email,
-      message: duplicatedIdMsg
-    }
+      message: duplicatedIdMsg,
+    };
 
-    axios.post("http://54.180.79.137:8000/searchinfo/email", userInfo.email)
-      .then(response => {
+    axios
+      .post("https://api.get-todo.com/searchinfo/overlapEmail", userInfo)
+      .then((response) => {
         // console.log('중복이메일?', response)
-        this.setState({
-          duplicatedIdMsg: response
-        })
+        // this.setState({
+        //   duplicatedIdMsg: response,
+        // });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
-          duplicatedIdMsg: error
-        })
-      })
+          duplicatedIdMsg: error,
+        });
+      });
 
     /* fakeData 사용 코드
     for (let i = 0; i < user.length; i++) {
@@ -78,20 +74,19 @@ class SignUpModal extends React.Component {
       }
     }
     return alert("사용이 가능한 e-mail입니다.");*/
-  }
-
+  };
 
   handleInPutValue = (key) => (text) => {
-    console.log('잘 입력되나?')
+    console.log("잘 입력되나?");
     // console.log('k', key)
     // console.log('t', text)
     this.setState({
-      [key]: text.target.value
+      [key]: text.target.value,
     });
-    console.log(text)
-  }
+    console.log(text);
+  };
 
-  // 회원가입한 새로운 유저 정보를 데이터 베이스에 저장한다. 
+  // 회원가입한 새로운 유저 정보를 데이터 베이스에 저장한다.
   // 서버에 회원가입을 요청 후 로그인 페이지로 이동한다.
   handClickAddNewUserInfo = () => {
     const NewUserInformation = {
@@ -100,7 +95,6 @@ class SignUpModal extends React.Component {
       email: this.state.email,
       mobile: this.state.mobile,
     };
-
 
     // 신규 등록 회원 정보를 서버로 전달 서버 -> DB -> DB 저장 후 해당 정보를 response에 담아서 클라이언트로 재 전송될 것.
 
@@ -113,20 +107,18 @@ class SignUpModal extends React.Component {
     //   this.notFormedMobileNum();  //! 코드 순서 때문에 알고리즘 무용지물. 백앤드분들께 -- 규칙 적용해달라 요청하기.
     // }
 
-    axios.post('http://54.180.79.137:8000/signup', NewUserInformation)
-      .then(response => {
-        console.log('res', response)
-        this.props.history.push("/")
+    axios
+      .post("https://api.get-todo.com/signup", NewUserInformation)
+      .then((response) => {
+        console.log("res", response);
+        this.props.history.push("/");
       })
-      .catch(error => {
-        console.log('err', error.response)
+      .catch((error) => {
+        console.log("err", error.response);
         this.setState({
-          errorMessage: error.response.data
+          errorMessage: error.response.data,
         });
-      })
-
-
-
+      });
 
     /*  fake Data
          if (
@@ -146,8 +138,6 @@ class SignUpModal extends React.Component {
         ) {
           this.notFormedMobileNum();
         } */
-
-
 
     //! 해당 신규 유저의 정보를 서버로 post 요청을 한 후(DB추가 등),  res로 응답코드를 받든 뭐든 받으면 로그인 페이지로 리다이렉트
     //* 서버 통신시 아래 코드를 테스트해보고 사용하기
@@ -192,7 +182,7 @@ class SignUpModal extends React.Component {
                   >
                     중복 확인
                   </button>
-                  <div>{this.state.errorMessageEmail}</div>
+                  <div>{this.state.duplicatedIdMsg}</div>
                 </div>
 
                 <div>

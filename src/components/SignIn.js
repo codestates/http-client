@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import user from "../test_data_user.json";
+import logo from "../image/logo.png";
+
 import axios from "axios";
 class SignInModal extends React.Component {
   constructor(props) {
@@ -34,9 +35,9 @@ class SignInModal extends React.Component {
       });
     } else {
       axios
-        .post("http://54.180.79.137:8000/signin", signInfo)
+        .post("https://api.get-todo.com/signin", signInfo)
         .then((response) => {
-          console.log("뭘받아와?", response)
+          console.log("뭘받아와?", response);
           this.setState({
             id: response.data.id, // 서버에서 생성 및 전달받은 고유 유저id
             email: response.data.email,
@@ -52,38 +53,38 @@ class SignInModal extends React.Component {
         });
     }
     /*     fakedata 용 코드
-        for (let i = 0; i < user.length; i++) {
-          if (!signInfo.email.length || !signInfo.password.length) {
-            this.setState({
-              errorMessage: "e-mail과 PW를 입력하세요.",
-            });
-          }
-          //* 입력이 된 값으로 서버에 로그인 요청을 하고, props로 전달된 callback을 호출
-          // else {  //! 추후 알맞게 수정하기, 우선은 fackdata로
-          //     axios.post('http://localhost:8000/', signInfo)
-          //         .then(res => {
-          //             this.props.handleResponseSuccess()
-          //         })
-          //         .catch(error => {
-          //             this.setState({
-          //                 errorMessage: 'e-mail 혹은 PW가 일치하지 않습니다.'
-          //             })
-          //         })
-          // }
-          else {
-            if (
-              user[i].email === this.state.email &&
-              user[i].password === this.state.password
-            ) {
-              // this.doSignIn();
-              this.doSignIn();
-            } else
-              this.setState({
-                errorMessage: "e-mail 혹은 PW가 일치하지 않습니다.",
-              });
-          }
-          // console.log(user)
-        } */
+            for (let i = 0; i < user.length; i++) {
+              if (!signInfo.email.length || !signInfo.password.length) {
+                this.setState({
+                  errorMessage: "e-mail과 PW를 입력하세요.",
+                });
+              }
+              //* 입력이 된 값으로 서버에 로그인 요청을 하고, props로 전달된 callback을 호출
+              // else {  //! 추후 알맞게 수정하기, 우선은 fackdata로
+              //     axios.post('http://localhost:8000/', signInfo)
+              //         .then(res => {
+              //             this.props.handleResponseSuccess()
+              //         })
+              //         .catch(error => {
+              //             this.setState({
+              //                 errorMessage: 'e-mail 혹은 PW가 일치하지 않습니다.'
+              //             })
+              //         })
+              // }
+              else {
+                if (
+                  user[i].email === this.state.email &&
+                  user[i].password === this.state.password
+                ) {
+                  // this.doSignIn();
+                  this.doSignIn();
+                } else
+                  this.setState({
+                    errorMessage: "e-mail 혹은 PW가 일치하지 않습니다.",
+                  });
+              }
+              // console.log(user)
+            } */
   };
   //! session storage에 저장하여 로그인을 유지시킨다.
   doSignIn = () => {
@@ -109,7 +110,8 @@ class SignInModal extends React.Component {
             </div>
             <img
               id="sign_in_img"
-              src="https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D"
+              //   src="https://t1.daumcdn.net/cfile/tistory/992C413B5D2ACF7C1D"
+              src={logo}
             ></img>
             {/*-------------- e-mail pw 입력칸 ----------------- */}
             <form onSubmit={(e) => e.preventDefault()}>

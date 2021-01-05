@@ -2,9 +2,6 @@ import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 
-//Fake Data
-import user from "../test_data_user.json";
-
 class FindAccount extends React.Component {
   constructor(props) {
     super(props);
@@ -73,27 +70,27 @@ class FindAccount extends React.Component {
     const { email, name, mobile } = this.state;
     const userIdInfo = {
       name: name,
-      mobile: mobile
+      mobile: mobile,
     };
 
     if (!userIdInfo.name.length || !userIdInfo.mobile.length) {
       this.setState({
-        errorMessageEmail: "모든 항목을 입력하세요."
-      })
-    }
-    else {
-      axios.post("http://54.180.79.137:8000/searchinfo/email", userIdInfo)
-        .then(response => {
+        errorMessageEmail: "모든 항목을 입력하세요.",
+      });
+    } else {
+      axios
+        .post("https://api.get-todo.com/searchinfo/email", userIdInfo)
+        .then((response) => {
           this.props.history.push({
             pathname: "/useremail",
-            state: response.data     // CompletedFindEmail에 props로 입력 값 넘겨주기
-          })
+            state: response.data, // CompletedFindEmail에 props로 입력 값 넘겨주기
+          });
         })
-        .catch(error => {
+        .catch((error) => {
           this.setState({
-            errorMessageEmail: error.response.data
-          })
-        })
+            errorMessageEmail: error.response.data,
+          });
+        });
     }
 
     /*     fakedata 용 코드
@@ -129,30 +126,33 @@ class FindAccount extends React.Component {
     const userPwInfo = {
       email: email,
       name: name,
-      mobile: mobile
+      mobile: mobile,
     };
 
-    if (!userPwInfo.email.length || !userPwInfo.name.length || !userPwInfo.mobile.length) {
+    if (
+      !userPwInfo.email.length ||
+      !userPwInfo.name.length ||
+      !userPwInfo.mobile.length
+    ) {
       this.setState({
-        errorMessagePw: "모든 항목을 입력하세요."
-      })
-    }
-    else {
-      axios.post("http://54.180.79.137:8000/searchinfo/password", userPwInfo)
-        .then(response => {
+        errorMessagePw: "모든 항목을 입력하세요.",
+      });
+    } else {
+      axios
+        .post("https://api.get-todo.com/searchinfo/password", userPwInfo)
+        .then((response) => {
           this.props.history.push({
             pathname: "/userpw",
-            state: response.data
-          })
+            state: response.data,
+          });
         })
-        .catch(error => {
-          console.log(error.response)
+        .catch((error) => {
+          console.log(error.response);
           this.setState({
-            errorMessagePw: error.response.data
-          })
-        })
+            errorMessagePw: error.response.data,
+          });
+        });
     }
-
 
     /*     fakedata 용 코드
        for (let i = 0; i < user.length; i++) {
@@ -263,9 +263,8 @@ class FindAccount extends React.Component {
               {/* </NavLink> */}
             </form>
 
-
-            <NavLink to='' className='signUp_link'>
-              <button className='signUp_btn'>로그인 페이지로 돌아가기</button>
+            <NavLink to="" className="signUp_link">
+              <button className="signUp_btn">로그인 페이지로 돌아가기</button>
             </NavLink>
 
             <NavLink to="/signup" className="signUp_link">
