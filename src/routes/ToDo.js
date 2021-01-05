@@ -36,20 +36,20 @@ const ToDo = ({ userId, todos, adoptRecentTodo }) => {
       setErr("");
       setLoading(true);
       try {
-        // const res = await axios.post("http://54.180.79.137:8000/main2", {
-        //   id: userId,
-        // });
-        await axios({
-          method: "GET",
-          url: "https://api.get-todo.com/getMain",
-          headers: {
-            "Content-Type": "application/json",
-            // accept: "application/json",
-            // Cookie: window.sessionStorage.getItem("id"),
-            withCreadentials: true,
-            credentials: "include",
-          },
-        })
+        const res = await axios.get("https://api.get-todo.com/getMain", {
+          // id: userId,
+        });
+        // await axios({
+        //   method: "GET",
+        //   url: "https://api.get-todo.com/getMain",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //     // accept: "application/json",
+        //     // Cookie: window.sessionStorage.getItem("id"),
+        //     withCreadentials: true,
+        //     credentials: "include",
+        //   },
+        // })
         setTodoList(res.data);
         setLoading(false);
         return; // clean-up

@@ -51,17 +51,17 @@ class SignUpModal extends React.Component {
       message: duplicatedIdMsg
     }
 
-    axios.post("https://api.get-todo.com/searchinfo/email", userInfo.email)
+    axios.post("https://api.get-todo.com/searchinfo/overlapEmail", userInfo)
       .then(response => {
-        // console.log('중복이메일?', response)
-        this.setState({
-          duplicatedIdMsg: response
-        })
+        console.log('중복이메일?', response)
+        // this.setState({
+        //   duplicatedIdMsg: response
+        // })
       })
       .catch(error => {
-        this.setState({
-          duplicatedIdMsg: error
-        })
+        // this.setState({
+        //   duplicatedIdMsg: error.response.data
+        // })
       })
 
     /* fakeData 사용 코드
@@ -192,7 +192,7 @@ class SignUpModal extends React.Component {
                   >
                     중복 확인
                   </button>
-                  <div>{this.state.errorMessageEmail}</div>
+                  <div>{this.state.duplicatedIdMsg}</div>
                 </div>
 
                 <div>
