@@ -36,15 +36,21 @@ class App extends React.Component {
   }
   // 세션 저장소에 저장된 id를 불러와 req하자.
   handleResponseSuccess = () => {
-    axios
-      // .post("http://54.180.79.137:8000/main2", {
-      // headers: { authorization: JSON.parse(window.sessionStorage.id) },
-      // headers: { id: window.sessionStorage.id },
-      // })
-      // console.
-      .post("http://54.180.79.137:8000/main2", {
-        id: window.sessionStorage.getItem("id"),
-      })
+    // axios
+    // .get("https://api.get-todo.com/getMain", {
+    //   id: window.sessionStorage.getItem("id"),
+    // })
+    axios({
+      method: "GET",
+      url: "https://api.get-todo.com/getMain",
+      headers: {
+        "Content-Type": "application/json",
+        // accept: "application/json",
+        // Cookie: window.sessionStorage.getItem("id"),
+        withCreadentials: true,
+        credentials: "include",
+      },
+    })
       .then((res) => {
         console.log("메인2 성공", res.data);
         this.setState({ todos: res.data });
@@ -63,8 +69,8 @@ class App extends React.Component {
   // 서버연동시 아래 코드 주석 해제하기
   handleSignOut = () => {
     axios({
-      method: "POST",
-      url: "http://54.180.79.137:8000/signout",
+      method: "GET",
+      url: "https://api.get-todo.com/signout",
       headers: {
         "Content-Type": "application/json",
         // accept: "application/json",
@@ -86,7 +92,7 @@ class App extends React.Component {
       })
       .catch((error) => {
         console.log(error.response);
-        alert(" 못 나 가 ! ");
+        alert("로그아웃에 실패하였습니다.");
       });
     this.doSignOut();
   };
@@ -107,7 +113,8 @@ class App extends React.Component {
     if (userEmail) {
       this.handleResponseSuccess();
     } else {
-      this.handleSignOut();
+      // this.handleSignOut();
+      window.sessionStorage.clear();
     }
     this.adoptRecentTodo;
     console.log("메인2 변경감지", this.state);
@@ -148,11 +155,11 @@ class App extends React.Component {
                   adoptRecentTodo={this.adoptRecentTodo}
                 />
               ) : (
-                // <MyPage />
-                <SignInModal
-                  handleResponseSuccess={this.handleResponseSuccess.bind(this)}
-                />
-              )
+                  // <MyPage />
+                  <SignInModal
+                    handleResponseSuccess={this.handleResponseSuccess.bind(this)}
+                  />
+                )
             }
           />
           <Route path={"/todo"} component={ToDo} />
@@ -170,8 +177,8 @@ class App extends React.Component {
                   signOut={this.handleSignOut}
                 />
               ) : (
-                <MyPage />
-              )
+                  <MyPage />
+                )
             }
           />
           <Route
@@ -180,8 +187,8 @@ class App extends React.Component {
               isLogin ? (
                 <Completed email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                <Completed />
-              )
+                  <Completed />
+                )
             }
           />
           <Route
@@ -190,8 +197,8 @@ class App extends React.Component {
               isLogin ? (
                 <Important email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                <Important />
-              )
+                  <Important />
+                )
             }
           />
           <Route path={"/signup"} component={SignUpModal} />
