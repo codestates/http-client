@@ -1,8 +1,3 @@
-/* .menu {
-}
-.screen {
-} */
-
 /* signOut */
 
 .logOut_logIn_btn {
@@ -23,21 +18,27 @@
   font-size: small;
 }
 .menu {
-  position: fixed;
+  position: relative;
   display: block;
   box-sizing: border-box;
   float: left;
-  width: 23%;
+  width: 15rem;
   height: 100vh;
 }
 .screen {
-  position: absolute;
+  position: relative;
   display: block;
-  box-sizing: border-box;
   float: left;
-  width: 70%;
-  margin-top: 40px;
-  margin-left: 230px;
+  margin-top: 1rem;
+  justify-content: left;
+  min-height: 320px;
+  /* max-height: 100vh; */
+  overflow-y: auto;
+}
+@media (max-width: 835px) {
+  .screen {
+    width: 50%;
+  }
 }
 .footer {
   position: absolute;
@@ -231,19 +232,3 @@ input[type="text"] {
   margin-top: 50%;
   /* line-height: 50%; */
 }
-
-/*------------*/
-/* 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */

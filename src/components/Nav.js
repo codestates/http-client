@@ -41,11 +41,6 @@ class Nav extends React.Component {
             마이페이지
           </Link>
         </li>
-        <li className="nav-completed">
-          <Link to={"/completed"} todos={this.props.todos} style={NavLinkStyle}>
-            완료일정
-          </Link>
-        </li>
         <li className="nav-important">
           <Link to={"/important"} todos={this.props.todos} style={NavLinkStyle}>
             중요일정
