@@ -3,7 +3,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 
 //fakedate
-import user from "../test_data_user.json";
+// import user from "../test_data_user.json";
 
 class SignUpModal extends React.Component {
   state = {

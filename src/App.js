@@ -16,8 +16,8 @@ import Footer from "./components/Footer";
 // Routes
 import MyPage from "./routes/MyPage";
 import ToDo from "./routes/ToDo";
-import Completed from "./routes/Completed";
-import Important from "./routes/Important";
+// import Completed from "./routes/Completed";
+// import Important from "./routes/Important";
 // CSS
 import "./App.css";
 class App extends React.Component {
@@ -155,11 +155,11 @@ class App extends React.Component {
                   adoptRecentTodo={this.adoptRecentTodo}
                 />
               ) : (
-                // <MyPage />
-                <SignInModal
-                  handleResponseSuccess={this.handleResponseSuccess.bind(this)}
-                />
-              )
+                  // <MyPage />
+                  <SignInModal
+                    handleResponseSuccess={this.handleResponseSuccess.bind(this)}
+                  />
+                )
             }
           />
           <Route path={"/todo"} component={ToDo} />
@@ -177,8 +177,8 @@ class App extends React.Component {
                   signOut={this.handleSignOut}
                 />
               ) : (
-                <MyPage />
-              )
+                  <MyPage />
+                )
             }
           />
           <Route
@@ -187,8 +187,8 @@ class App extends React.Component {
               isLogin ? (
                 <Completed email={email} todos={todos} /> // A$AP funckin' added on
               ) : (
-                <Completed />
-              )
+                  <Completed />
+                )
             }
           />
           <Route
@@ -203,8 +203,8 @@ class App extends React.Component {
                   }}
                 />
               ) : (
-                <ImportantTodo />
-              )
+                  <ImportantTodo />
+                )
             }
           />
           <Route path={"/signup"} component={SignUpModal} />
