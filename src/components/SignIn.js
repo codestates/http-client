@@ -25,7 +25,7 @@ class SignInModal extends React.Component {
     };
     handleSignIn = () => {
         const signInfo = {
-            id: this.state.id,
+            // id: this.state.id,
             email: this.state.email,
             password: this.state.password,
         };

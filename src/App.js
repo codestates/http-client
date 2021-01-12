@@ -47,7 +47,7 @@ class App extends React.Component {
         "Content-Type": "application/json",
         // accept: "application/json",
         // Cookie: window.sessionStorage.getItem("id"),
-        withCreadentials: true,
+        withCredentials: true,
         credentials: "include",
       },
     })

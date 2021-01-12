@@ -19,17 +19,20 @@ import {
 // moment.js 사용
 import Moment from "react-moment";
 import "./ToDo.css";
+// import axios from "axios";
 
 const ToDo = (props) => {
   // 리덕스 dispatch 기능정의
   const dispatch = useDispatch();
   const [todos, setTodos] = useState([]);
 
-  useEffect(() => {
-    Axios.get("https://api.get-todo.com/getMain", props.userId).then((res) =>
-      setTodos(res.data)
-    );
-  }, []);
+  // useEffect(() => {
+  //   Axios.get("https://api.get-todo.com/getMain", props.userId, {
+  //     withCredentials: true
+  //   }).then((res) =>
+  //     setTodos(res.data)
+  //   );
+  // }, []);
 
   // 고유값으로 사용될 id.. 하지만 이것은 컴포넌트 렌더링에 영향을 미쳐선 안된다. 따라서 ref를 이용하여 컴포넌트 바깥에서 다룬다
   // const nextId = useRef(todos.length + 1);
@@ -154,7 +157,7 @@ const ToDo = (props) => {
         onToggleOfImportant={onToggleOfImportant}
         onToggleOfComplete={onToggleOfComplete}
         onRemove={onRemove}
-        // onToggleOfEdit={onToggleOfEdit}
+      // onToggleOfEdit={onToggleOfEdit}
       />
     </TodoTemplate>
   );
