@@ -36,21 +36,24 @@ class App extends React.Component {
   }
   // 세션 저장소에 저장된 id를 불러와 req하자.
   handleResponseSuccess = () => {
-    // axios
-    // .get("https://api.get-todo.com/getMain", {
-    //   id: window.sessionStorage.getItem("id"),
-    // })
-    axios({
-      method: "GET",
-      url: "https://api.get-todo.com/getMain",
-      headers: {
-        "Content-Type": "application/json",
-        // accept: "application/json",
-        // Cookie: window.sessionStorage.getItem("id"),
-        withCredentials: true,
-        credentials: "include",
-      },
-    })
+    axios
+      .post("https://api.get-todo.com/getMain", {
+        id: window.sessionStorage.getItem("id"),
+      })
+      // axios({
+      //   method: "GET",
+      //   url: "https://api.get-todo.com/getMain",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     // accept: "application/json",
+      //     // Cookie: window.sessionStorage.getItem("id"),
+      //     withCredentials: true,
+      //     credentials: "include",
+      //   },
+      // })
+      // axios.get("https://api.get-todo.com/getMain", {
+      //   withCredentials: true
+      // })
       .then((res) => {
         console.log("메인2 성공", res.data);
         this.setState({ todos: res.data });
@@ -68,32 +71,33 @@ class App extends React.Component {
   //로그아웃
   // 서버연동시 아래 코드 주석 해제하기
   handleSignOut = () => {
-    axios({
-      method: "GET",
-      url: "https://api.get-todo.com/signout",
-      headers: {
-        "Content-Type": "application/json",
-        // accept: "application/json",
-        // Cookie: window.sessionStorage.getItem("id"),
-        withCreadentials: true,
-        credentials: "include",
-      },
+    // axios({
+    //   method: "GET",
+    //   url: "https://api.get-todo.com/signout",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     // accept: "application/json",
+    //     // Cookie: window.sessionStorage.getItem("id"),
+    //     withCredentials: true,
+    //     credentials: "include",
+    //   },
+    // })
+    //   .then((response) => {
+    //     console.log("사인아웃 리스폰스", response);
+    this.setState({
+      isLogin: false,
+      email: null,
+      password: null,
+      name: null,
+      mobile: null,
+      // });
+      // alert(response.data);
     })
-      .then((response) => {
-        console.log("사인아웃 리스폰스", response);
-        this.setState({
-          isLogin: false,
-          email: null,
-          password: null,
-          name: null,
-          mobile: null,
-        });
-        alert(response.data);
-      })
-      .catch((error) => {
-        console.log(error.response);
-        alert("로그아웃에 실패하였습니다.");
-      });
+    alert("로그아웃이 되었습니다.")
+    // .catch((error) => {
+    //   console.log(error.response);
+    //   alert("로그아웃에 실패하였습니다.");
+    // });
     this.doSignOut();
   };
   // Edit 컴포넌트의 결과를 끌어올린다.
