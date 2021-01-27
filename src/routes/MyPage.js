@@ -81,12 +81,12 @@ class MyPage extends React.Component {
                   }}
                   style={{ color: `white`, textDecoration: `none` }}
 
-                  // to={"/remove"}
-                  // style={{ textDecoration: "none", color: "white" }}
-                  // email={email}
-                  // password={password}
-                  // name={name}
-                  // mobile={mobile}
+                // to={"/remove"}
+                // style={{ textDecoration: "none", color: "white" }}
+                // email={email}
+                // password={password}
+                // name={name}
+                // mobile={mobile}
                 >
                   회원탈퇴
                 </Link>
@@ -104,7 +104,7 @@ class MyPage extends React.Component {
         <section>
           <Edit
             to={"/edit"}
-            style={{ textDecoration: "none", color: "black" }}
+            // style={{ textDecoration: "none", color: "black" }}
             makeChange={this.makeChange.bind(this)}
           />
         </section>

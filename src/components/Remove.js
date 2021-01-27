@@ -42,11 +42,15 @@ class Remove extends React.Component {
     };
 
     axios.post("https://api.get-todo.com/remove", InputPw).then((response) => {
-      console.log(response);
+      console.log("asdf", response);
     });
+    this.props.location.signOut()
+    this.props.history.push({
+      pathname: "/remove_user_completed",
+    })
 
     /* fake data
-
+ 
      if (!InputPw.password.length) {
       this.setState({
         errorMessage: "비밀번호를 입력해주세요."
@@ -80,6 +84,8 @@ class Remove extends React.Component {
   //         })
   //       } */
   // };
+
+
 
   render() {
     // console.log('user', user)

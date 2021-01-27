@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import axios from "axios";
 // Components
 import Nav from "./components/Nav";
@@ -93,7 +93,9 @@ class App extends React.Component {
       // });
       // alert(response.data);
     })
-    alert("로그아웃이 되었습니다.")
+    // if (this.state.isLogin === true) {
+    //   alert("로그아웃이 되었습니다.")
+    // }
     // .catch((error) => {
     //   console.log(error.response);
     //   alert("로그아웃에 실패하였습니다.");
@@ -138,7 +140,7 @@ class App extends React.Component {
       todos,
     } = this.state;
     return (
-      <HashRouter>
+      <BrowserRouter>
         <div className="menu">
           {/* 1. 로그인 성공시 해당 유저의 이름을 메뉴바 상단에 "***님 환영합니다." 라고 표시하기 위해 welcome 컴포넌트까지 건네줄 것
               2. 로그아웃기능을 위해 하위 컴포넌트인 Nav로, 그리고 다시 SignOut 컴포넌트로 내릴 것. */}
@@ -225,7 +227,7 @@ class App extends React.Component {
         <div className="footer">
           <Footer />
         </div>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }

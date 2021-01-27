@@ -11,11 +11,14 @@ class SignOut extends React.Component {
 
   /*//* 아래 20번줄 주석 설명 참고하기 */
 
+
   reLogin = () => {
     if (this.props.loginStatus === false) {
       window.location.href = "/"; // 자바스크립트 이용한 특정 Url로 접속 (redirect)
+
     }
   };
+
   render() {
     return (
       /* 1. 로그아웃하기 위해 App.js로부터 props로 로그인 된 유저정보를 받아왔고, 이 컴포넌트에서 로그아웃 이벤트를 state 끌어올리기로 App.js로 전달.  
