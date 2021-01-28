@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Button from "./Button";
 
 //fakedate
@@ -236,7 +236,9 @@ class SignUpModal extends React.Component {
               </div>
             </form>
             <div className="return_to_signin">
-              <span> 로그인 페이지로 돌아가기 </span>
+              <NavLink to="/" style={{ textDecoration: "none", color: "gray" }}>
+                <span> 로그인 페이지로 돌아가기 </span>
+              </NavLink>
             </div>
           </div>
         </div>
