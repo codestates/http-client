@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../image/logo.png";
 // import user from "../test_data_user.json";
 import axios from "axios";
+import Button from "./Button";
 class SignInModal extends React.Component {
     constructor(props) {
         super(props);
@@ -141,18 +142,18 @@ class SignInModal extends React.Component {
                             </div>
                             <div>
                                 {/* <NavLink to="/todo"> */}
-                                <button
+                                <Button
                                     className="loginButton"
                                     type="submit"
                                     onClick={this.handleSignIn}
                                 >
                                     로그인
-                </button>
+                                </Button>
                                 {/* </NavLink> */}
                                 <div>
-                                    <button className="loginButton" type="submit">
+                                    <Button className="loginButton" type="submit">
                                         Github 로그인
-                  </button>
+                                    </Button>
                                 </div>
                                 <div className="alert-box">{this.state.errorMessage}</div>
                             </div>

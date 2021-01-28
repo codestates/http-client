@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import Button from "./Button";
 
 //fakedate
 // import user from "../test_data_user.json";
@@ -225,15 +226,18 @@ class SignUpModal extends React.Component {
                 <div>{this.state.errorMessage}</div>
 
                 {/* <NavLink to='' className='signUp_link'> */}
-                <button
+                <Button
                   className="signUp_btn"
                   onClick={this.handClickAddNewUserInfo}
                 >
                   회원 가입
-                </button>
+                </Button>
                 {/* </NavLink> */}
               </div>
             </form>
+            <div className="return_to_signin">
+              <span> 로그인 페이지로 돌아가기 </span>
+            </div>
           </div>
         </div>
       </div>

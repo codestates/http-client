@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Button from "./Button";
 
 class CompletedFindEmail extends React.Component {
   render() {
@@ -18,11 +19,11 @@ class CompletedFindEmail extends React.Component {
             </div>
 
             <NavLink to="/findaccount">
-              <button className="findBtn">PW 찾기</button>
+              <Button className="findBtn">PW 찾기</Button>
             </NavLink>
 
             <NavLink to="" className="signUp_link">
-              <button className="signUp_btn">로그인 페이지로 돌아가기</button>
+              <Button className="signUp_btn">로그인 페이지로 돌아가기</Button>
             </NavLink>
           </div>
         </div>

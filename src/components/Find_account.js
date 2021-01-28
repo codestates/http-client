@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import Button from "./Button";
 
 //Fake Data
 // import user from "../test_data_user.json";
@@ -220,9 +221,9 @@ class FindAccount extends React.Component {
 
               <div>{this.state.errorMessageEmail}</div>
               {/* <NavLink to='/useremail'> */}
-              <button className="findBtn" onClick={this.handleFindEmailValue}>
+              <Button className="findBtn" onClick={this.handleFindEmailValue}>
                 e-mail 찾기
-              </button>
+              </Button>
               {/* </NavLink> */}
             </form>
 
@@ -260,18 +261,18 @@ class FindAccount extends React.Component {
               <div>{this.state.errorMessagePw}</div>
 
               {/* <NavLink to='/userpw'> */}
-              <button className="findBtn" onClick={this.handleFindPwValue}>
+              <Button className="findBtn" onClick={this.handleFindPwValue}>
                 PW 찾기
-              </button>
+              </Button>
               {/* </NavLink> */}
             </form>
 
             <NavLink to="" className="signUp_link">
-              <button className="signUp_btn">로그인 페이지로 돌아가기</button>
+              <Button className="signUp_btn">로그인 페이지로 돌아가기</Button>
             </NavLink>
 
             <NavLink to="/signup" className="signUp_link">
-              <button className="signUp_btn">회원 가입</button>
+              <Button className="signUp_btn">회원 가입</Button>
             </NavLink>
           </div>
         </div>
