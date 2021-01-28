@@ -13,7 +13,7 @@ class SignInModal extends React.Component {
             password: "",
             errorMessage: "",
         };
-        // console.log("props", this.props); // App.js 로부터 handleResponseSuccess()가 내려옴
+        console.log("싸인인props", this.props); // App.js 로부터 handleResponseSuccess()가 내려옴
         /* ----------------소셜 로그인------------------- */
         /* ----------------로그인----------------------- */
     }

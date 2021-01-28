@@ -114,14 +114,14 @@ class App extends React.Component {
     this.setState({ todos: data });
   };
   componentDidMount() {
-    const userEmail = window.sessionStorage.getItem("email");
-    const userId = window.sessionStorage.getItem("userId");
-    if (userEmail) {
-      this.handleResponseSuccess();
-    } else {
-      // this.handleSignOut();
-      window.sessionStorage.clear();
-    }
+    // const userEmail = window.sessionStorage.getItem("email");
+    // const userId = window.sessionStorage.getItem("userId");
+    // if (userEmail) {
+    //   this.handleResponseSuccess();
+    // } else {
+    //   // this.handleSignOut();
+    //   window.sessionStorage.clear();
+    // }
     this.adoptRecentTodo;
     console.log("메인2 변경감지", this.state);
   }
