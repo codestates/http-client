@@ -43,6 +43,7 @@ class SignInModal extends React.Component {
                         email: response.data.email,
                         name: response.data.name,
                     });
+                    console.log("axiosthen", this.state)
                     this.doSignIn();
                 })
                 .catch((error) => {
