@@ -53,14 +53,16 @@ class SignUpModal extends React.Component {
       .post("https://api.get-todo.com/searchinfo/overlapEmail", userInfo)
       .then((response) => {
         console.log("중복이메일?", response);
-        // this.setState({
-        //   duplicatedIdMsg: response
-        // })
+        this.setState({
+          duplicatedIdMsg: response.data
+        })
+        alert(this.state.duplicatedIdMsg)
       })
       .catch((error) => {
-        // this.setState({
-        //   duplicatedIdMsg: error.response.data
-        // })
+        this.setState({
+          duplicatedIdMsg: error.response.data
+        })
+        alert(this.state.duplicatedIdMsg)
       })
       .catch((error) => {
         // this.setState({
@@ -190,7 +192,7 @@ class SignUpModal extends React.Component {
                   >
                     중복 확인
                   </button>
-                  <div>{this.state.duplicatedIdMsg}</div>
+                  {/* <div>{this.state.duplicatedIdMsg}</div> */}
                 </div>
 
                 <div>
