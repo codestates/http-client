@@ -108,7 +108,7 @@ class SignInModal extends React.Component {
                         <div className="signUp_div">
                             <NavLink to="/signup" className="signUp_link">
                                 아직 회원이 아니신가요?
-              </NavLink>
+                            </NavLink>
                         </div>
                         <img
                             id="sign_in_img"
@@ -120,17 +120,21 @@ class SignInModal extends React.Component {
                             <div className="container1">
                                 <div className="email_div">
                                     <span className="email_span">e-mail</span>
-                                    <input
-                                        type="email"
-                                        onChange={this.hadleInputValue("email")}
-                                    ></input>
+                                    <span>
+                                        <input
+                                            type="email"
+                                            onChange={this.hadleInputValue("email")}
+                                        ></input>
+                                    </span>
                                 </div>
                                 <div className="PW_div">
                                     <span>PW</span>
-                                    <input
-                                        type="password"
-                                        onChange={this.hadleInputValue("password")}
-                                    ></input>
+                                    <span>
+                                        <input
+                                            type="password"
+                                            onChange={this.hadleInputValue("password")}
+                                        ></input>
+                                    </span>
                                 </div>
                             </div>
                             <div className="findAccount_span">
