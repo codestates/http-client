@@ -207,6 +207,7 @@ class FindAccount extends React.Component {
 
                   <input
                     type="text"
+                    placeholder="이름을 입력하세요."
                     onChange={this.handleInputValue("name")}
                   ></input>
 
@@ -216,6 +217,7 @@ class FindAccount extends React.Component {
                   <span className="findAccount_span">연락처</span>
                   <input
                     type="text"
+                    placeholder="연락처를 입력하세요."
                     onChange={this.handleInputValue("mobile")}
                   ></input>
                 </div>
@@ -241,6 +243,7 @@ class FindAccount extends React.Component {
                   <span className="findAccount_span">e-mail</span>
                   <input
                     type="email"
+                    placeholder="이메일을 입력하세요."
                     onChange={this.handleInputValue("email")}
                   ></input>
                 </div>
@@ -248,6 +251,7 @@ class FindAccount extends React.Component {
                   <span className="findAccount_span">고객명</span>
                   <input
                     type="text"
+                    placeholder="이름을 입력하세요."
                     onChange={this.handleInputValue("name")}
                   ></input>
                 </div>
@@ -256,6 +260,7 @@ class FindAccount extends React.Component {
                   <span className="findAccount_span">연락처</span>
                   <input
                     type="text"
+                    placeholder="연락처를 입력하세요."
                     onChange={this.handleInputValue("mobile")}
                   ></input>
                 </div>

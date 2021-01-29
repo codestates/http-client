@@ -123,6 +123,7 @@ class SignInModal extends React.Component {
                                     <span>
                                         <input
                                             type="email"
+                                            placeholder="이메일을 입력하세요."
                                             onChange={this.hadleInputValue("email")}
                                         ></input>
                                     </span>
@@ -132,6 +133,7 @@ class SignInModal extends React.Component {
                                     <span>
                                         <input
                                             type="password"
+                                            placeholder="비밀번호를 입력하세요."
                                             onChange={this.hadleInputValue("password")}
                                         ></input>
                                     </span>

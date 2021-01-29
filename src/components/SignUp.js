@@ -14,7 +14,6 @@ class SignUpModal extends React.Component {
     mobile: "",
     duplicatedIdMsg: "",
     errorMessage: "",
-    errorMessageMobile: "",
     errorMessageEmail: "",
   };
 
@@ -130,6 +129,7 @@ class SignUpModal extends React.Component {
         this.setState({
           errorMessage: error.response.data,
         });
+        alert(this.state.errorMessage)
       });
 
     /*  fake Data
@@ -187,6 +187,7 @@ class SignUpModal extends React.Component {
                   <span>
                     <input
                       type="email"
+                      placeholder="이메일을 입력하세요."
                       onChange={this.handleInPutValue("email")}
                     ></input>
                   </span>
@@ -206,6 +207,7 @@ class SignUpModal extends React.Component {
                     <input
                       className="Signup_Pw_inputInfo"
                       type="password"
+                      placeholder="비밀번호를 입력하세요."
                       onChange={this.handleInPutValue("password")}
                     ></input>
                   </span>
@@ -216,6 +218,7 @@ class SignUpModal extends React.Component {
                   <span>
                     <input
                       type="text"
+                      placeholder="이름을 입력하세요."
                       onChange={this.handleInPutValue("name")}
                     ></input>
                   </span>
@@ -226,14 +229,13 @@ class SignUpModal extends React.Component {
                   <span>
                     <input
                       type="text"
+                      placeholder="연락처를 입력하세요."
                       onChange={this.handleInPutValue("mobile")}
                     ></input>
                   </span>
-                  <div>{this.state.errorMessageMobile}</div>
                 </div>
               </div>
               <div>
-                <div>{this.state.errorMessage}</div>
 
                 {/* <NavLink to='' className='signUp_link'> */}
                 <Button
