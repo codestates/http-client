@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import Button from "./Button";
 
 //fakedate
 // import user from "../test_data_user.json";
@@ -11,6 +12,7 @@ class Remove extends React.Component {
     password: "",
     errorMessage: "",
   };
+
 
   /*  모달 닫기 : isModalOpen이 true면 모달창이 떠있도록 셋팅 후 삼항연산자로 아래 렌더부분을 모두 감싸고, 
       아래 closemodal이벤트로 isModaalOpen의 상태를 false로 변경시켜주어 모달을 끄게 하자. 
@@ -30,6 +32,7 @@ class Remove extends React.Component {
     this.setState({
       [key]: text.target.value,
     });
+    console.log(this.state.password)
   };
 
   // 유저 정보를 삭제하는 기능 이벤트
@@ -39,11 +42,15 @@ class Remove extends React.Component {
     };
 
     axios.post("https://api.get-todo.com/remove", InputPw).then((response) => {
-      console.log(response);
+      console.log("asdf", response);
     });
+    this.props.location.signOut()
+    this.props.history.push({
+      pathname: "/remove_user_completed",
+    })
 
     /* fake data
-
+ 
      if (!InputPw.password.length) {
       this.setState({
         errorMessage: "비밀번호를 입력해주세요."
@@ -78,6 +85,8 @@ class Remove extends React.Component {
   //       } */
   // };
 
+
+
   render() {
     // console.log('user', user)
     // console.log('사인아웃 props', this.props)
@@ -88,7 +97,7 @@ class Remove extends React.Component {
           <div className="modal">
             <div className="modal_overlay" onClick={this.closeModal}></div>
             <div className="modal_content">
-              <h1>진짜 탈퇴하게유...?</h1>
+              <h1>회원 탈퇴</h1>
 
               <div className="container">
                 <form
@@ -109,12 +118,12 @@ class Remove extends React.Component {
                   <div>
                     <div>{this.state.errorMessage}</div>
 
-                    <button
+                    <Button
                       className="signUp_btn"
                       onClick={this.handleClickRemoveUserInfo}
                     >
                       계정 삭제
-                    </button>
+                    </Button>
                   </div>
                 </form>
               </div>

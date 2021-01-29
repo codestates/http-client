@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 /* signOut */
 
 .logOut_logIn_btn {
@@ -48,7 +52,7 @@
   bottom: 0;
   width: 100%;
   height: 60px;
-  margin-left: 8px;
+  margin-left: 0;
   padding-top: 30px;
   background-color: pink;
 }
@@ -86,8 +90,8 @@
 
 .modal_content {
   background-color: white;
-  width: 29%;
-  padding: 1% 5%;
+  width: 500px;
+  padding: 20px 0;
   text-align: center;
   position: relative;
   top: 0px;
@@ -105,24 +109,70 @@
 
 .container {
   /* background-color: pink; */
-
-  width: 100%;
+  display: inline-block;
+  text-align: center;
+  width: 390px;
   margin-bottom: 5%;
 
   /* align-items: center; */
-  display: block;
+  /* display: fle; */
 }
 
 .container1 {
-  background-color: pink;
-  max-width: 100%;
+  background-color: rgba(255, 192, 203, 0.582);
+  border-radius: 10px;
+  /* max-width: 100%; */
   padding-right: 50px;
-  padding-left: 50px;
-  padding-top: 10px;
+  padding-left: 1px;
+  padding-top: 30px;
   padding-bottom: 30px;
+  /* display: grid; */
+  /* justify-content: space-between; */
   /* align-items: center; */
   /* display: inline-table; */
 }
+.container input {
+  width: 60% !important;
+}
+.signup_span_title {
+  margin-right: 20px;
+}
+#signup_email_div{
+  height: 40px !important;
+  /* padding-left: 1%; */
+}
+.Signup_Pw_inputInfo{
+  margin-left: 25px !important;
+}
+
+.email_div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 40px;
+  margin-bottom: 10px;
+  font-size: 1.15rem;
+}
+.email_div input {
+  width: 180px !important;
+  font-size: 0.9rem !important;
+  padding: 0.2rem 0.6rem !important;
+  
+}
+
+.PW_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 40px;
+  font-size: 1.15rem;
+}
+.PW_div input {
+  width: 180px !important;
+  font-size: 0.9rem !important;
+  padding: 0.2rem 0.6rem !important;
+}
+
 
 /* 사진크기 자동 조절 */
 #sign_in_img {
@@ -141,23 +191,35 @@ input[type="email"],
 input[type="password"],
 input[type="text"] {
   width: 70%;
-  font-size: 1.1rem;
-  padding: 0;
+  font-size: 0.8rem;
+  padding: 0.28rem 0.6rem;
   margin: 0.4rem;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+input[type="email"]::placeholder,
+input[type="password"]::placeholder,
+input[type="text"]::placeholder {
+  color: gray;
+  font-size: 0.6rem;
 }
 
-.findAccount_span {
-  text-align: right;
-  padding-top: 13px;
-  font-size: 1.1rem;
-}
+/* .findAccount_span { */
+  /* text-align: right; */
+  /* padding-top: 13px; */
+  /* font-size: 1.1rem; */
+/* } */
 
 .findAccount_link {
   text-decoration: none;
+  color: gray;
+  font-size: 0.9rem;
 }
 
 .signUp_link {
   text-decoration: none;
+  color: rgb(240, 101, 124);
+  font-size: 0.9rem;
 }
 
 .signUp_div {
@@ -180,9 +242,16 @@ input[type="text"] {
 }
 
 .check {
-  text-align: right;
-  font-size: 0.7rem;
+  position: relative;
+  top: -30px;
+  /* left: 380px; */
+  left: 53%;
+  text-align: center;  
 }
+.check button {
+  font-size: 0.3rem;
+}
+
 
 /*-----Find_account.css-----*/
 
@@ -195,6 +264,24 @@ input[type="text"] {
   /* padding-left:50px; */
   padding-top: 10px;
   padding-bottom: 30px;
+}
+.findAccount_div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.findAccount_div input {
+  width: 170px !important;
+  font-size: 0.9rem !important;
+  padding: 0.2rem 0.6rem !important;
+}
+.findAccount_span {
+  margin-top: 10px;
+  margin-left: 40px;
+  /* margin-right: 20px; */
+  text-align: right;
+  font-size: 1rem;
 }
 
 .line {
@@ -231,4 +318,12 @@ input[type="text"] {
 .informaion {
   margin-top: 50%;
   /* line-height: 50%; */
+}
+
+
+.return_to_signin {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 0.9rem;
 }

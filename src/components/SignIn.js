@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../image/logo.png";
 // import user from "../test_data_user.json";
 import axios from "axios";
+import Button from "./Button";
 class SignInModal extends React.Component {
     constructor(props) {
         super(props);
@@ -13,7 +14,7 @@ class SignInModal extends React.Component {
             password: "",
             errorMessage: "",
         };
-        // console.log("props", this.props); // App.js 로부터 handleResponseSuccess()가 내려옴
+        console.log("싸인인props", this.props); // App.js 로부터 handleResponseSuccess()가 내려옴
         /* ----------------소셜 로그인------------------- */
         /* ----------------로그인----------------------- */
     }
@@ -43,6 +44,7 @@ class SignInModal extends React.Component {
                         email: response.data.email,
                         name: response.data.name,
                     });
+                    console.log("axiosthen", this.state)
                     this.doSignIn();
                 })
                 .catch((error) => {
@@ -106,7 +108,7 @@ class SignInModal extends React.Component {
                         <div className="signUp_div">
                             <NavLink to="/signup" className="signUp_link">
                                 아직 회원이 아니신가요?
-              </NavLink>
+                            </NavLink>
                         </div>
                         <img
                             id="sign_in_img"
@@ -118,17 +120,23 @@ class SignInModal extends React.Component {
                             <div className="container1">
                                 <div className="email_div">
                                     <span className="email_span">e-mail</span>
-                                    <input
-                                        type="email"
-                                        onChange={this.hadleInputValue("email")}
-                                    ></input>
+                                    <span>
+                                        <input
+                                            type="email"
+                                            placeholder="이메일을 입력하세요."
+                                            onChange={this.hadleInputValue("email")}
+                                        ></input>
+                                    </span>
                                 </div>
                                 <div className="PW_div">
                                     <span>PW</span>
-                                    <input
-                                        type="password"
-                                        onChange={this.hadleInputValue("password")}
-                                    ></input>
+                                    <span>
+                                        <input
+                                            type="password"
+                                            placeholder="비밀번호를 입력하세요."
+                                            onChange={this.hadleInputValue("password")}
+                                        ></input>
+                                    </span>
                                 </div>
                             </div>
                             <div className="findAccount_span">
@@ -140,18 +148,18 @@ class SignInModal extends React.Component {
                             </div>
                             <div>
                                 {/* <NavLink to="/todo"> */}
-                                <button
+                                <Button
                                     className="loginButton"
                                     type="submit"
                                     onClick={this.handleSignIn}
                                 >
                                     로그인
-                </button>
+                                </Button>
                                 {/* </NavLink> */}
                                 <div>
-                                    <button className="loginButton" type="submit">
+                                    <Button className="loginButton" type="submit">
                                         Github 로그인
-                  </button>
+                                    </Button>
                                 </div>
                                 <div className="alert-box">{this.state.errorMessage}</div>
                             </div>

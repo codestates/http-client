@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import Button from "./Button";
 
 //fakedate
 // import user from "../test_data_user.json";
@@ -13,7 +14,6 @@ class SignUpModal extends React.Component {
     mobile: "",
     duplicatedIdMsg: "",
     errorMessage: "",
-    errorMessageMobile: "",
     errorMessageEmail: "",
   };
 
@@ -53,14 +53,16 @@ class SignUpModal extends React.Component {
       .post("https://api.get-todo.com/searchinfo/overlapEmail", userInfo)
       .then((response) => {
         console.log("중복이메일?", response);
-        // this.setState({
-        //   duplicatedIdMsg: response
-        // })
+        this.setState({
+          duplicatedIdMsg: response.data
+        })
+        alert(this.state.duplicatedIdMsg)
       })
       .catch((error) => {
-        // this.setState({
-        //   duplicatedIdMsg: error.response.data
-        // })
+        this.setState({
+          duplicatedIdMsg: error.response.data
+        })
+        alert(this.state.duplicatedIdMsg)
       })
       .catch((error) => {
         // this.setState({
@@ -119,6 +121,7 @@ class SignUpModal extends React.Component {
       .post("https://api.get-todo.com/signup", NewUserInformation)
       .then((response) => {
         console.log("res", response);
+        alert("회원가입이 완료되었습니다. 로그인을 해주세요.")
         this.props.history.push("/");
       })
       .catch((error) => {
@@ -126,6 +129,7 @@ class SignUpModal extends React.Component {
         this.setState({
           errorMessage: error.response.data,
         });
+        alert(this.state.errorMessage)
       });
 
     /*  fake Data
@@ -178,59 +182,76 @@ class SignUpModal extends React.Component {
               }}
             >
               <div className="container1">
-                <div className="inputInfo">
-                  <span className="email_span">e-mail</span>
-                  <input
-                    type="email"
-                    onChange={this.handleInPutValue("email")}
-                  ></input>
-                  <button
-                    className="check"
-                    onClick={this.handleClickduplicatedId}
-                  >
-                    중복 확인
+                <div id="signup_email_div">
+                  <span className="signup_span_title">e-mail</span>
+                  <span>
+                    <input
+                      type="email"
+                      placeholder="이메일을 입력하세요."
+                      onChange={this.handleInPutValue("email")}
+                    ></input>
+                  </span>
+                  <span className="check">
+                    <button
+                      onClick={this.handleClickduplicatedId}
+                    >
+                      중복 확인
                   </button>
-                  <div>{this.state.duplicatedIdMsg}</div>
+                  </span>
+                  {/* <div>{this.state.duplicatedIdMsg}</div> */}
                 </div>
 
                 <div>
-                  <span>PW</span>
-                  <input
-                    type="password"
-                    onChange={this.handleInPutValue("password")}
-                  ></input>
+                  <span className="signup_span_title">PW</span>
+                  <span>
+                    <input
+                      className="Signup_Pw_inputInfo"
+                      type="password"
+                      placeholder="비밀번호를 입력하세요."
+                      onChange={this.handleInPutValue("password")}
+                    ></input>
+                  </span>
                 </div>
 
                 <div>
-                  <span>고객명</span>
-                  <input
-                    type="text"
-                    onChange={this.handleInPutValue("name")}
-                  ></input>
+                  <span className="signup_span_title">고객명</span>
+                  <span>
+                    <input
+                      type="text"
+                      placeholder="이름을 입력하세요."
+                      onChange={this.handleInPutValue("name")}
+                    ></input>
+                  </span>
                 </div>
 
                 <div>
-                  <span>연락처</span>
-                  <input
-                    type="text"
-                    onChange={this.handleInPutValue("mobile")}
-                  ></input>
-                  <div>{this.state.errorMessageMobile}</div>
+                  <span className="signup_span_title">연락처</span>
+                  <span>
+                    <input
+                      type="text"
+                      placeholder="연락처를 입력하세요."
+                      onChange={this.handleInPutValue("mobile")}
+                    ></input>
+                  </span>
                 </div>
               </div>
               <div>
-                <div>{this.state.errorMessage}</div>
 
                 {/* <NavLink to='' className='signUp_link'> */}
-                <button
+                <Button
                   className="signUp_btn"
                   onClick={this.handClickAddNewUserInfo}
                 >
                   회원 가입
-                </button>
+                </Button>
                 {/* </NavLink> */}
               </div>
             </form>
+            <div className="return_to_signin">
+              <NavLink to="/" style={{ textDecoration: "none", color: "gray" }}>
+                <span> 로그인 페이지로 돌아가기 </span>
+              </NavLink>
+            </div>
           </div>
         </div>
       </div>

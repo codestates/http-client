@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import Button from "./Button";
 
 //Fake Data
 // import user from "../test_data_user.json";
@@ -200,19 +201,23 @@ class FindAccount extends React.Component {
 
           <div className="container">
             <form onSubmit={(e) => e.preventDefault()}>
-              <div className="find_e-mail_box">
-                <div>
-                  <span>고객명</span>
+              <div className="container1">
+                <div className="findAccount_div">
+                  <span className="findAccount_span">고객명</span>
+
                   <input
                     type="text"
+                    placeholder="이름을 입력하세요."
                     onChange={this.handleInputValue("name")}
                   ></input>
+
                 </div>
 
-                <div>
-                  <span>연락처</span>
+                <div className="findAccount_div">
+                  <span className="findAccount_span">연락처</span>
                   <input
                     type="text"
+                    placeholder="연락처를 입력하세요."
                     onChange={this.handleInputValue("mobile")}
                   ></input>
                 </div>
@@ -220,9 +225,9 @@ class FindAccount extends React.Component {
 
               <div>{this.state.errorMessageEmail}</div>
               {/* <NavLink to='/useremail'> */}
-              <button className="findBtn" onClick={this.handleFindEmailValue}>
+              <Button className="findBtn" onClick={this.handleFindEmailValue}>
                 e-mail 찾기
-              </button>
+              </Button>
               {/* </NavLink> */}
             </form>
 
@@ -233,26 +238,29 @@ class FindAccount extends React.Component {
             <h2>PW 찾기</h2>
             {/* 바로 아랫 줄 코드. 이메일 형식이 안맞으면 말풍선으로 에러 메세지 띄움 */}
             <form onSubmit={(e) => e.preventDefault()}>
-              <div className="find_pw_box">
-                <div className="inputInfo">
-                  <span className="email_span">e-mail</span>
+              <div className="container1">
+                <div className="findAccount_div">
+                  <span className="findAccount_span">e-mail</span>
                   <input
                     type="email"
+                    placeholder="이메일을 입력하세요."
                     onChange={this.handleInputValue("email")}
                   ></input>
                 </div>
-                <div>
-                  <span>고객명</span>
+                <div className="findAccount_div">
+                  <span className="findAccount_span">고객명</span>
                   <input
                     type="text"
+                    placeholder="이름을 입력하세요."
                     onChange={this.handleInputValue("name")}
                   ></input>
                 </div>
 
-                <div>
-                  <span>연락처</span>
+                <div className="findAccount_div">
+                  <span className="findAccount_span">연락처</span>
                   <input
                     type="text"
+                    placeholder="연락처를 입력하세요."
                     onChange={this.handleInputValue("mobile")}
                   ></input>
                 </div>
@@ -260,18 +268,18 @@ class FindAccount extends React.Component {
               <div>{this.state.errorMessagePw}</div>
 
               {/* <NavLink to='/userpw'> */}
-              <button className="findBtn" onClick={this.handleFindPwValue}>
+              <Button className="findBtn" onClick={this.handleFindPwValue}>
                 PW 찾기
-              </button>
+              </Button>
               {/* </NavLink> */}
             </form>
 
             <NavLink to="" className="signUp_link">
-              <button className="signUp_btn">로그인 페이지로 돌아가기</button>
+              <Button className="signUp_btn">로그인 페이지로 돌아가기</Button>
             </NavLink>
 
             <NavLink to="/signup" className="signUp_link">
-              <button className="signUp_btn">회원 가입</button>
+              <Button className="signUp_btn">회원 가입</Button>
             </NavLink>
           </div>
         </div>
